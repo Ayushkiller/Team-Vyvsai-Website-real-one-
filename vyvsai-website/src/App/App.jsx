@@ -1,4 +1,5 @@
-import React from 'react';
+// src/App/App.jsx
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from '../components/Layout/Layout';
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
@@ -18,32 +19,47 @@ import Reviews from '../components/Reviews';
 import PrivacyPolicy from '../components/Policy/PrivacyPolicy';
 import UploadDocuments from '../components/UploadDocuments';
 import ContactUs from '../components/ContactUs/ContactUs';
-
+import Animation from './Animation'; 
+import '../styles.css';
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 15000); // Adjust the timeout duration as needed
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Router>
-      <ErrorBoundary>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/tenders" element={<TenderList />} />
-            <Route path="/tenders/:id" element={<TenderDetails />} />
-            <Route path="/password-reset" element={<PasswordReset />} />
-            <Route path="/request-otp" element={<RequestOtp />} />
-            <Route path="/verify-otp" element={<VerifyOtp />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/subscriptions" element={<Subscriptions />} />
-            <Route path="/mission" element={<Mission />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/core-values" element={<CoreValues />} />
-            <Route path="/reviews" element={<Reviews />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/upload-documents" element={<UploadDocuments />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-          </Routes>
-        </Layout>
-      </ErrorBoundary>
+      {loading ? (
+        <Animation />
+      ) : (
+        <ErrorBoundary>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/tenders" element={<TenderList />} />
+              <Route path="/tenders/:id" element={<TenderDetails />} />
+              <Route path="/password-reset" element={<PasswordReset />} />
+              <Route path="/request-otp" element={<RequestOtp />} />
+              <Route path="/verify-otp" element={<VerifyOtp />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/subscriptions" element={<Subscriptions />} />
+              <Route path="/mission" element={<Mission />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/core-values" element={<CoreValues />} />
+              <Route path="/reviews" element={<Reviews />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/upload-documents" element={<UploadDocuments />} />
+              <Route path="/contact-us" element={<ContactUs />} />
+            </Routes>
+          </Layout>
+        </ErrorBoundary>
+      )}
     </Router>
   );
 }
