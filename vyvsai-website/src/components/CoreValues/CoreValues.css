@@ -1,0 +1,44 @@
+/* CoreValues.css */
+
+.core-values {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.core-values h2 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.core-values p {
+    font-size: 1.2em;
+    color: #666;
+    line-height: 1.5;
+    text-align: center;
+    max-width: 800px;
+}
+
+.core-values .value-item {
+    margin: 10px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    width: 100%;
+    max-width: 600px;
+}
+
+.core-values .value-item h3 {
+    font-size: 1.5em;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.core-values .value-item p {
+    font-size: 1em;
+    color: #555;
+}
