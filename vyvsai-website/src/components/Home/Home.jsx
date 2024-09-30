@@ -2,7 +2,7 @@ import React from 'react';
 import Mission from '../Mission/Mission';
 import Services from '../Services/ServicesSection';
 import CoreValues from '../CoreValues/CoreValues';
-import Reviews from '../Reviews';
+
 
 const HomePage = ({ success, error }) => (
   <div className="home-page">
@@ -36,7 +36,7 @@ const HomePage = ({ success, error }) => (
               <p className="text-justify">
                 "Vyvsai has completely revolutionized our bidding process. Their
                 AI-driven notifications and bid predictions have given us a
-                competitive edge, while the marketplace has streamlined our
+-                competitive edge, while the marketplace has streamlined our
                 procurement. The free trial in Himachal Pradesh has been
                 incredibly beneficial, making Vyvsai an essential tool for our
                 business."

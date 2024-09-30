@@ -86,7 +86,7 @@ const Animation = () => {
               fontSize="40"
               fontWeight="bold"
             >
-              Vyvsai AI
+              Vyvsai
             </text>
           </motion.g>
         )}

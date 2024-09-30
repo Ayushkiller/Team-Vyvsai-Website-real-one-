@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-
+import React, {useState} from 'react';
+import connect from '../../Database/connect.js';
+import mongoose from 'mongoose';
 const Register = () => {
   const [formData, setFormData] = useState({
     username: '',
@@ -9,7 +10,7 @@ const Register = () => {
     preferences: ''
   });
 
-  const [errorMessages, setErrorMessages] = useState([]);
+  const [errorMessages] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,9 +20,16 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    //TODO Add form validation and submission logic here
+    try {
+      await connect(); 
+      const collection = mongoose.connection.collection('Credentials');
+      await collection.insertOne(formData);
+      console.log('Data submitted successfully:', formData);
+    } catch (err) {
+      console.error('Error submitting data:', err);
+    }
   };
 
   return (
