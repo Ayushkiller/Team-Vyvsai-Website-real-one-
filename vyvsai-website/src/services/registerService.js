@@ -1,8 +1,12 @@
 import axios from 'axios';
 
 const register = async (userData) => {
-  const response = await axios.post('/register', userData);
-  return response.data;
+  try {
+    const response = await axios.post('http://localhost:5000/api/register', userData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export default { register };

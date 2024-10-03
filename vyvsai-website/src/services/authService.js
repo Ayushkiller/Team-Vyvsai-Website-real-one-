@@ -1,36 +1,23 @@
-import jwt from 'jsonwebtoken';
-import Cookies from 'js-cookie';
+// src/services/authService.js
+import axios from 'axios';
 
-const JWT_AUTH_SECRET = process.env.REACT_APP_JWT_AUTH_SECRET;
+export const isAuthenticated = () => {
+  return !!localStorage.getItem('auth');
+};
 
-export const login = (token) => {
-  Cookies.set('UUID', token);
+export const login = async (mobileNo, password) => {
+  try {
+    const response = await axios.post('http://localhost:5000/api/login', { mobileNo, password });
+    if (response.data.success) {
+      localStorage.setItem('auth', 'true');
+    } else {
+      throw new Error('Authentication failed');
+    }
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const logout = () => {
-  Cookies.remove('UUID');
-};
-
-export const isAuthenticated = () => {
-  const token = Cookies.get('UUID');
-  if (!token) return false;
-
-  try {
-    const user = jwt.verify(token, JWT_AUTH_SECRET);
-    return user;
-  } catch (err) {
-    return false;
-  }
-};
-
-export const getUser = () => {
-  const token = Cookies.get('UUID');
-  if (!token) return null;
-
-  try {
-    const user = jwt.verify(token, JWT_AUTH_SECRET);
-    return user;
-  } catch (err) {
-    return null;
-  }
+  localStorage.removeItem('auth');
 };
