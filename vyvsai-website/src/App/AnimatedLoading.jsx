@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Animation = () => {
+const AnimatedLoading = () => {
   const [stage, setStage] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setStage((prevStage) => (prevStage < 5 ? prevStage + 1 : 0));
-    }, 3000); // Slightly longer duration for better visibility
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, [stage]);
@@ -321,4 +321,4 @@ const Animation = () => {
   );
 };
 
-export default Animation;
+export default AnimatedLoading;

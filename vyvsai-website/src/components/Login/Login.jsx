@@ -1,79 +1,65 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useCallback } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import './Login.css';
 
-const Login = () => {
+const Login = ({ setAuth }) => {
   const [formData, setFormData] = useState({ mobileNo: '', password: '' });
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState({ error: '', isLoading: false });
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    setError('');
+    setSubmitStatus({ error: '', isLoading: true });
+
     try {
       const response = await axios.post('http://localhost:5000/api/login', formData);
+      
       if (response.data.success) {
-        localStorage.setItem('auth', 'true');
+        Cookies.set('auth', 'true');
+        setAuth(true);
         navigate('/');
-        window.location.reload();
       } else {
-        setError(response.data.message || 'An error occurred during login');
+        setSubmitStatus({ error: response.data.message || 'An unexpected error occurred during login', isLoading: false });
       }
     } catch (err) {
       console.error('Login error:', err);
-      setError(err.response?.data?.message || 'An error occurred during login');
-    } finally {
-      setIsLoading(false);
+      setSubmitStatus({ error: 'An error occurred during login. Please try again.', isLoading: false });
     }
   };
-
 
   return (
     <div className="login-container">
       <h2>Login</h2>
-      {error && <div className="alert error">{error}</div>}
+      {submitStatus.error && <p className="error">{submitStatus.error}</p>}
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="mobileNo">Mobile Number:</label>
-          <input
-            type="text"
-            id="mobileNo"
-            name="mobileNo"
-            className="form-control"
-            value={formData.mobileNo}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className="form-control"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            minLength="8"
-          />
-        </div>
-        <button type="submit" className="btn btn-primary w-100" disabled={isLoading}>
-          {isLoading ? 'Logging in...' : 'Login'}
+        <input
+          type="text"
+          name="mobileNo"
+          placeholder="Mobile Number"
+          value={formData.mobileNo}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit" disabled={submitStatus.isLoading}>
+          {submitStatus.isLoading ? 'Logging in...' : 'Login'}
         </button>
-        <a href="/password-reset/request-otp">Forgot Password?</a>
       </form>
-      <div className="text-center mt-3">
-        <p>Don't have an account? <a href="/register">Register here</a></p>
-      </div>
+      <Link to="/register">Don't have an account? Register here</Link>
     </div>
   );
 };

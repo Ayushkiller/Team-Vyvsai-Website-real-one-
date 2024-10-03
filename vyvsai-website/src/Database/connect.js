@@ -5,17 +5,15 @@ const { MongoClient } = require('mongodb');
 const app = express();
 const port = 5000;
 
-// MongoDB connection URL
 const mongoUrl = 'mongodb://localhost:27017';
 const dbNameRegistration = 'Registered';
 const dbNameTenders = 'Output';
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Connect to MongoDB
 let client;
+
 async function connectToMongo() {
   try {
     client = new MongoClient(mongoUrl, { useUnifiedTopology: true });
@@ -34,18 +32,16 @@ app.post('/api/register', async (req, res) => {
     const db = client.db(dbNameRegistration);
     const usersCollection = db.collection('users');
 
-    // Check if user already exists
     const existingUser = await usersCollection.findOne({ $or: [{ mobileNo }, { email }] });
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    // Insert new user
     const result = await usersCollection.insertOne({
       username,
       mobileNo,
       email,
-      password, // Storing password as-is
+      password, 
       preferences
     });
 
@@ -60,18 +56,16 @@ app.post('/api/register', async (req, res) => {
 app.post('/api/login', async (req, res) => {
   try {
     const { mobileNo, password } = req.body;
-    console.log('Login attempt:', { mobileNo, password: '****' });
+    console.log('Login attempt:', { mobileNo, passwordLength: password ? password.length : 0 });
     
     const db = client.db(dbNameRegistration);
     const user = await db.collection('users').findOne({ mobileNo });
 
     if (!user) {
-      console.log('User not found:', mobileNo);
       return res.status(401).json({ message: 'User not found' });
     }
 
     if (user.password !== password) {
-      console.log('Incorrect password for user:', mobileNo);
       return res.status(401).json({ message: 'Incorrect password' });
     }
 
@@ -87,19 +81,68 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// Fetch tenders endpoint
-app.get('/api/tenders', async (req, res) => {
+// Endpoint to fetch states
+app.get('/api/states', async (req, res) => {
   try {
     const db = client.db(dbNameTenders);
-    const tenders = await db.collection('Tenders').find().toArray();
-    res.json(tenders);
+    const tendersCollection = db.collection('Tenders');
+    const states = await tendersCollection.distinct('state');
+    res.json({ states });
+  } catch (error) {
+    console.error('Error fetching states:', error);
+    res.status(500).json({ message: 'Error fetching states' });
+  }
+});
+
+// Endpoint to fetch districts for a selected state
+app.get('/api/districts/:state', async (req, res) => {
+  try {
+    const { state } = req.params;
+    const db = client.db(dbNameTenders);
+    const tendersCollection = db.collection('Tenders');
+    const districts = await tendersCollection.distinct('district', { state });
+    res.json({ districts });
+  } catch (error) {
+    console.error('Error fetching districts:', error);
+    res.status(500).json({ message: 'Error fetching districts' });
+  }
+});
+
+// Endpoint to fetch departments for a selected state
+app.get('/api/departments/:state', async (req, res) => {
+  try {
+    const { state } = req.params;
+    const db = client.db(dbNameTenders);
+    const tendersCollection = db.collection('Tenders');
+    const departments = await tendersCollection.distinct('org_name', { state });
+    res.json({ departments });
+  } catch (error) {
+    console.error('Error fetching departments:', error);
+    res.status(500).json({ message: 'Error fetching departments' });
+  }
+});
+
+// Endpoint to fetch tenders
+app.get('/api/tenders', async (req, res) => {
+  try {
+    const { state, district, department, showExpired } = req.query;
+    const db = client.db(dbNameTenders);
+    const tendersCollection = db.collection('Tenders');
+
+    let query = {};
+    if (state) query.state = state;
+    if (district) query.district = district;
+    if (department) query.org_name = department;
+    if (showExpired === 'false') query.expired = false;
+
+    const tenders = await tendersCollection.find(query).toArray();
+    res.json({ tenders });
   } catch (error) {
     console.error('Error fetching tenders:', error);
     res.status(500).json({ message: 'Error fetching tenders' });
   }
 });
 
-// Start server
 async function startServer() {
   await connectToMongo();
   app.listen(port, () => {
@@ -109,7 +152,6 @@ async function startServer() {
 
 startServer();
 
-// Graceful shutdown
 process.on('SIGINT', async () => {
   try {
     await client.close();

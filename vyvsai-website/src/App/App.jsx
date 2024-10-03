@@ -1,79 +1,67 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import React, { useState, useEffect, lazy, Suspense } from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 import Layout from "../components/Layout/Layout";
 import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
-import HomePage from "../components/Home/Home";
-import PasswordReset from "../components/Login/PasswordReset";
-import RequestOtp from "../components/Login/RequestOtp";
-import VerifyOtp from "../components/Login/VerifyOtp";
-import Login from "../components/Login/Login";
-import Register from "../components/Login/Register";
-import Subscriptions from "../components/Subscriptions";
-import Mission from "../components/Mission/Mission";
-import Services from "../components/Services/ServicesSection";
-import CoreValues from "../components/CoreValues/CoreValues";
-import Reviews from "../components/Reviews";
-import PrivacyPolicy from "../components/Policy/PrivacyPolicy";
-import UploadDocuments from "../components/UploadDocuments";
-import ContactUs from "../components/ContactUs/ContactUs";
-import Animation from "./Animation";
-import { isAuthenticated, logout } from "../services/authService";
+import PrivateRoute from "./PrivateRoute";
 import "../styles.css";
+import AnimatedLoading from "./AnimatedLoading";
 
+// Lazy-loaded components
+const HomePage = lazy(() => import("../components/Home/Home"));
+const Login = lazy(() => import("../components/Login/Login"));
+const Register = lazy(() => import("../components/Login/Register"));
+const PasswordReset = lazy(() => import("../components/Login/PasswordReset"));
+const RequestOtp = lazy(() => import("../components/Login/RequestOtp"));
+const VerifyOtp = lazy(() => import("../components/Login/VerifyOtp"));
+const Subscriptions = lazy(() => import("../components/Subscriptions"));
+const Mission = lazy(() => import("../components/Mission/Mission"));
+const Services = lazy(() => import("../components/Services/ServicesSection"));
+const CoreValues = lazy(() => import("../components/CoreValues/CoreValues"));
+const Reviews = lazy(() => import("../components/Reviews"));
+const PrivacyPolicy = lazy(() => import("../components/Policy/PrivacyPolicy"));
+const UploadDocuments = lazy(() => import("../components/UploadDocuments"));
+const ContactUs = lazy(() => import("../components/ContactUs/ContactUs"));
+const ProtectedComponent = lazy(() => import("./ProtectedComponent"));
+const Tenders =lazy(() => import("../components/Tender/Tenders"));
 function App() {
-  const [loading, setLoading] = useState(true);
-  const [auth, setAuth] = useState(isAuthenticated());
+  const [auth, setAuth] = useState(Cookies.get('auth') === 'true');
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 15000);
-    return () => clearTimeout(timer);
-  }, []);
+    Cookies.set('auth', auth);
+  }, [auth]);
 
   const handleLogout = () => {
-    logout();
     setAuth(false);
-    window.location.href = '/';
+    Cookies.remove('auth');
   };
 
   return (
     <Router>
-      {loading ? (
-        <Animation />
-      ) : (
-        <ErrorBoundary>
-          <Layout>
-            <nav>
-              <Link to="/">Home</Link>
-              {auth ? (
-                <button onClick={handleLogout}>Logout</button>
-              ) : (
-                <>
-                  <Link to="/login">Login</Link>
-                  <Link to="/register">Register</Link>
-                </>
-              )}
-            </nav>
+      <ErrorBoundary>
+        <Layout auth={auth} handleLogout={handleLogout}>
+          <Suspense fallback={<AnimatedLoading />}>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/password-reset" element={<PasswordReset />} />
-              <Route path="/request-otp" element={<RequestOtp />} />
-              <Route path="/verify-otp" element={<VerifyOtp />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<Login setAuth={setAuth} />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/password-reset" element={<PasswordReset />} />
+              <Route path="/password-reset/request-otp" element={<RequestOtp />} />
+              <Route path="/password-reset/verify-otp" element={<VerifyOtp />} />
               <Route path="/subscriptions" element={<Subscriptions />} />
               <Route path="/mission" element={<Mission />} />
               <Route path="/services" element={<Services />} />
               <Route path="/core-values" element={<CoreValues />} />
+              <Route path="/tenders" element={<Tenders />} />
               <Route path="/reviews" element={<Reviews />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/upload-documents" element={<UploadDocuments />} />
-              <Route path="/contact-us" element={<ContactUs />} />
+              <Route path="/contact" element={<ContactUs />} />
+              <Route path="/protected" element={<PrivateRoute auth={auth}><ProtectedComponent /></PrivateRoute>} />
             </Routes>
-          </Layout>
-        </ErrorBoundary>
-      )}
+          </Suspense>
+        </Layout>
+      </ErrorBoundary>
     </Router>
   );
 }
