@@ -6,7 +6,7 @@ import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 import PrivateRoute from "./PrivateRoute";
 import "../styles.css";
 import AnimatedLoading from "./AnimatedLoading";
-
+//Vercel now u need to reload as i pushed changes
 // Lazy-loaded components
 const HomePage = lazy(() => import("../components/Home/Home"));
 const Login = lazy(() => import("../components/Login/Login"));
