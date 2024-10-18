@@ -5,7 +5,7 @@ const { MongoClient } = require('mongodb');
 const app = express();
 const port = 5000;
 
-const mongoUrl = 'mongodb://localhost:27017';
+const mongoUrl = 'mongodb+srv://m84719666:d6Rjb4DyVuasNDrn@tendertesting.zygfo.mongodb.net/?retryWrites=true&w=majority&appName=tenderTesting';
 const dbNameRegistration = 'Registered';
 const dbNameTenders = 'Output';
 
