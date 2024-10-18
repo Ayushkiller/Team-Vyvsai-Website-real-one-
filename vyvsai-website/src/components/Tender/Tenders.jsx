@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:5000/api';
+axios.defaults.baseURL = 'https://localhost:5000/api';
 
 const Tenders = () => {
   const [state, setState] = useState('');
