@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const register = async (userData) => {
   try {
-    const response = await axios.post('http://38.69.12.10:1301/api/register', userData);
+    const response = await axios.post('https://yeah.emboticnodes.xyz:1301/api/register', userData);
     return response.data;
   } catch (error) {
     throw error;
