@@ -1,9 +1,9 @@
+
 const express = require('express');
 const cors = require('cors');
 const { MongoClient } = require('mongodb');
 
 const app = express();
-const port = 1301;
 
 const mongoUrl = 'mongodb+srv://m84719666:d6Rjb4DyVuasNDrn@tendertesting.zygfo.mongodb.net/?retryWrites=true&w=majority&appName=tenderTesting';
 const dbNameRegistration = 'Registered';
@@ -15,19 +15,18 @@ app.use(express.json());
 let client;
 
 async function connectToMongo() {
-  try {
+  if (!client) {
     client = new MongoClient(mongoUrl, { useUnifiedTopology: true });
     await client.connect();
     console.log('Connected to MongoDB');
-  } catch (error) {
-    console.error('Failed to connect to MongoDB', error);
-    process.exit(1);
   }
+  return client;
 }
 
 // Registration endpoint
 app.post('/api/register', async (req, res) => {
   try {
+    const client = await connectToMongo();
     const { username, mobileNo, email, password, preferences } = req.body;
     const db = client.db(dbNameRegistration);
     const usersCollection = db.collection('users');
@@ -55,6 +54,7 @@ app.post('/api/register', async (req, res) => {
 // Login endpoint
 app.post('/api/login', async (req, res) => {
   try {
+    const client = await connectToMongo();
     const { mobileNo, password } = req.body;
     console.log('Login attempt:', { mobileNo, passwordLength: password ? password.length : 0 });
     
@@ -84,6 +84,7 @@ app.post('/api/login', async (req, res) => {
 // Endpoint to fetch states
 app.get('/api/states', async (req, res) => {
   try {
+    const client = await connectToMongo();
     const db = client.db(dbNameTenders);
     const tendersCollection = db.collection('Tenders');
     const states = await tendersCollection.distinct('state');
@@ -97,6 +98,7 @@ app.get('/api/states', async (req, res) => {
 // Endpoint to fetch districts for a selected state
 app.get('/api/districts/:state', async (req, res) => {
   try {
+    const client = await connectToMongo();
     const { state } = req.params;
     const db = client.db(dbNameTenders);
     const tendersCollection = db.collection('Tenders');
@@ -111,6 +113,7 @@ app.get('/api/districts/:state', async (req, res) => {
 // Endpoint to fetch departments for a selected state
 app.get('/api/departments/:state', async (req, res) => {
   try {
+    const client = await connectToMongo();
     const { state } = req.params;
     const db = client.db(dbNameTenders);
     const tendersCollection = db.collection('Tenders');
@@ -125,6 +128,7 @@ app.get('/api/departments/:state', async (req, res) => {
 // Endpoint to fetch tenders
 app.get('/api/tenders', async (req, res) => {
   try {
+    const client = await connectToMongo();
     const { state, district, department, showExpired } = req.query;
     const db = client.db(dbNameTenders);
     const tendersCollection = db.collection('Tenders');
@@ -143,22 +147,4 @@ app.get('/api/tenders', async (req, res) => {
   }
 });
 
-async function startServer() {
-  await connectToMongo();
-  app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-  });
-}
-
-startServer();
-
-process.on('SIGINT', async () => {
-  try {
-    await client.close();
-    console.log('MongoDB connection closed');
-    process.exit(0);
-  } catch (error) {
-    console.error('Error during graceful shutdown', error);
-    process.exit(1);
-  }
-});
+module.exports = app;
