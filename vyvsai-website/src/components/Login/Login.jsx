@@ -23,7 +23,7 @@ const Login = ({ setAuth }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/login",
+        "https://38.69.12.10:1301/api/login",
         formData
       );
 
