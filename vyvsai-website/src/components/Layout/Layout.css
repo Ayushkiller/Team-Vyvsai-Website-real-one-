@@ -1,52 +1,47 @@
 /* Layout.css */
 
+/* General body styling */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: rgb(208, 226, 255);
 }
 
+/* Container styling */
 .container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.header, .footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
+a {
+  text-decoration: none;
+  color: #333;
 }
-
-.header {
-    margin-bottom: 20px;
-}
-
-.footer {
-    margin-top: 20px;
-}
-
-.main-content {
-    padding: 20px;
-    background-color: #e9e9e9;
-}
-
+/* Navbar customization */
 .navbar {
-    display: flex;
-    justify-content: space-around;
-    background-color: #444;
-    padding: 10px;
+  background-color: #f4f4f4;
+  border-bottom: 2px solid rgb(79, 190, 255);
+  max-height: 70px;
 }
 
 .navbar a {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px;
+  color: #242424;
+  padding: 10px;
 }
 
-.navbar a:hover {
-    background-color: #555;
+/* Offcanvas should be full width on small screens */
+.offcanvas {
+  width: 100%; /* Fullscreen on mobile */
+}
+
+.offcanvas-body {
+  overflow-y: hidden; /* Disable scrolling inside the off-canvas */
+}
+
+/* Ensure the content fills the page */
+.flex-grow-1 {
+  padding: 20px;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Mission = () => (
-  <section className="mission-section bg-light">
+  <section className="mission-section bg-light rounded-3">
     <div className="container text-primary-emphasis">
       <h2 className="text-center">Our Mission</h2>
       <p className="text-justify">

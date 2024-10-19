@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-axios.defaults.baseURL = 'http://localhost:5000/api';
+axios.defaults.baseURL = "http://localhost:5000/api";
 
 const Tenders = () => {
-  const [state, setState] = useState('');
-  const [district, setDistrict] = useState('');
-  const [department, setDepartment] = useState('');
+  const [state, setState] = useState("");
+  const [district, setDistrict] = useState("");
+  const [department, setDepartment] = useState("");
   const [showExpired, setShowExpired] = useState(false);
   const [dropdownOptions, setDropdownOptions] = useState({
     states: [],
@@ -14,7 +14,7 @@ const Tenders = () => {
     departments: [],
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [tenderDetails, setTenderDetails] = useState(null);
 
   useEffect(() => {
@@ -24,13 +24,13 @@ const Tenders = () => {
   const fetchStates = async () => {
     setLoading(true);
     try {
-      console.log('Fetching states...');
-      const response = await axios.get('/states');
-      console.log('States response:', response.data);
-      setDropdownOptions(prev => ({ ...prev, states: response.data.states }));
+      console.log("Fetching states...");
+      const response = await axios.get("/states");
+      console.log("States response:", response.data);
+      setDropdownOptions((prev) => ({ ...prev, states: response.data.states }));
     } catch (err) {
-      console.error('Error fetching states:', err);
-      console.error('Error details:', err.response);
+      console.error("Error fetching states:", err);
+      console.error("Error details:", err.response);
       setError(`Error fetching states: ${err.message}`);
     } finally {
       setLoading(false);
@@ -40,40 +40,44 @@ const Tenders = () => {
   const handleStateChange = async (e) => {
     const selectedState = e.target.value;
     setState(selectedState);
-    setDistrict('');
-    setDepartment('');
+    setDistrict("");
+    setDepartment("");
     if (selectedState) {
       try {
         const [districtsResponse, departmentsResponse] = await Promise.all([
           axios.get(`/districts/${selectedState}`),
-          axios.get(`/departments/${selectedState}`)
+          axios.get(`/departments/${selectedState}`),
         ]);
-        setDropdownOptions(prev => ({
+        setDropdownOptions((prev) => ({
           ...prev,
           districts: districtsResponse.data.districts,
-          departments: departmentsResponse.data.departments
+          departments: departmentsResponse.data.departments,
         }));
       } catch (err) {
-        setError('Error fetching districts or departments');
-        console.error('Error fetching districts or departments:', err);
+        setError("Error fetching districts or departments");
+        console.error("Error fetching districts or departments:", err);
       }
     } else {
-      setDropdownOptions(prev => ({ ...prev, districts: [], departments: [] }));
+      setDropdownOptions((prev) => ({
+        ...prev,
+        districts: [],
+        departments: [],
+      }));
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
     try {
-      const response = await axios.get('/tenders', {
-        params: { state, district, department, showExpired }
+      const response = await axios.get("/tenders", {
+        params: { state, district, department, showExpired },
       });
       setTenderDetails(response.data.tenders);
     } catch (err) {
-      setError('Error fetching tender details');
-      console.error('Error fetching tender details:', err);
+      setError("Error fetching tender details");
+      console.error("Error fetching tender details:", err);
     } finally {
       setLoading(false);
     }
@@ -88,7 +92,9 @@ const Tenders = () => {
         <div className="row mb-3">
           <div className="col-md-3">
             <div className="form-group">
-              <label htmlFor="state" className="form-label">State:</label>
+              <label htmlFor="state" className="form-label">
+                State:
+              </label>
               <select
                 id="state"
                 name="state"
@@ -98,15 +104,19 @@ const Tenders = () => {
                 onChange={handleStateChange}
               >
                 <option value="">Select a State</option>
-                {dropdownOptions.states.map(s => (
-                  <option key={s} value={s}>{s}</option>
+                {dropdownOptions.states.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
                 ))}
               </select>
             </div>
           </div>
           <div className="col-md-3">
             <div className="form-group">
-              <label htmlFor="district" className="form-label">District:</label>
+              <label htmlFor="district" className="form-label">
+                District:
+              </label>
               <select
                 id="district"
                 name="district"
@@ -115,15 +125,19 @@ const Tenders = () => {
                 onChange={(e) => setDistrict(e.target.value)}
               >
                 <option value="">Select a District</option>
-                {dropdownOptions.districts.map(d => (
-                  <option key={d} value={d}>{d}</option>
+                {dropdownOptions.districts.map((d) => (
+                  <option key={d} value={d}>
+                    {d}
+                  </option>
                 ))}
               </select>
             </div>
           </div>
           <div className="col-md-3">
             <div className="form-group">
-              <label htmlFor="department" className="form-label">Department:</label>
+              <label htmlFor="department" className="form-label">
+                Department:
+              </label>
               <select
                 id="department"
                 name="department"
@@ -132,8 +146,10 @@ const Tenders = () => {
                 onChange={(e) => setDepartment(e.target.value)}
               >
                 <option value="">Select a Department</option>
-                {dropdownOptions.departments.map(d => (
-                  <option key={d} value={d}>{d}</option>
+                {dropdownOptions.departments.map((d) => (
+                  <option key={d} value={d}>
+                    {d}
+                  </option>
                 ))}
               </select>
             </div>
@@ -153,7 +169,9 @@ const Tenders = () => {
             </div>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary">Search Tenders</button>
+        <button type="submit" className="btn btn-primary">
+          Search Tenders
+        </button>
       </form>
 
       {tenderDetails && tenderDetails.length > 0 && (
@@ -163,14 +181,28 @@ const Tenders = () => {
             <div key={index} className="card mb-4">
               <div className="card-body">
                 <h5 className="card-title">{tender.title}</h5>
-                <p className="card-text"><strong>Tender ID:</strong> {tender.tender_id}</p>
-                <p className="card-text"><strong>Organization:</strong> {tender.org_name}</p>
-                <p className="card-text"><strong>Category:</strong> {tender.category}</p>
-                <p className="card-text"><strong>Price:</strong> {tender.price}</p>
-                <p className="card-text"><strong>Address:</strong> {tender.address}</p>
-                <p className="card-text"><strong>Closing Date:</strong> {tender.closing_date}</p>
+                <p className="card-text">
+                  <strong>Tender ID:</strong> {tender.tender_id}
+                </p>
+                <p className="card-text">
+                  <strong>Organization:</strong> {tender.org_name}
+                </p>
+                <p className="card-text">
+                  <strong>Category:</strong> {tender.category}
+                </p>
+                <p className="card-text">
+                  <strong>Price:</strong> {tender.price}
+                </p>
+                <p className="card-text">
+                  <strong>Address:</strong> {tender.address}
+                </p>
+                <p className="card-text">
+                  <strong>Closing Date:</strong> {tender.closing_date}
+                </p>
                 {tender.boq && tender.boq.length ? (
-                  <a href={tender.boq} className="btn btn-primary" download>Download BOQ</a>
+                  <a href={tender.boq} className="btn btn-primary" download>
+                    Download BOQ
+                  </a>
                 ) : (
                   <span className="text-muted">No BOQ available</span>
                 )}

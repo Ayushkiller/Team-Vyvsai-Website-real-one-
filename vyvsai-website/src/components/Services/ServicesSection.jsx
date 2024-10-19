@@ -1,12 +1,15 @@
-import React from 'react';
+import React from "react";
 
 const ServicesSection = () => (
-  <section className="services-section py-5">
-    <div className="container">
+  <section className="services-section">
+    <div className="container rounded-3">
       <h2 className="text-center mb-4">Our Services</h2>
-      <div className="row">
-        <div className="col-md-6 col-lg-4 mb-4">
-          <div className="card border border-primary border-opacity-50" style={{ borderRadius: '10px' }}>
+      <div className="row justify-content-center">
+        <div className="col-sm-12 col-md-6 mb-4">
+          <div
+            className="card h-100 border border-primary border-opacity-50"
+            style={{ borderRadius: "10px" }}
+          >
             <div className="card-body">
               <h5 className="card-title">Free Trial in Himachal Pradesh</h5>
               <p className="card-text">
@@ -17,8 +20,8 @@ const ServicesSection = () => (
             </div>
           </div>
         </div>
-        <div className="col-md-6 col-lg-4 mb-4">
-          <div className="card border border-primary border-opacity-75">
+        <div className="col-sm-12 col-md-6 mb-4">
+          <div className="card h-100 border border-primary border-opacity-75">
             <div className="card-body">
               <h5 className="card-title">Tender Notifications</h5>
               <p className="card-text">
@@ -28,8 +31,8 @@ const ServicesSection = () => (
             </div>
           </div>
         </div>
-        <div className="col-md-6 col-lg-4 mb-4">
-          <div className="card border border-primary border-opacity-50">
+        <div className="col-sm-12 col-md-6 mb-4">
+          <div className="card h-100 border border-primary border-opacity-50">
             <div className="card-body">
               <h5 className="card-title">Bid Prediction</h5>
               <p className="card-text">
@@ -39,8 +42,8 @@ const ServicesSection = () => (
             </div>
           </div>
         </div>
-        <div className="col-md-6 col-lg-4 mb-4">
-          <div className="card border border-primary border-opacity-50">
+        <div className="col-sm-12 col-md-6 mb-4">
+          <div className="card h-100 border border-primary border-opacity-50">
             <div className="card-body">
               <h5 className="card-title">Marketplace Creation</h5>
               <p className="card-text">
@@ -51,8 +54,8 @@ const ServicesSection = () => (
             </div>
           </div>
         </div>
-        <div className="col-md-6 col-lg-4 mb-4">
-          <div className="card border border-primary border-opacity-50">
+        <div className="col-sm-12 col-md-6 mb-4">
+          <div className="card h-100 border border-primary border-opacity-50">
             <div className="card-body">
               <h5 className="card-title">Consultancy on Bidding</h5>
               <p className="card-text">
@@ -62,8 +65,8 @@ const ServicesSection = () => (
             </div>
           </div>
         </div>
-        <div className="col-md-6 col-lg-4 mb-4">
-          <div className="card border border-primary border-opacity-50">
+        <div className="col-sm-12 col-md-6 mb-4">
+          <div className="card h-100 border border-primary border-opacity-50">
             <div className="card-body">
               <h5 className="card-title">Fintech Solutions</h5>
               <p className="card-text">
@@ -74,8 +77,8 @@ const ServicesSection = () => (
             </div>
           </div>
         </div>
-        <div className="col-md-6 col-lg-4 mb-4">
-          <div className="card border border-primary border-opacity-50">
+        <div className="col-sm-12 col-md-6 mb-4">
+          <div className="card h-100 border border-primary border-opacity-50">
             <div className="card-body">
               <h5 className="card-title text-primary-emphasis">
                 Material Supply Focus
@@ -88,6 +91,7 @@ const ServicesSection = () => (
           </div>
         </div>
       </div>
+
       <div className="text-center mt-5">
         <p className="lead">Our offerings include:</p>
         <ul className="list-unstyled">
@@ -96,12 +100,12 @@ const ServicesSection = () => (
             notifications via WhatsApp and email.
           </li>
           <li>
-            <i className="bi bi-check-circle text-success"></i> Customizable plans
-            based on project size and scope.
+            <i className="bi bi-check-circle text-success"></i> Customizable
+            plans based on project size and scope.
           </li>
           <li>
-            <i className="bi bi-check-circle text-success"></i> Comprehensive tender
-            tracking across multiple regions.
+            <i className="bi bi-check-circle text-success"></i> Comprehensive
+            tender tracking across multiple regions.
           </li>
           <li>
             <i className="bi bi-check-circle text-success"></i> Flexible pricing
