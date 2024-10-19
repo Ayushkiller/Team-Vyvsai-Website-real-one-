@@ -50,8 +50,9 @@ const Register = () => {
     setIsSubmitting(true);
     setSubmitStatus({ error: "", success: false });
 
+
     try {
-      await registerService.register(formData);
+      const response = await axios.post('http://localhost:5000/api/register', formData);
       setSubmitStatus({ error: "", success: true });
     } catch (error) {
       console.error('Error submitting data:', error);
