@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-axios.defaults.baseURL = "http://localhost:5000/api";
+import data from "./data.json"; // Assuming your JSON file is named 'data.json' and is in the same directory
 
 const Tenders = () => {
   const [state, setState] = useState("");
@@ -18,44 +17,27 @@ const Tenders = () => {
   const [tenderDetails, setTenderDetails] = useState(null);
 
   useEffect(() => {
-    fetchStates();
+    // Load states from the local JSON file
+    const states = data.states.map((stateObj) => stateObj.state);
+    setDropdownOptions((prev) => ({ ...prev, states }));
   }, []);
 
-  const fetchStates = async () => {
-    setLoading(true);
-    try {
-      console.log("Fetching states...");
-      const response = await axios.get("/states");
-      console.log("States response:", response.data);
-      setDropdownOptions((prev) => ({ ...prev, states: response.data.states }));
-    } catch (err) {
-      console.error("Error fetching states:", err);
-      console.error("Error details:", err.response);
-      setError(`Error fetching states: ${err.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleStateChange = async (e) => {
+  const handleStateChange = (e) => {
     const selectedState = e.target.value;
     setState(selectedState);
     setDistrict("");
     setDepartment("");
+
     if (selectedState) {
-      try {
-        const [districtsResponse, departmentsResponse] = await Promise.all([
-          axios.get(`/districts/${selectedState}`),
-          axios.get(`/departments/${selectedState}`),
-        ]);
+      const selectedStateData = data.states.find(
+        (s) => s.state === selectedState
+      );
+      if (selectedStateData) {
         setDropdownOptions((prev) => ({
           ...prev,
-          districts: districtsResponse.data.districts,
-          departments: departmentsResponse.data.departments,
+          districts: selectedStateData.districts,
+          departments: selectedStateData.departments,
         }));
-      } catch (err) {
-        setError("Error fetching districts or departments");
-        console.error("Error fetching districts or departments:", err);
       }
     } else {
       setDropdownOptions((prev) => ({
@@ -123,6 +105,7 @@ const Tenders = () => {
                 className="form-select"
                 value={district}
                 onChange={(e) => setDistrict(e.target.value)}
+                disabled={!state} // Disable if no state is selected
               >
                 <option value="">Select a District</option>
                 {dropdownOptions.districts.map((d) => (
@@ -144,6 +127,7 @@ const Tenders = () => {
                 className="form-select"
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
+                disabled={!state} // Disable if no state is selected
               >
                 <option value="">Select a Department</option>
                 {dropdownOptions.departments.map((d) => (
@@ -154,63 +138,11 @@ const Tenders = () => {
               </select>
             </div>
           </div>
-          <div className="col-md-3">
-            <div className="form-check mt-4">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="showExpired"
-                checked={showExpired}
-                onChange={(e) => setShowExpired(e.target.checked)}
-              />
-              <label className="form-check-label" htmlFor="showExpired">
-                Show Expired Tenders
-              </label>
-            </div>
-          </div>
         </div>
         <button type="submit" className="btn btn-primary">
           Search Tenders
         </button>
       </form>
-
-      {tenderDetails && tenderDetails.length > 0 && (
-        <div className="mt-5">
-          <h2 className="mb-4">Tender Details</h2>
-          {tenderDetails.map((tender, index) => (
-            <div key={index} className="card mb-4">
-              <div className="card-body">
-                <h5 className="card-title">{tender.title}</h5>
-                <p className="card-text">
-                  <strong>Tender ID:</strong> {tender.tender_id}
-                </p>
-                <p className="card-text">
-                  <strong>Organization:</strong> {tender.org_name}
-                </p>
-                <p className="card-text">
-                  <strong>Category:</strong> {tender.category}
-                </p>
-                <p className="card-text">
-                  <strong>Price:</strong> {tender.price}
-                </p>
-                <p className="card-text">
-                  <strong>Address:</strong> {tender.address}
-                </p>
-                <p className="card-text">
-                  <strong>Closing Date:</strong> {tender.closing_date}
-                </p>
-                {tender.boq && tender.boq.length ? (
-                  <a href={tender.boq} className="btn btn-primary" download>
-                    Download BOQ
-                  </a>
-                ) : (
-                  <span className="text-muted">No BOQ available</span>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 };

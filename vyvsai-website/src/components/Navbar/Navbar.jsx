@@ -104,19 +104,28 @@ const Navbar = ({ auth, handleLogout }) => {
               <li className="nav-item">
                 <Link
                   className="nav-link"
-                  to="/features"
+                  to="/tenders"
                   onClick={handleLinkClick}
                 >
-                  Features
+                  Tenders
                 </Link>
               </li>
               <li className="nav-item">
                 <Link
                   className="nav-link"
-                  to="/pricing"
+                  to="/login"
                   onClick={handleLinkClick}
                 >
-                  Pricing
+                  Login
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  to="/subscription"
+                  onClick={handleLinkClick}
+                >
+                  Subscriptions
                 </Link>
               </li>
               {/* Optional Logout Button */}
