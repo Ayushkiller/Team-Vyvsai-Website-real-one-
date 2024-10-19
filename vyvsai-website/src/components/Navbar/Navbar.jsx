@@ -56,7 +56,7 @@ const Navbar = ({ auth, handleLogout }) => {
     <nav className="navbar navbar-expand-lg bg-light sticky-top">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          Navbar w/ text
+          <img src="logo-2.png" alt="" className="logo" />
         </Link>
         <button
           className="navbar-toggler"
@@ -80,7 +80,7 @@ const Navbar = ({ auth, handleLogout }) => {
         >
           <div className="offcanvas-header">
             <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-              Menu
+              Links
             </h5>
             <button
               type="button"
@@ -122,7 +122,7 @@ const Navbar = ({ auth, handleLogout }) => {
               <li className="nav-item">
                 <Link
                   className="nav-link"
-                  to="/subscription"
+                  to="/subscriptions"
                   onClick={handleLinkClick}
                 >
                   Subscriptions

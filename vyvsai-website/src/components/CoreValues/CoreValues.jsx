@@ -1,7 +1,7 @@
 import React from "react";
 
 const CoreValues = () => (
-  <section className="values-section p-1">
+  <section className="values-section p-1 mb-3">
     <div className="container text-primary-emphasis rounded-3">
       <h2 className="text-center mb-4">Our Core Values</h2>
       <div className="row text-center">

@@ -51,7 +51,7 @@ const ContactUs = () => {
       <div className="row g-4">
         {/* Contact Information */}
         <div className="col-lg-6">
-          <div className="card border-dark shadow-sm rounded-3 bg-transparent">
+          <div className="card border-dark shadow-sm rounded-3 ">
             <div className="card-body">
               <h3 className="card-title text-center mb-4">
                 Contact Information
@@ -85,7 +85,7 @@ const ContactUs = () => {
 
         {/* Office Hours */}
         <div className="col-lg-6">
-          <div className="card border-dark shadow-sm rounded-3 bg-transparent">
+          <div className="card border-dark shadow-sm rounded-3 ">
             <div className="card-body">
               <h3 className="card-title text-center mb-4">Office Hours</h3>
               <p className="mb-3 d-flex align-items-center">
@@ -103,7 +103,7 @@ const ContactUs = () => {
       </div>
 
       {/* Contact Form Section */}
-      <div className="container mt-5 border border-dark rounded-3 p-3 w-75 bg-transparent">
+      <div className="container mt-5 border border-dark rounded-3 p-3 w-75">
         <h3 className="text-center fw-bold mb-4">Get in Touch</h3>
         <div className="row justify-content-center">
           <div className="col-md-8">
