@@ -143,6 +143,44 @@ const Tenders = () => {
           Search Tenders
         </button>
       </form>
+
+      {tenderDetails && tenderDetails.length > 0 && (
+        <div className="mt-5">
+          <h2 className="mb-4">Tender Details</h2>
+          {tenderDetails.map((tender, index) => (
+            <div key={index} className="card mb-4">
+              <div className="card-body">
+                <h5 className="card-title">{tender.title}</h5>
+                <p className="card-text">
+                  <strong>Tender ID:</strong> {tender.tender_id}
+                </p>
+                <p className="card-text">
+                  <strong>Organization:</strong> {tender.org_name}
+                </p>
+                <p className="card-text">
+                  <strong>Category:</strong> {tender.category}
+                </p>
+                <p className="card-text">
+                  <strong>Price:</strong> {tender.price}
+                </p>
+                <p className="card-text">
+                  <strong>Address:</strong> {tender.address}
+                </p>
+                <p className="card-text">
+                  <strong>Closing Date:</strong> {tender.closing_date}
+                </p>
+                {tender.boq && tender.boq.length ? (
+                  <a href={tender.boq} className="btn btn-primary" download>
+                    Download BOQ
+                  </a>
+                ) : (
+                  <span className="text-muted">No BOQ available</span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
