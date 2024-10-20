@@ -14,7 +14,10 @@ const Register = () => {
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState({ error: "", success: false });
+  const [submitStatus, setSubmitStatus] = useState({
+    error: "",
+    success: false,
+  });
 
   const validateForm = useCallback(() => {
     const newErrors = {};
@@ -22,11 +25,14 @@ const Register = () => {
 
     if (!username.trim()) newErrors.username = "Username is required";
     if (!mobileNo.trim()) newErrors.mobileNo = "Contact number is required";
-    else if (!/^\d{10}$/.test(mobileNo)) newErrors.mobileNo = "Invalid contact number";
+    else if (!/^\d{10}$/.test(mobileNo))
+      newErrors.mobileNo = "Invalid contact number";
     if (!email.trim()) newErrors.email = "Email is required";
-    else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = "Invalid email address";
+    else if (!/\S+@\S+\.\S+/.test(email))
+      newErrors.email = "Invalid email address";
     if (!password.trim()) newErrors.password = "Password is required";
-    else if (password.length < 8) newErrors.password = "Password must be at least 8 characters";
+    else if (password.length < 8)
+      newErrors.password = "Password must be at least 8 characters";
     if (!preferences) newErrors.preferences = "Please select a preference";
 
     return newErrors;
@@ -37,7 +43,7 @@ const Register = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: "" }));
   }, []);
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formErrors = validateForm();
@@ -54,8 +60,11 @@ const Register = () => {
       await registerService.register(formData);
       setSubmitStatus({ error: "", success: true });
     } catch (error) {
-      console.error('Error submitting data:', error);
-      setSubmitStatus({ error: error.response?.data?.message || 'Registration failed', success: false });
+      console.error("Error submitting data:", error);
+      setSubmitStatus({
+        error: error.response?.data?.message || "Registration failed",
+        success: false,
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -73,7 +82,11 @@ const Register = () => {
         aria-invalid={errors[name] ? "true" : "false"}
         aria-describedby={errors[name] ? `${name}-error` : undefined}
       />
-      {errors[name] && <p id={`${name}-error`} className="error">{errors[name]}</p>}
+      {errors[name] && (
+        <p id={`${name}-error`} className="error">
+          {errors[name]}
+        </p>
+      )}
     </div>
   );
 
@@ -94,16 +107,30 @@ const Register = () => {
             value={formData.preferences}
             onChange={handleChange}
             aria-invalid={errors.preferences ? "true" : "false"}
-            aria-describedby={errors.preferences ? "preferences-error" : undefined}
+            aria-describedby={
+              errors.preferences ? "preferences-error" : undefined
+            }
           >
             <option value="">Select preference</option>
             <option value="government-tenders">Government Tenders</option>
           </select>
-          {errors.preferences && <p id="preferences-error" className="error">{errors.preferences}</p>}
+          {errors.preferences && (
+            <p id="preferences-error" className="error">
+              {errors.preferences}
+            </p>
+          )}
         </div>
 
-        {submitStatus.error && <div className="alert error"><p>{submitStatus.error}</p></div>}
-        {submitStatus.success && <div className="alert success"><p>Registration successful!</p></div>}
+        {submitStatus.error && (
+          <div className="alert error">
+            <p>{submitStatus.error}</p>
+          </div>
+        )}
+        {submitStatus.success && (
+          <div className="alert success">
+            <p>Registration successful!</p>
+          </div>
+        )}
 
         <button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Registering..." : "Register"}

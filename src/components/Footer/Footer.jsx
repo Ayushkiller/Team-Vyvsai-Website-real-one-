@@ -1,18 +1,55 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 
 const Footer = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <footer className="footer bg-dark text-white mt-auto">
-      <div className="container py-3">
-        <div className="row">
-          <div className="col-md-6">
-            <p>
-              &copy; {new Date().getFullYear()} vyvsai.com All rights reserved.
+    <footer className="footer mt-auto bg-dark text-white">
+      <div className="container-fluid py-3">
+        <div className="row align-items-center">
+          {/* Copyright Text */}
+          <div
+            className={`col-12 col-md-6 ${
+              isMobile ? "text-center" : "text-md-left"
+            } mb-2 mb-md-0`}
+          >
+            <p className="mb-0">
+              &copy; {new Date().getFullYear()} vyvsai.com. All rights reserved.
             </p>
           </div>
-          <div className="col-md-6 text-md-right">
-            <a href="/privacy-policy" className="text-white mx-1">Privacy Policy</a>
-            <a href="/contact" className="text-white mx-1">Contact us</a>
+
+          {/* Links Section */}
+          <div
+            className={`col-12 col-md-6 ${
+              isMobile ? "text-center" : "text-md-right"
+            }`}
+          >
+            <div
+              className={`d-flex ${
+                isMobile ? "flex-column" : "flex-row"
+              } justify-content-center justify-content-md-end`}
+            >
+              <a
+                href="/privacy-policy"
+                className="text-white mx-2 mb-2 mb-md-0"
+              >
+                Privacy Policy
+              </a>
+              <a href="/contact" className="text-white mx-2 mb-2 mb-md-0">
+                Contact Us
+              </a>
+            </div>
           </div>
         </div>
       </div>

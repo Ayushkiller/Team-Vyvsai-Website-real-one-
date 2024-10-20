@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const UploadDocuments = () => {
   const [formData, setFormData] = useState({
-    tenderId: '',
-    mobileNo: '',
-    files: []
+    tenderId: "",
+    mobileNo: "",
+    files: [],
   });
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === 'files') {
+    if (name === "files") {
       setFormData({
         ...formData,
-        files: files
+        files: files,
       });
     } else {
       setFormData({
         ...formData,
-        [name]: value
+        [name]: value,
       });
     }
   };
@@ -29,16 +29,17 @@ const UploadDocuments = () => {
 
   return (
     <div className="container my-5 pt-4">
-      <h2 className="text-center mb-4"><strong>Upload Your Documents</strong></h2>
+      <h2 className="text-center mb-4">
+        <strong>Upload Your Documents</strong>
+      </h2>
       <div className="card">
         <div className="card-body">
-          <form
-            onSubmit={handleSubmit}
-            encType="multipart/form-data"
-          >
+          <form onSubmit={handleSubmit} encType="multipart/form-data">
             {/* Tender ID */}
             <div className="mb-3">
-              <label htmlFor="tenderId" className="form-label"><strong>Tender ID</strong></label>
+              <label htmlFor="tenderId" className="form-label">
+                <strong>Tender ID</strong>
+              </label>
               <input
                 type="text"
                 className="form-control"
@@ -53,7 +54,9 @@ const UploadDocuments = () => {
 
             {/* Mobile Number */}
             <div className="mb-3">
-              <label htmlFor="mobileNo" className="form-label"><strong>Mobile Number</strong></label>
+              <label htmlFor="mobileNo" className="form-label">
+                <strong>Mobile Number</strong>
+              </label>
               <input
                 type="text"
                 className="form-control"
@@ -68,7 +71,9 @@ const UploadDocuments = () => {
 
             {/* File Upload */}
             <div className="mb-3">
-              <label htmlFor="files" className="form-label"><strong>Choose Files</strong></label>
+              <label htmlFor="files" className="form-label">
+                <strong>Choose Files</strong>
+              </label>
               <input
                 type="file"
                 className="form-control"

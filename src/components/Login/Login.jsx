@@ -23,7 +23,7 @@ const Login = ({ setAuth }) => {
 
     try {
       const response = await axios.post(
-        "https://localhost:5000/api/login",
+        "http://localhost:5000/api/login",
         formData
       );
 
