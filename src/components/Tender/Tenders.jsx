@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import data from "./data.json"; // Assuming your JSON file is named 'data.json' and is in the same directory
 
-
 const Tenders = () => {
   const [state, setState] = useState("");
   const [district, setDistrict] = useState("");

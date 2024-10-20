@@ -110,15 +110,17 @@ const Navbar = ({ auth, handleLogout }) => {
                   Tenders
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link"
-                  to="/login"
-                  onClick={handleLinkClick}
-                >
-                  Login
-                </Link>
-              </li>
+              {!auth && (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    to="/login"
+                    onClick={handleLinkClick}
+                  >
+                    Login
+                  </Link>
+                </li>
+              )}
               <li className="nav-item">
                 <Link
                   className="nav-link"

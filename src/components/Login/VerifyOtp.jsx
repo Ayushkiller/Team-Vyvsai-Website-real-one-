@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const VerifyOtp = () => {
-  const [otp, setOtp] = useState('');
+  const [otp, setOtp] = useState("");
   const [errorMessages, setErrorMessages] = useState([]);
-  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState("");
   const history = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('/password-reset/verify-otp', {
-        method: 'POST',
+      const response = await fetch("/password-reset/verify-otp", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ otp }),
       });
@@ -25,11 +25,11 @@ const VerifyOtp = () => {
       } else {
         const data = await response.json();
         setSuccessMessage(data.message);
-        history.push('/password-reset/new-password'); // Redirect to new password page
+        history.push("/password-reset/new-password"); // Redirect to new password page
       }
     } catch (error) {
-      console.error('Error verifying OTP:', error);
-      setErrorMessages([{ msg: 'An error occurred. Please try again.' }]);
+      console.error("Error verifying OTP:", error);
+      setErrorMessages([{ msg: "An error occurred. Please try again." }]);
     }
   };
 
@@ -43,7 +43,9 @@ const VerifyOtp = () => {
           <h1 className="text-center mb-4">Verify OTP</h1>
           <form onSubmit={handleSubmit} className="needs-validation" noValidate>
             <div className="mb-3">
-              <label htmlFor="otp" className="form-label">Enter the OTP:</label>
+              <label htmlFor="otp" className="form-label">
+                Enter the OTP:
+              </label>
               <input
                 type="text"
                 id="otp"
@@ -60,7 +62,9 @@ const VerifyOtp = () => {
                 </div>
               )}
             </div>
-            <button type="submit" className="btn btn-primary w-100">Verify OTP</button>
+            <button type="submit" className="btn btn-primary w-100">
+              Verify OTP
+            </button>
           </form>
         </div>
       </div>
