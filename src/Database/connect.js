@@ -25,7 +25,6 @@ async function connectToMongo() {
   }
 }
 
-// Registration endpoint
 app.post('/api/register', async (req, res) => {
   try {
     const { username, mobileNo, email, password, preferences } = req.body;
@@ -44,6 +43,10 @@ app.post('/api/register', async (req, res) => {
       password, 
       preferences
     });
+
+    if (!result.insertedId) {
+      throw new Error('User registration failed');
+    }
 
     res.status(201).json({ message: 'User registered successfully', id: result.insertedId });
   } catch (error) {
