@@ -1,61 +1,78 @@
-import React from 'react';
+import React from "react";
+import "./Subscription.css"; // Minimal custom styles for specific tweaks
 
 const Subscriptions = () => (
-  <div className="container py-5 mt-5">
-    <div className="pricing-header text-center">
-      <h3 className="display-5">
+  <div className="container mt-2 rounded-3">
+    <div className="text-center mb-4">
+      <h3 className="display-6">
         Choose Your Plan
-        <img src="images/vip.png" className="membership" alt="" />
+        <img src="images/vip.png" className="ms-2" alt="VIP" />
       </h3>
       <p className="lead">Select the membership plan that suits your needs.</p>
     </div>
     <div className="row row-cols-1 row-cols-md-3 g-4">
       {/* Basic Plan */}
-      <div className="col subscription">
-        <div className="card text-center">
+      <div className="col col-md-6 col-lg-4 plans">
+        <div className="card h-100 text-center shadow border-dark">
           <div className="card-body">
             <h5 className="card-title">Basic Plan</h5>
-            <p className="card-price">₹2799/year</p>
-            <p className="card-feature">✓ Unlimited Notifications</p>
-            <p className="card-feature">✓ Email Alerts</p>
-            <p className="card-feature"><s>Priority Support</s></p>
-            <p className="card-feature"><s>Unlimited Tender Filing</s></p>
-            <p className="card-feature"><s>No-cost Consultancy</s></p>
-            <button className="btn btn-primary btn-plan">Get Started</button>
+            <p className="fs-4 fw-semibold">₹2799/year</p>
+            <ul className="list-unstyled">
+              <li className="text-primary fw-bold">
+                ✓ Unlimited Notifications
+              </li>
+              <li className="text-primary fw-bold">✓ Email Alerts</li>
+              <li className="text-muted">✗ Priority Support</li>
+              <li className="text-muted">✗ Unlimited Tender Filing</li>
+              <li className="text-muted">✗ No-cost Consultancy</li>
+            </ul>
+            <button className="btn btn-outline-primary w-100 mt-3">
+              Get Started
+            </button>
           </div>
         </div>
       </div>
 
       {/* Pro Plan */}
-      <div className="col subscription">
-        <div className="card text-center border-primary">
+      <div className="col col-md-6 col-lg-4 plans">
+        <div className="card h-100 text-center shadow border-primary">
           <div className="card-body">
             <h5 className="card-title">Pro Plan</h5>
-            <p className="card-price">₹5899/year</p>
-            <p className="card-feature">✓ Unlimited Notifications</p>
-            <p className="card-feature">✓ Email & SMS Alerts</p>
-            <p className="card-feature">✓ Priority Support</p>
-            <p className="card-feature">✓ 1 Tender Filing</p>
-            <p className="card-feature"><s>No-cost Consultancy</s></p>
-            <button className="btn btn-primary btn-plan">Get Started</button>
+            <p className="fs-4 fw-semibold">₹5899/year</p>
+            <ul className="list-unstyled">
+              <li className="text-primary fw-bold">
+                ✓ Unlimited Notifications
+              </li>
+              <li className="text-primary fw-bold">✓ Email & SMS Alerts</li>
+              <li className="text-primary fw-bold">✓ Priority Support</li>
+              <li className="text-primary fw-bold">✓ 1 Tender Filing</li>
+              <li className="text-muted">✗ No-cost Consultancy</li>
+            </ul>
+            <button className="btn btn-primary text-white w-100 mt-3">
+              Get Started
+            </button>
           </div>
         </div>
       </div>
 
       {/* Enterprise Plan */}
-      <div className="col">
-        <div className="card text-center">
+      <div className="col col-md-6 col-lg-4 plans">
+        <div className="card h-100 text-center shadow border-dark">
           <div className="card-body">
             <h5 className="card-title">Enterprise Plan</h5>
-            <p className="card-price">
-              ₹14999/<span className="text-muted">year</span>
-            </p>
-            <p className="card-feature">✓ Unlimited Notifications</p>
-            <p className="card-feature">✓ Email, SMS & Phone Alerts</p>
-            <p className="card-feature">✓ AI Based Bid Support</p>
-            <p className="card-feature">✓ 3 Tender Filing</p>
-            <p className="card-feature">✓ No-Cost Consultation</p>
-            <button className="btn btn-primary btn-plan">Get Started</button>
+            <p className="fs-4 fw-semibold">₹14999/year</p>
+            <ul className="list-unstyled">
+              <li className="text-primary fw-bold">
+                ✓ Unlimited Notifications
+              </li>
+              <li className="text-primary fw-bold">✓ Email & Phone Alerts</li>
+              <li className="text-primary fw-bold">✓ AI Based Bid Support</li>
+              <li className="text-primary fw-bold">✓ 3 Tender Filing</li>
+              <li className="text-primary fw-bold">✓ No-Cost Consultation</li>
+            </ul>
+            <button className="btn btn-outline-primary w-100 mt-3">
+              Get Started
+            </button>
           </div>
         </div>
       </div>

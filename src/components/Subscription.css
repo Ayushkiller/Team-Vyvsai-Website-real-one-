@@ -1,0 +1,131 @@
+/* General container styling */
+.container {
+    max-width: 1140px;
+    margin: auto;
+  }
+  
+  .plans:hover {
+    transform: scale(1.02);
+    transition: all 0.3s;
+  }
+  
+  .pricing-header img.membership {
+    width: 50px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+  
+  /* Responsive font sizes */
+  .card-price {
+    font-size: 1.25rem; /* Base font size */
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  .card-feature {
+    margin: 0.5rem 0;
+    font-size: 1rem; /* Base font size for features */
+  }
+  
+  .card-title {
+    font-size: 1.5rem; /* Title font size */
+    font-weight: 700;
+  }
+  
+  .btn-plan {
+    margin-top: 1rem;
+    width: 100%;
+  }
+  
+  /* Box shadow and hover effect for cards */
+  /* .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  } */
+  
+  /* Hover effect for cards */
+  /* .card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  } */
+  
+  /* Responsive font sizing with media queries */
+  @media (max-width: 576px) {
+    .card-price {
+      font-size: 1rem;
+    }
+    .card-title {
+      font-size: 1.25rem;
+    }
+    .card-feature {
+      font-size: 0.875rem; /* Slightly smaller for small screens */
+    }
+  }
+  
+  @media (min-width: 576px) {
+    .card-price {
+      font-size: 1.25rem;
+    }
+    .card-title {
+      font-size: 1.5rem;
+    }
+    .card-feature {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .card-price {
+      font-size: 1.5rem;
+    }
+    .card-title {
+      font-size: 1.75rem;
+    }
+    .card-feature {
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .card-price {
+      font-size: 1.75rem;
+    }
+    .card-title {
+      font-size: 2rem;
+    }
+    .card-feature {
+      font-size: 1.2rem;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .card-price {
+      font-size: 2rem;
+    }
+    .card-title {
+      font-size: 2.25rem;
+    }
+    .card-feature {
+      font-size: 1.25rem;
+    }
+  }
+  
+  /* Box shadows */
+  .shadow-lg {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .shadow-sm {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Borders for each plan */
+  .border-basic {
+    border: 2px solid rgba(0, 0, 0, 0.5);
+  }
+  
+  .border-pro {
+    border: 3px solid rgb(34, 218, 34);
+  }
+  
+  .border-enterprise {
+    border: 2px solid rgba(0, 0, 0, 0.5);
+  }

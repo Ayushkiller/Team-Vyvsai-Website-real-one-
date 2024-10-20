@@ -1,61 +1,147 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = ({ auth, handleLogout }) => {
   const navigate = useNavigate();
 
-  const handleTendersClick = (e) => {
-    if (!auth) {
-      e.preventDefault();
-      navigate('/login');
+  // Function to handle link clicks and collapse the off-canvas menu
+  const handleLinkClick = () => {
+    const offcanvasToggle = document.getElementById("offcanvasNavbar");
+    if (offcanvasToggle) {
+      offcanvasToggle.classList.remove("show");
+      const backdrop = document.querySelector(".offcanvas-backdrop");
+      if (backdrop) {
+        backdrop.classList.remove("show");
+        backdrop.style.display = "none";
+      }
     }
   };
 
+  // Toggle the offcanvas menu
+  const handleToggleClick = () => {
+    const offcanvasToggle = document.getElementById("offcanvasNavbar");
+    if (offcanvasToggle) {
+      offcanvasToggle.classList.toggle("show");
+      const backdrop = document.querySelector(".offcanvas-backdrop");
+      if (backdrop) {
+        backdrop.classList.toggle("show");
+        backdrop.style.display = backdrop.classList.contains("show")
+          ? "block"
+          : "none";
+      }
+    }
+  };
+
+  // Close the offcanvas if clicked outside
+  const handleClickOutside = (event) => {
+    const offcanvasToggle = document.getElementById("offcanvasNavbar");
+    if (
+      offcanvasToggle &&
+      !offcanvasToggle.contains(event.target) &&
+      !event.target.closest(".navbar-toggler")
+    ) {
+      handleLinkClick();
+    }
+  };
+
+  // Use effect to add the click event listener on mount and clean up on unmount
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link className="navbar-brand" to="/">Vyvsai</Link>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarTogglerDemo02"
-        aria-controls="navbarTogglerDemo02"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-          <li className="nav-item">
-            <Link className="nav-link" aria-current="page" to="/">Home</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" aria-current="page" to="/tenders" onClick={handleTendersClick}>Tenders</Link>
-          </li>
-          {/* <li className="nav-item">
-            <Link className="nav-link" aria-current="page" to="/upload-documents">Filing</Link>
-          </li> */}
-        </ul>
-        <ul className="navbar-nav ml-auto">
-          {auth ? (
-            <li className="nav-item">
-              <Link className="nav-link" to="/logout" onClick={handleLogout}>Log-Out</Link>
-            </li>
-          ) : (
-            <>
+    <nav className="navbar navbar-expand-lg bg-light sticky-top">
+      <div className="container-fluid">
+        <Link className="navbar-brand" to="/">
+          <img src="logo-2.png" alt="" className="logo" />
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          onClick={handleToggleClick}
+          aria-controls="offcanvasNavbar"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        {/* Offcanvas for mobile screens */}
+        <div
+          className="offcanvas offcanvas-end custom-offcanvas" // Add a custom class here
+          tabIndex="-1"
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+          data-bs-backdrop="true"
+          data-bs-keyboard="true"
+        >
+          <div className="offcanvas-header">
+            <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
+              Links
+            </h5>
+            <button
+              type="button"
+              className="btn-close"
+              aria-label="Close"
+              onClick={handleLinkClick}
+            ></button>
+          </div>
+          <div className="offcanvas-body">
+            <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li className="nav-item">
-                <Link className="nav-link" to="/login">Login</Link>
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/"
+                  onClick={handleLinkClick}
+                >
+                  Home
+                </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/register">Register</Link>
+                <Link
+                  className="nav-link"
+                  to="/tenders"
+                  onClick={handleLinkClick}
+                >
+                  Tenders
+                </Link>
               </li>
-            </>
-          )}
-          <li className="nav-item">
-            <Link className="nav-link" to="/subscriptions">Subscriptions</Link>
-          </li>
-        </ul>
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  to="/login"
+                  onClick={handleLinkClick}
+                >
+                  Login
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  to="/subscriptions"
+                  onClick={handleLinkClick}
+                >
+                  Subscriptions
+                </Link>
+              </li>
+              {/* Optional Logout Button */}
+              {auth && (
+                <li className="nav-item">
+                  <button
+                    className="nav-link btn btn-link"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </li>
+              )}
+            </ul>
+          </div>
+        </div>
       </div>
     </nav>
   );

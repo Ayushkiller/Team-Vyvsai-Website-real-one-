@@ -1,0 +1,44 @@
+/* Container and card layout */
+/* .testimonials-section {
+  padding: 3rem 1rem;
+} */
+
+.testimonial {
+    background-color: #fff;
+    margin-bottom: 2px;
+    border-bottom: 2px solid black;
+    /* padding: 1.5rem; */
+    /* border-radius: 10px; */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .testimonial:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Font styling */
+  .testimonial p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+    text-align: justify;
+  }
+  
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #333;
+  }
+  
+  /* Layout on smaller screens */
+  @media (max-width: 767px) {
+    .testimonial {
+      margin-bottom: 1.5rem;
+    }
+  
+    .testimonial p {
+      font-size: 1rem;
+    }
+  }

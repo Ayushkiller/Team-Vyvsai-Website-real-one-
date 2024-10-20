@@ -1,10 +1,11 @@
-import React from 'react';
-import Navbar from '../Navbar/Navbar';
-import Footer from '../Footer/Footer';
+import React from "react";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
+import "./Layout.css"; // Import the updated CSS
 
 const Layout = ({ children, auth, handleLogout }) => {
   return (
-    <div className="d-flex flex-column vh-100 bg-primary-subtle">
+    <div className="d-flex flex-column vh-100">
       <Navbar auth={auth} handleLogout={handleLogout} />
       <main className="flex-grow-1">{children}</main>
       <Footer />

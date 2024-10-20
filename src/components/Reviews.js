@@ -1,29 +1,27 @@
-import React from 'react';
+import React from "react";
+import "./Reviews.css"; // Import the updated CSS
 
 const Reviews = () => (
-  <section className="testimonials-section bg-primary-subtle">
+  <section className="testimonials-section bg-primary-subtle rounded-3">
     <div className="container">
       <h2 className="text-center">Reviews</h2>
       <div className="row">
         <div className="col-md-6 rounded">
           <div className="testimonial">
             <p className="text-justify">
-              "Vyvsai has completely revolutionized our bidding process. Their
-              AI-driven notifications and bid predictions have given us a
-              competitive edge, while the marketplace has streamlined our
-              procurement. The free trial in Himachal Pradesh has been
-              incredibly beneficial, making Vyvsai an essential tool for our
-              business."
+              "Vyvsai has made bidding so much easier for us. Their
+              notifications help us stay ahead, and the marketplace makes it
+              simple to get the materials we need. The trial in Himachal was a
+              big plus!"
             </p>
           </div>
         </div>
         <div className="col-md-6">
           <div className="testimonial">
             <p className="text-justify">
-              "Vyvsai's SaaS model has been invaluable for us. It not only helps
-              us fill out and submit bids efficiently but also accurately
-              predicts bid outcomes, giving us a significant advantage. The free
-              trial in Himachal Pradesh has proven to be a game-changer."
+              "Using Vyvsai has saved us time and effort. The bid predictions
+              are spot on, and the process is straightforward. The trial offer
+              in Himachal Pradesh was a great way to test it out."
             </p>
           </div>
         </div>

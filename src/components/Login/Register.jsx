@@ -1,8 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import registerService from "../../services/registerService";
 import "./Register.css";
-
+import axios from "axios";
 const Register = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -52,7 +51,7 @@ const Register = () => {
 
 
     try {
-      const response = await axios.post('http://localhost:5000/api/register', formData);
+    await axios.post('https://dbbackend.something.vyvsai.com/api/register', formData);
       setSubmitStatus({ error: "", success: true });
     } catch (error) {
       console.error('Error submitting data:', error);
