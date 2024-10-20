@@ -10,7 +10,12 @@ const mongoUrl =
 const dbNameRegistration = "Registered";
 const dbNameTenders = "Output";
 
-app.use(cors());
+const corsOptions = {
+  origin: /^(https?:\/\/)?(\w+\.)?vyvsai\.com$/,
+  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 let client;
