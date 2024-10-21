@@ -4,11 +4,13 @@
   margin: auto;
 }
 
+/* Card hover effect */
 .plans:hover {
   transform: scale(1.02);
   transition: all 0.3s;
 }
 
+/* Membership image styling */
 .pricing-header img.membership {
   width: 50px;
   margin-left: 10px;
@@ -36,16 +38,6 @@
   margin-top: 1rem;
   width: 100%;
 }
-
-/* Box shadow and hover effect for cards */
-/* .card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  } */
-
-/* Hover effect for cards */
-/* .card:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  } */
 
 /* Responsive font sizing with media queries */
 @media (max-width: 576px) {
@@ -128,4 +120,66 @@
 
 .border-enterprise {
   border: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+/* Animation for subscription cards */
+.hidden {
+  opacity: 0;
+  visibility: hidden; /* Ensures they are not interactable */
+  transition: opacity 0.5s ease, visibility 0.5s ease; /* Smooth transition */
+}
+
+/* Override the hidden class when showing cards */
+.animate-left,
+.animate-middle,
+.animate-right {
+  opacity: 1;
+  visibility: visible; /* Make visible after animation starts */
+}
+
+/* Add custom styles for animations */
+.animate-left {
+  animation: slideInLeft 0.5s forwards;
+}
+
+.animate-middle {
+  animation: slideInUp 0.5s forwards;
+}
+
+.animate-right {
+  animation: slideInRight 0.5s forwards;
+}
+
+/* Keyframes for animations */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

@@ -1,28 +1,17 @@
 /* CoreValues.css */
 
-.core-values {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+.values-section {
   background-color: #f9f9f9;
+  padding: 20px;
 }
 
-.core-values h2 {
+.values-section h2 {
   font-size: 2em;
   color: #333;
   margin-bottom: 20px;
 }
 
-.core-values p {
-  font-size: 1.2em;
-  color: #666;
-  line-height: 1.5;
-  text-align: center;
-  max-width: 800px;
-}
-
-.core-values .value-item {
+.values-section .value-item {
   margin: 10px 0;
   padding: 15px;
   border: 1px solid #ddd;
@@ -30,15 +19,24 @@
   background-color: #fff;
   width: 100%;
   max-width: 600px;
+  opacity: 0; /* Initially hidden */
+  transform: translateY(20px); /* Start slightly lower */
+  transition: opacity 0.5s ease, transform 0.5s ease; /* Animation transition */
 }
 
-.core-values .value-item h3 {
+.values-section .value-item h3 {
   font-size: 1.5em;
   color: #444;
   margin-bottom: 10px;
 }
 
-.core-values .value-item p {
+.values-section .value-item p {
   font-size: 1em;
   color: #555;
+}
+
+/* Animation class for visible state */
+.values-section .value-item.fade-in {
+  opacity: 1; /* Fade in */
+  transform: translateY(0); /* Slide up */
 }
