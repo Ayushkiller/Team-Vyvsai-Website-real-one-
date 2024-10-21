@@ -1,116 +1,186 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const TenderDetails = () => {
-  const { id } = useParams(); // Get the ID from the URL
-  const [tender, setTender] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+axios.defaults.baseURL = 'https://dbbackend.something.vyvsai.com/api';
+
+const Tenders = () => {
+  const [state, setState] = useState('');
+  const [district, setDistrict] = useState('');
+  const [department, setDepartment] = useState('');
+  const [showExpired, setShowExpired] = useState(false);
+  const [dropdownOptions, setDropdownOptions] = useState({
+    states: [],
+    districts: [],
+    departments: [],
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [tenderDetails, setTenderDetails] = useState(null);
 
   useEffect(() => {
-    const fetchTender = async () => {
+    fetchStates();
+  }, []);
+
+  const fetchStates = async () => {
+    setLoading(true);
+    try {
+      console.log('Fetching states...');
+      const response = await axios.get('/states');
+      console.log('States response:', response.data);
+      setDropdownOptions(prev => ({ ...prev, states: response.data.states }));
+    } catch (err) {
+      console.error('Error fetching states:', err);
+      console.error('Error details:', err.response);
+      setError(`Error fetching states: ${err.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleStateChange = async (e) => {
+    const selectedState = e.target.value;
+    setState(selectedState);
+    setDistrict('');
+    setDepartment('');
+    if (selectedState) {
       try {
-        const response = await fetch(`https://dbbackend.something.vyvsai.com/api/tenders/${id}`); // Make API call to fetch tender by ID
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setTender(data); // Set the fetched tender data
+        const [districtsResponse, departmentsResponse] = await Promise.all([
+          axios.get(`/districts/${selectedState}`),
+          axios.get(`/departments/${selectedState}`)
+        ]);
+        setDropdownOptions(prev => ({
+          ...prev,
+          districts: districtsResponse.data.districts,
+          departments: departmentsResponse.data.departments
+        }));
       } catch (err) {
-        setError(err.message); // Set error if the fetch fails
-      } finally {
-        setLoading(false); // Set loading to false after fetch attempt
+        setError('Error fetching districts or departments');
+        console.error('Error fetching districts or departments:', err);
       }
-    };
+    } else {
+      setDropdownOptions(prev => ({ ...prev, districts: [], departments: [] }));
+    }
+  };
 
-    fetchTender();
-  }, [id]); // Run the effect when ID changes
-
-  if (loading) return <div>Loading...</div>; // Display loading state
-  if (error) return <div>Error: {error}</div>; // Display error message
-  if (!tender) return <div>No tender found</div>; // Handle case where no tender is found
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      const response = await axios.get('/tenders', {
+        params: { state, district, department, showExpired }
+      });
+      setTenderDetails(response.data.tenders);
+    } catch (err) {
+      setError('Error fetching tender details');
+      console.error('Error fetching tender details:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="tender-details">
-      <h2>Tender Details</h2>
-      <table className="table table-bordered table-hover">
-        <tbody>
-          <tr>
-            <td>
-              <strong>Tender ID:</strong>
-            </td>
-            <td>{tender.tender_id}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Title:</strong>
-            </td>
-            <td>{tender.title}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Organization:</strong>
-            </td>
-            <td>{tender.org_name}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Category:</strong>
-            </td>
-            <td>{tender.category}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>District:</strong>
-            </td>
-            <td>{tender.district}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Price:</strong>
-            </td>
-            <td>{tender.price}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Address:</strong>
-            </td>
-            <td>{tender.address}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Closing Date:</strong>
-            </td>
-            <td>{new Date(tender.closing_date).toLocaleString()}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Published Date:</strong>
-            </td>
-            <td>{new Date(tender.published_date).toLocaleString()}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>BOQ:</strong>
-            </td>
-            <td>{tender.boq}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>State:</strong>
-            </td>
-            <td>{tender.state}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Expired:</strong>
-            </td>
-            <td>{tender.expired ? "Yes" : "No"}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div className="container mt-5 pt-4">
+      <h1 className="mb-4">Tender Search</h1>
+      {loading && <p>Loading...</p>}
+      {error && <p className="text-danger">{error}</p>}
+      <form onSubmit={handleSubmit}>
+        <div className="row mb-3">
+          <div className="col-md-3">
+            <div className="form-group">
+              <label htmlFor="state" className="form-label">State:</label>
+              <select
+                id="state"
+                name="state"
+                className="form-select"
+                required
+                value={state}
+                onChange={handleStateChange}
+              >
+                <option value="">Select a State</option>
+                {dropdownOptions.states.map(s => (
+                  <option key={s} value={s}>{s}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="col-md-3">
+            <div className="form-group">
+              <label htmlFor="district" className="form-label">District:</label>
+              <select
+                id="district"
+                name="district"
+                className="form-select"
+                value={district}
+                onChange={(e) => setDistrict(e.target.value)}
+              >
+                <option value="">Select a District</option>
+                {dropdownOptions.districts.map(d => (
+                  <option key={d} value={d}>{d}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="col-md-3">
+            <div className="form-group">
+              <label htmlFor="department" className="form-label">Department:</label>
+              <select
+                id="department"
+                name="department"
+                className="form-select"
+                value={department}
+                onChange={(e) => setDepartment(e.target.value)}
+              >
+                <option value="">Select a Department</option>
+                {dropdownOptions.departments.map(d => (
+                  <option key={d} value={d}>{d}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="col-md-3">
+            <div className="form-check mt-4">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                id="showExpired"
+                checked={showExpired}
+                onChange={(e) => setShowExpired(e.target.checked)}
+              />
+              <label className="form-check-label" htmlFor="showExpired">
+                Show Expired Tenders
+              </label>
+            </div>
+          </div>
+        </div>
+        <button type="submit" className="btn btn-primary">Search Tenders</button>
+      </form>
+
+      {tenderDetails && tenderDetails.length > 0 && (
+        <div className="mt-5">
+          <h2 className="mb-4">Tender Details</h2>
+          {tenderDetails.map((tender, index) => (
+            <div key={index} className="card mb-4">
+              <div className="card-body">
+                <h5 className="card-title">{tender.title}</h5>
+                <p className="card-text"><strong>Tender ID:</strong> {tender.tender_id}</p>
+                <p className="card-text"><strong>Organization:</strong> {tender.org_name}</p>
+                <p className="card-text"><strong>Category:</strong> {tender.category}</p>
+                <p className="card-text"><strong>Price:</strong> {tender.price}</p>
+                <p className="card-text"><strong>Address:</strong> {tender.address}</p>
+                <p className="card-text"><strong>Closing Date:</strong> {tender.closing_date}</p>
+                {tender.boq && tender.boq.length ? (
+                  <a href={tender.boq} className="btn btn-primary" download>Download BOQ</a>
+                ) : (
+                  <span className="text-muted">No BOQ available</span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
 
-export default TenderDetails;
+export default Tenders;
