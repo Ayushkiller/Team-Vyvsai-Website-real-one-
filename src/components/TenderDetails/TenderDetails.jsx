@@ -10,7 +10,7 @@ const TenderDetails = () => {
   useEffect(() => {
     const fetchTender = async () => {
       try {
-        const response = await fetch(`/api/tenders/${id}`); // Make API call to fetch tender by ID
+        const response = await fetch(`https://dbbackend.something.vyvsai.com/api/tenders/${id}`); // Make API call to fetch tender by ID
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
