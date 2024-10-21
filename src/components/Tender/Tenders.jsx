@@ -68,7 +68,7 @@ const Tenders = () => {
     setError('');
     try {
       const response = await axios.get('/tenders', {
-        params: { state, district, department, showExpired }
+        params: { state, district, department }
       });
       setTenderDetails(response.data.tenders);
     } catch (err) {
@@ -136,20 +136,6 @@ const Tenders = () => {
                   <option key={d} value={d}>{d}</option>
                 ))}
               </select>
-            </div>
-          </div>
-          <div className="col-md-3">
-            <div className="form-check mt-4">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="showExpired"
-                checked={showExpired}
-                onChange={(e) => setShowExpired(e.target.checked)}
-              />
-              <label className="form-check-label" htmlFor="showExpired">
-                Show Expired Tenders
-              </label>
             </div>
           </div>
         </div>
