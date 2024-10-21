@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import currentData from '../current.json'; // Import the JSON data
 
 axios.defaults.baseURL = 'https://dbbackend.something.vyvsai.com/api';
 
@@ -7,7 +8,6 @@ const Tenders = () => {
   const [state, setState] = useState('');
   const [district, setDistrict] = useState('');
   const [department, setDepartment] = useState('');
-  const [showExpired, setShowExpired] = useState(false);
   const [dropdownOptions, setDropdownOptions] = useState({
     states: [],
     districts: [],
@@ -21,37 +21,33 @@ const Tenders = () => {
     fetchStates();
   }, []);
 
-  const fetchStates = async () => {
+  const fetchStates = () => {
     setLoading(true);
     try {
-      console.log('Fetching states...');
-      const response = await axios.get('/states');
-      console.log('States response:', response.data);
-      setDropdownOptions(prev => ({ ...prev, states: response.data.states }));
+      const states = currentData.states.map(stateObj => stateObj.state);
+      setDropdownOptions(prev => ({ ...prev, states }));
     } catch (err) {
       console.error('Error fetching states:', err);
-      console.error('Error details:', err.response);
       setError(`Error fetching states: ${err.message}`);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleStateChange = async (e) => {
+  const handleStateChange = (e) => {
     const selectedState = e.target.value;
     setState(selectedState);
     setDistrict('');
     setDepartment('');
     if (selectedState) {
       try {
-        const [districtsResponse, departmentsResponse] = await Promise.all([
-          axios.get(`/districts/${selectedState}`),
-          axios.get(`/departments/${selectedState}`)
-        ]);
+        const stateObj = currentData.states.find(stateObj => stateObj.state === selectedState);
+        const districts = stateObj.districts;
+        const departments = stateObj.departments;
         setDropdownOptions(prev => ({
           ...prev,
-          districts: districtsResponse.data.districts,
-          departments: departmentsResponse.data.departments
+          districts,
+          departments
         }));
       } catch (err) {
         setError('Error fetching districts or departments');
@@ -68,9 +64,10 @@ const Tenders = () => {
     setError('');
     try {
       const response = await axios.get('/tenders', {
-        params: { state, district, department, showExpired }
+        params: { state, district, department }
       });
-      setTenderDetails(response.data.tenders);
+      const filteredTenders = response.data.tenders.filter(tender => !tender.expired);
+      setTenderDetails(filteredTenders);
     } catch (err) {
       setError('Error fetching tender details');
       console.error('Error fetching tender details:', err);
@@ -86,7 +83,7 @@ const Tenders = () => {
       {error && <p className="text-danger">{error}</p>}
       <form onSubmit={handleSubmit}>
         <div className="row mb-3">
-          <div className="col-md-3">
+          <div className="col-md-4">
             <div className="form-group">
               <label htmlFor="state" className="form-label">State:</label>
               <select
@@ -104,7 +101,7 @@ const Tenders = () => {
               </select>
             </div>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-4">
             <div className="form-group">
               <label htmlFor="district" className="form-label">District:</label>
               <select
@@ -121,7 +118,7 @@ const Tenders = () => {
               </select>
             </div>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-4">
             <div className="form-group">
               <label htmlFor="department" className="form-label">Department:</label>
               <select
@@ -136,20 +133,6 @@ const Tenders = () => {
                   <option key={d} value={d}>{d}</option>
                 ))}
               </select>
-            </div>
-          </div>
-          <div className="col-md-3">
-            <div className="form-check mt-4">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="showExpired"
-                checked={showExpired}
-                onChange={(e) => setShowExpired(e.target.checked)}
-              />
-              <label className="form-check-label" htmlFor="showExpired">
-                Show Expired Tenders
-              </label>
             </div>
           </div>
         </div>

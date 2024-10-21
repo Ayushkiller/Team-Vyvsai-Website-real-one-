@@ -8,7 +8,7 @@ const port = 6000;
 const mongoUrl =
   "mongodb+srv://m84719666:d6Rjb4DyVuasNDrn@tendertesting.zygfo.mongodb.net/?retryWrites=true&w=majority&appName=tenderTesting";
 const dbNameRegistration = "Registered";
-const dbNameTenders = "Output";
+const dbNameTenders = "test";
 
 const corsOptions = {
   origin: /^(https?:\/\/)?(\w+\.)?vyvsai\.com$/,
@@ -109,7 +109,7 @@ app.post("/api/login", async (req, res) => {
 app.get("/api/states", async (req, res) => {
   try {
     const db = client.db(dbNameTenders);
-    const tendersCollection = db.collection("Tenders");
+    const tendersCollection = db.collection("tenders");
     const states = await tendersCollection.distinct("state");
     res.json({ states });
   } catch (error) {
@@ -123,7 +123,7 @@ app.get("/api/districts/:state", async (req, res) => {
   try {
     const { state } = req.params;
     const db = client.db(dbNameTenders);
-    const tendersCollection = db.collection("Tenders");
+    const tendersCollection = db.collection("tenders");
     const districts = await tendersCollection.distinct("district", { state });
     res.json({ districts });
   } catch (error) {
@@ -137,7 +137,7 @@ app.get("/api/departments/:state", async (req, res) => {
   try {
     const { state } = req.params;
     const db = client.db(dbNameTenders);
-    const tendersCollection = db.collection("Tenders");
+    const tendersCollection = db.collection("tenders");
     const departments = await tendersCollection.distinct("org_name", { state });
     res.json({ departments });
   } catch (error) {
@@ -151,7 +151,7 @@ app.get("/api/tenders", async (req, res) => {
   try {
     const { state, district, department, showExpired } = req.query;
     const db = client.db(dbNameTenders);
-    const tendersCollection = db.collection("Tenders");
+    const tendersCollection = db.collection("tenders");
 
     let query = {};
     if (state) query.state = state;
