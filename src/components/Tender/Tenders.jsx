@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import currentData from '../current.json'; // Import the JSON data
 
 axios.defaults.baseURL = 'https://dbbackend.something.vyvsai.com/api';
 
@@ -22,33 +21,37 @@ const Tenders = () => {
     fetchStates();
   }, []);
 
-  const fetchStates = () => {
+  const fetchStates = async () => {
     setLoading(true);
     try {
-      const states = currentData.states.map(stateObj => stateObj.state);
-      setDropdownOptions(prev => ({ ...prev, states }));
+      console.log('Fetching states...');
+      const response = await axios.get('/states');
+      console.log('States response:', response.data);
+      setDropdownOptions(prev => ({ ...prev, states: response.data.states }));
     } catch (err) {
       console.error('Error fetching states:', err);
+      console.error('Error details:', err.response);
       setError(`Error fetching states: ${err.message}`);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleStateChange = (e) => {
+  const handleStateChange = async (e) => {
     const selectedState = e.target.value;
     setState(selectedState);
     setDistrict('');
     setDepartment('');
     if (selectedState) {
       try {
-        const stateObj = currentData.states.find(stateObj => stateObj.state === selectedState);
-        const districts = stateObj.districts;
-        const departments = stateObj.departments;
+        const [districtsResponse, departmentsResponse] = await Promise.all([
+          axios.get(`/districts/${selectedState}`),
+          axios.get(`/departments/${selectedState}`)
+        ]);
         setDropdownOptions(prev => ({
           ...prev,
-          districts,
-          departments
+          districts: districtsResponse.data.districts,
+          departments: departmentsResponse.data.departments
         }));
       } catch (err) {
         setError('Error fetching districts or departments');
@@ -175,5 +178,6 @@ const Tenders = () => {
 </div>
 );
 };
+
 
 export default Tenders;
