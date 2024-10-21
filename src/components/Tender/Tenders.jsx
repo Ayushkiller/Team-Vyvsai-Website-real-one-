@@ -8,6 +8,7 @@ const Tenders = () => {
   const [state, setState] = useState('');
   const [district, setDistrict] = useState('');
   const [department, setDepartment] = useState('');
+  const [showExpired, setShowExpired] = useState(false);
   const [dropdownOptions, setDropdownOptions] = useState({
     states: [],
     districts: [],
@@ -64,10 +65,9 @@ const Tenders = () => {
     setError('');
     try {
       const response = await axios.get('/tenders', {
-        params: { state, district, department }
+        params: { state, district, department, showExpired }
       });
-      const filteredTenders = response.data.tenders.filter(tender => !tender.expired);
-      setTenderDetails(filteredTenders);
+      setTenderDetails(response.data.tenders);
     } catch (err) {
       setError('Error fetching tender details');
       console.error('Error fetching tender details:', err);
@@ -83,7 +83,7 @@ const Tenders = () => {
       {error && <p className="text-danger">{error}</p>}
       <form onSubmit={handleSubmit}>
         <div className="row mb-3">
-          <div className="col-md-4">
+          <div className="col-md-3">
             <div className="form-group">
               <label htmlFor="state" className="form-label">State:</label>
               <select
@@ -101,7 +101,7 @@ const Tenders = () => {
               </select>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-3">
             <div className="form-group">
               <label htmlFor="district" className="form-label">District:</label>
               <select
@@ -118,7 +118,7 @@ const Tenders = () => {
               </select>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-3">
             <div className="form-group">
               <label htmlFor="department" className="form-label">Department:</label>
               <select
@@ -135,35 +135,45 @@ const Tenders = () => {
               </select>
             </div>
           </div>
+          <div className="col-md-3">
+            <div className="form-check mt-4">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                id="showExpired"
+                checked={showExpired}
+                onChange={(e) => setShowExpired(e.target.checked)}
+              />
+              <label className="form-check-label" htmlFor="showExpired">
+                Show Expired Tenders
+              </label>
+            </div>
+          </div>
         </div>
         <button type="submit" className="btn btn-primary">Search Tenders</button>
       </form>
 
       {tenderDetails && tenderDetails.length > 0 && (
-        <div className="mt-5">
-          <h2 className="mb-4">Tender Details</h2>
-          {tenderDetails.map((tender, index) => (
-            <div key={index} className="card mb-4">
-              <div className="card-body">
-                <h5 className="card-title">{tender.title}</h5>
-                <p className="card-text"><strong>Tender ID:</strong> {tender.tender_id}</p>
-                <p className="card-text"><strong>Organization:</strong> {tender.org_name}</p>
-                <p className="card-text"><strong>Category:</strong> {tender.category}</p>
-                <p className="card-text"><strong>Price:</strong> {tender.price}</p>
-                <p className="card-text"><strong>Address:</strong> {tender.address}</p>
-                <p className="card-text"><strong>Closing Date:</strong> {tender.closing_date}</p>
-                {tender.boq && tender.boq.length ? (
-                  <a href={tender.boq} className="btn btn-primary" download>Download BOQ</a>
-                ) : (
-                  <span className="text-muted">No BOQ available</span>
-                )}
-              </div>
-            </div>
-          ))}
+  <div className="mt-5">
+    <h2 className="mb-4">Tender Details</h2>
+    {tenderDetails.map((tender, index) => (
+      <div key={index} className="card mb-4">
+        <div className="card-body">
+          <h5 className="card-title">{tender.title}</h5>
+          <p className="card-text"><strong>Tender ID:</strong> {tender.tender_id}</p>
+          <p className="card-text"><strong>Organization:</strong> {tender.org_name}</p>
+          <p className="card-text"><strong>Category:</strong> {tender.category}</p>
+          <p className="card-text"><strong>Price:</strong> {tender.price}</p>
+          <p className="card-text"><strong>Address:</strong> {tender.address}</p>
+          <p className="card-text"><strong>Closing Date:</strong> {tender.closing_date}</p>
+          <p className="card-text"><strong>BOQ:</strong> No BOQ available</p>
         </div>
-      )}
-    </div>
-  );
+      </div>
+    ))}
+  </div>
+)}
+</div>
+);
 };
 
 export default Tenders;
