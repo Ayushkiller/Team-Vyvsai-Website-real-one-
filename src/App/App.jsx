@@ -29,6 +29,11 @@ const UploadDocuments = lazy(() => import("../components/UploadDocuments"));
 const ContactUs = lazy(() => import("../components/ContactUs/ContactUs"));
 const ProtectedComponent = lazy(() => import("./ProtectedComponent"));
 const Tenders = lazy(() => import("../components/Tender/Tenders"));
+const ShowTenders = lazy(() => import("../components/ShowTenders/ShowTenders"));
+const TenderDetails = lazy(() =>
+  import("../components/TenderDetails/TenderDetails")
+); // Import TenderDetail component
+
 function App() {
   const [auth, setAuth] = useState(Cookies.get("auth") === "true");
 
@@ -76,6 +81,9 @@ function App() {
                   </PrivateRoute>
                 }
               />
+              <Route path="/show-tenders" element={<ShowTenders />} />
+              <Route path="/tenders/:id" element={<TenderDetails />} />
+              {/* Add TenderDetail route */}
             </Routes>
           </Suspense>
         </Layout>

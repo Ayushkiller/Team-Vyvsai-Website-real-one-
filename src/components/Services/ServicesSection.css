@@ -1,0 +1,34 @@
+/* ServicesSection.css */
+
+/* General Styles */
+.services-section {
+  padding: 2rem 0;
+  min-height: 200vh; /* Enough space for scrolling */
+  overflow: hidden; /* Prevent overflow */
+}
+
+/* Card Container Styles */
+.card-container {
+  transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+}
+
+/* Additional styles to enhance card appearance */
+.card {
+  width: 100%; /* Ensure the card takes full width of the column */
+  max-width: 400px; /* Optional: Set a max-width for the cards */
+  margin: 0 auto; /* Center the cards in their columns */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: add shadow for depth */
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Slight lift on hover for better UX */
+}
+
+/* Media Queries */
+@media (max-width: 576px) {
+  .card {
+    max-width: 100%; /* Allow full width on small screens */
+  }
+}

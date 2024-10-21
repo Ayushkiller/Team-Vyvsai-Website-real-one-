@@ -1,7 +1,8 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
   background-color: rgb(208, 226, 255);
+  overscroll-behavior: none;
 }
 
 /* Container styling */
@@ -20,7 +21,6 @@ body {
 
 a {
   text-decoration: none;
-  color: #333;
 }
 /* Navbar customization */
 .navbar {
@@ -46,4 +46,21 @@ a {
 /* Ensure the content fills the page */
 .flex-grow-1 {
   padding: 20px;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 0.8em;
+  }
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  table {
+    font-size: 0.85em;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
 }
