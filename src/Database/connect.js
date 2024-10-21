@@ -3,16 +3,16 @@ const cors = require("cors");
 const { MongoClient } = require("mongodb");
 
 const app = express();
-const port = 6000;
+const port = 8008;
 
 const mongoUrl =
   "mongodb+srv://m84719666:d6Rjb4DyVuasNDrn@tendertesting.zygfo.mongodb.net/?retryWrites=true&w=majority&appName=tenderTesting";
 const dbNameRegistration = "Registered";
-const dbNameTenders = "Output";
+const dbNameTenders = "test";
 
 const corsOptions = {
-  origin: /^(https?:\/\/)?(\w+\.)?vyvsai\.com$/,
-  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
+  origin: [/^(https?:\/\/)?(\w+\.)?vyvsai\.com$/, "http://localhost:3000"],
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
@@ -149,28 +149,85 @@ app.get("/api/departments/:state", async (req, res) => {
 // Endpoint to fetch tenders
 app.get("/api/tenders", async (req, res) => {
   try {
-    const { state, district, department, showExpired } = req.query;
+    const { state, district, department } = req.query;
+    console.log("Tender request received:", { state, district, department });
+
     const db = client.db(dbNameTenders);
-    const tendersCollection = db.collection("Tenders");
+    const tendersCollection = db.collection("tenders");
 
+    // Create a query object based on request parameters
     let query = {};
-    if (state) query.state = state;
-    if (district) query.district = district;
-    if (department) query.org_name = department;
-    if (showExpired === "false") query.expired = false;
 
-    const tenders = await tendersCollection.find(query).toArray();
-    res.json({ tenders });
+    // Use case-insensitive regex search for state, district, and department
+    if (state) query.state = { $regex: new RegExp(state, "i") };
+    if (district) query.district = { $regex: new RegExp(district, "i") };
+    if (department) query.org_name = { $regex: new RegExp(department, "i") };
+
+    console.log("Querying tenders with:", query);
+
+    // Use aggregation to handle price conversion and sorting
+    const tenders = await tendersCollection
+      .aggregate([
+        { $match: query },
+        {
+          $addFields: {
+            priceNumeric: {
+              $convert: {
+                input: {
+                  $replaceAll: { input: "$price", find: ",", replacement: "" },
+                },
+                to: "double",
+                onError: null,
+                onNull: null,
+              },
+            },
+          },
+        },
+        { $sort: { priceNumeric: -1 } }, // Sort by numeric price in descending order
+        { $project: { priceNumeric: 0 } }, // Exclude the numeric price from the final output
+      ])
+      .toArray();
+
+    if (tenders.length > 0) {
+      console.log("Tenders found:", tenders);
+      res.json({ tenders, department, district });
+    } else {
+      console.log("No tenders found");
+      res.json({ tenders: [] });
+    }
   } catch (error) {
     console.error("Error fetching tenders:", error);
     res.status(500).json({ message: "Error fetching tenders" });
   }
 });
 
+// Backend - Express route for fetching a tender by ID
+app.get("/api/tenders/:id", async (req, res) => {
+  const { id } = req.params; // Get the ID from the route parameters
+  try {
+    const db = client.db(dbNameTenders);
+    const tendersCollection = db.collection("tenders");
+
+    // Ensure ObjectId is imported from MongoDB
+    const ObjectId = require("mongodb").ObjectId;
+
+    const tender = await tendersCollection.findOne({ _id: new ObjectId(id) }); // Find tender by ID
+
+    if (tender) {
+      res.json(tender); // Return the found tender
+    } else {
+      res.status(404).json({ message: "Tender not found" }); // Handle not found case
+    }
+  } catch (error) {
+    console.error("Error fetching tender by ID:", error);
+    res.status(500).json({ message: "Error fetching tender" });
+  }
+});
+
 async function startServer() {
   try {
     await connectToMongo(); // Attempt to connect to MongoDB
-    app.listen(port, '0.0.0.0', () => {
+    app.listen(port, "0.0.0.0", () => {
       console.log(`Server is running on port ${port}`);
     });
   } catch (error) {
@@ -178,6 +235,7 @@ async function startServer() {
     process.exit(1); // Terminate the process with an exit code of 1
   }
 }
+
 startServer();
 
 process.on("SIGINT", async () => {
