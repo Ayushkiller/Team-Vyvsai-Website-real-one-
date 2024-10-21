@@ -17,7 +17,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
-
+//time to check if sht worked for automation
 let client;
 
 async function connectToMongo() {
