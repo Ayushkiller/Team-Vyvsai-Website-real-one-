@@ -11,7 +11,6 @@
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "concurrently": "^9.0.1",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "express": "^4.21.0",
@@ -30,13 +29,12 @@
     "tailwindcss-animate": "^1.0.7",
     "web-vitals": "^2.1.4"
   },
-"scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject",
-  "deploy": "vercel --prod"
-},
+  "scripts": {
+    "start": " react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

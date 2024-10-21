@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const RequestOtp = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [errorMessages, setErrorMessages] = useState([]);
   const history = useNavigate();
 
@@ -10,10 +10,10 @@ const RequestOtp = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('/password-reset/request-otp', {
-        method: 'POST',
+      const response = await fetch("/password-reset/request-otp", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email }),
       });
@@ -22,11 +22,11 @@ const RequestOtp = () => {
         const data = await response.json();
         setErrorMessages(data.errors);
       } else {
-        history.push('/password-reset/verify-otp'); // Redirect to OTP verification page
+        history.push("/password-reset/verify-otp"); // Redirect to OTP verification page
       }
     } catch (error) {
-      console.error('Error requesting OTP:', error);
-      setErrorMessages([{ msg: 'An error occurred. Please try again.' }]);
+      console.error("Error requesting OTP:", error);
+      setErrorMessages([{ msg: "An error occurred. Please try again." }]);
     }
   };
 
@@ -37,7 +37,9 @@ const RequestOtp = () => {
           <h1 className="text-center mb-4">Reset Password</h1>
           <form onSubmit={handleSubmit} className="needs-validation" noValidate>
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">Enter your registered Email or Phone Number:</label>
+              <label htmlFor="email" className="form-label">
+                Enter your registered Email or Phone Number:
+              </label>
               <input
                 type="text"
                 id="email"
@@ -54,7 +56,9 @@ const RequestOtp = () => {
                 </div>
               )}
             </div>
-            <button type="submit" className="btn btn-primary w-100">Get OTP</button>
+            <button type="submit" className="btn btn-primary w-100">
+              Get OTP
+            </button>
           </form>
         </div>
       </div>
