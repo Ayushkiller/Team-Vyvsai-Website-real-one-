@@ -13,7 +13,11 @@ const TenderTable = ({ tenders, state = '', district = '', organization = '' }) 
       (tender.district?.toLowerCase().includes(district.toLowerCase()) || district === '') &&
       (tender.organization?.toLowerCase().includes(organization.toLowerCase()) || organization === '')
     )
-    .sort((a, b) => parseFloat(b.price) - parseFloat(a.price)); // Ensure price is treated as a number
+    .sort((a, b) => parseFloat(b.price.replace(/,/g, '')) - parseFloat(a.price.replace(/,/g, '')));
+
+  const formatIndianNumber = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
 
   return (
     <div className="table-responsive">
@@ -35,12 +39,16 @@ const TenderTable = ({ tenders, state = '', district = '', organization = '' }) 
                   className="btn btn-link"
                   onClick={() => handleViewDetails(tender)}
                 >
-                  {tender.title}
+                  {tender.title}{' '}
+                  {tender.price !== 'N/A' && (
+                    <span className="badge bg-secondary ms-2">
+                      ₹ {formatIndianNumber(tender.price)}
+                    </span>
+                  )}
                 </button>
               </td>
-              <td>{tender.price}</td>
+              <td>{tender.price === 'N/A' ? 'N/A' : `₹ ${formatIndianNumber(tender.price)}`}</td>
               <td>{tender.closing_date}</td>
-              <td></td>
             </tr>
           ))}
         </tbody>
