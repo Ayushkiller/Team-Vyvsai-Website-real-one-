@@ -1,12 +1,19 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const TenderTable = ({ tenders }) => {
+const TenderTable = ({ tenders, state = '', district = '', organization = '' }) => {
   const navigate = useNavigate();
 
   const handleViewDetails = (tender) => {
     navigate('/tender-detail', { state: { tender } });
   };
+
+  const filteredTenders = tenders
+    .filter(tender =>
+      (tender.state?.toLowerCase().includes(state.toLowerCase()) || state === '') &&
+      (tender.district?.toLowerCase().includes(district.toLowerCase()) || district === '') &&
+      (tender.organization?.toLowerCase().includes(organization.toLowerCase()) || organization === '')
+    )
+    .sort((a, b) => parseFloat(b.price) - parseFloat(a.price)); // Ensure price is treated as a number
 
   return (
     <div className="table-responsive">
@@ -15,28 +22,25 @@ const TenderTable = ({ tenders }) => {
           <tr>
             <th>Tender ID</th>
             <th>Title</th>
-            <th>Organization</th>
             <th>Price</th>
             <th>Closing Date</th>
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {tenders.map((tender, index) => (
+          {filteredTenders.map((tender, index) => (
             <tr key={index}>
               <td>{tender.tender_id}</td>
-              <td>{tender.title}</td>
-              <td>{tender.org_name}</td>
-              <td>{tender.price}</td>
-              <td>{tender.closing_date}</td>
               <td>
                 <button
-                  className="btn btn-primary btn-sm"
+                  className="btn btn-link"
                   onClick={() => handleViewDetails(tender)}
                 >
-                  View Details
+                  {tender.title}
                 </button>
               </td>
+              <td>{tender.price}</td>
+              <td>{tender.closing_date}</td>
+              <td></td>
             </tr>
           ))}
         </tbody>
