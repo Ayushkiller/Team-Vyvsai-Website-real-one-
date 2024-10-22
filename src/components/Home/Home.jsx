@@ -3,6 +3,7 @@ import Mission from "../Mission/Mission";
 import Services from "../Services/ServicesSection";
 import CoreValues from "../CoreValues/CoreValues";
 import Reviews from "../Reviews";
+import "./Home.css"; // Ensure you import the CSS file
 
 const HomePage = ({ success, error }) => (
   <div className="home-page">
@@ -12,10 +13,10 @@ const HomePage = ({ success, error }) => (
     {error && error.length > 0 && (
       <div className="alert alert-danger mt-5 pt-4">{error}</div>
     )}
-    <section className="hero-section mb-3 rounded-3">
-      <div className="container text-white-subtle text-center">
+    <section className="hero-section">
+      <div>
         <h1>Welcome to Vyvsai</h1>
-        <p className="text-justify text-center">
+        <p>
           We provide an AI-powered SaaS platform that automates tender
           management, integrates marketplace for construction materials, and
           introduces fintech solutions to streamline and optimize the

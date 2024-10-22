@@ -3,7 +3,7 @@
 /* General Styles */
 .services-section {
   padding: 2rem 0;
-  min-height: 200vh; /* Enough space for scrolling */
+  /* min-height: 200vh; */ /* Commented out or remove this line */
   overflow: hidden; /* Prevent overflow */
 }
 

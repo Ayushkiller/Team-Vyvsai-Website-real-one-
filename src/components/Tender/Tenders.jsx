@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import currentData from '../current.json'; // Import the JSON data
+import currentData from '../current.json';
 
 axios.defaults.baseURL = 'https://dbbackend.something.vyvsai.com/api';
 
 const Tenders = () => {
+  const navigate = useNavigate();
   const [state, setState] = useState('');
   const [district, setDistrict] = useState('');
   const [department, setDepartment] = useState('');
@@ -15,7 +17,6 @@ const Tenders = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [tenderDetails, setTenderDetails] = useState(null);
 
   useEffect(() => {
     fetchStates();
@@ -64,9 +65,13 @@ const Tenders = () => {
     setError('');
     try {
       const response = await axios.get('/tenders', {
-        params: { state, district, department}
+        params: { state, district, department }
       });
-      setTenderDetails(response.data.tenders);
+      if (response.data.tenders.length > 0) {
+        navigate('/tender-results', { state: { tenders: response.data.tenders } });
+      } else {
+        setError('No tenders found matching your criteria.');
+      }
     } catch (err) {
       setError('Error fetching tender details');
       console.error('Error fetching tender details:', err);
@@ -78,8 +83,8 @@ const Tenders = () => {
   return (
     <div className="container mt-5 pt-4">
       <h1 className="mb-4">Tender Search</h1>
-      {loading && <p>Loading...</p>}
-      {error && <p className="text-danger">{error}</p>}
+      {loading && <div className="alert alert-info">Loading...</div>}
+      {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div className="row mb-3">
           <div className="col-md-3">
@@ -135,30 +140,16 @@ const Tenders = () => {
             </div>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary">Search Tenders</button>
+        <button 
+          type="submit" 
+          className="btn btn-primary"
+          disabled={loading}
+        >
+          {loading ? 'Searching...' : 'Search Tenders'}
+        </button>
       </form>
-
-      {tenderDetails && tenderDetails.length > 0 && (
-  <div className="mt-5">
-    <h2 className="mb-4">Tender Details</h2>
-    {tenderDetails.map((tender, index) => (
-      <div key={index} className="card mb-4">
-        <div className="card-body">
-          <h5 className="card-title">{tender.title}</h5>
-          <p className="card-text"><strong>Tender ID:</strong> {tender.tender_id}</p>
-          <p className="card-text"><strong>Organization:</strong> {tender.org_name}</p>
-          <p className="card-text"><strong>Category:</strong> {tender.category}</p>
-          <p className="card-text"><strong>Price:</strong> {tender.price}</p>
-          <p className="card-text"><strong>Address:</strong> {tender.address}</p>
-          <p className="card-text"><strong>Closing Date:</strong> {tender.closing_date}</p>
-          <p className="card-text"><strong>BOQ:</strong> No BOQ available</p>
-        </div>
-      </div>
-    ))}
-  </div>
-)}
-</div>
-);
+    </div>
+  );
 };
 
 export default Tenders;

@@ -28,6 +28,8 @@ const UploadDocuments = lazy(() => import("../components/UploadDocuments"));
 const ContactUs = lazy(() => import("../components/ContactUs/ContactUs"));
 const ProtectedComponent = lazy(() => import("./ProtectedComponent"));
 const Tenders = lazy(() => import("../components/Tender/Tenders"));
+const TenderDetail = lazy(() => import("../components/Tender/TenderDetail"));
+const TenderResults = lazy(() => import("../components/Tender/TenderResults"));
 
 function App() {
   const [auth, setAuth] = useState(Cookies.get("auth") === "true");
@@ -62,6 +64,8 @@ function App() {
               <Route path="/subscriptions" element={<Subscriptions />} />
               <Route path="/mission" element={<Mission />} />
               <Route path="/services" element={<Services />} />
+              <Route path="/tender-results" element={<TenderResults />} />
+              <Route path="/tender-detail" element={<TenderDetail />} />
               <Route path="/core-values" element={<CoreValues />} />
               <Route path="/tenders" element={<Tenders />} />
               <Route path="/reviews" element={<Reviews />} />
