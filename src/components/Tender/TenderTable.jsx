@@ -143,7 +143,7 @@ const TenderTable = ({
     <div className="bg-white shadow-lg rounded-lg border border-gray-200">
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left p-1">
-          <thead className="bg-black text-white">
+          <thead className="bg-black text-white text-center">
             <tr>
               <th
                 className="px-6 py-4 cursor-pointer hover:bg-gray-800 transition-colors duration-200"
