@@ -1,14 +1,5 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import {
-  FaIdCard,
-  FaBuilding,
-  FaTag,
-  FaDollarSign,
-  FaMapMarkerAlt,
-  FaCalendarAlt,
-  FaFileDownload,
-} from "react-icons/fa";
 
 const TenderDetail = () => {
   const location = useLocation();
@@ -41,55 +32,51 @@ const TenderDetail = () => {
           <table className="table table-bordered">
             <tbody>
               <tr>
-                <td>
-                  <FaIdCard className="text-primary" />{" "}
+                <td className="text-muted">
                   <strong>Tender ID</strong>
                 </td>
                 <td>{tender.tender_id}</td>
               </tr>
               <tr>
-                <td>
-                  <FaBuilding className="text-primary" />{" "}
+                <td className="text-muted">
                   <strong>Organization</strong>
                 </td>
                 <td>{tender.org_name}</td>
               </tr>
               <tr>
-                <td>
-                  <FaTag className="text-primary" /> <strong>Title</strong>
+                <td className="text-muted">
+                  <strong>Title</strong>
                 </td>
                 <td>{tender.title}</td>
               </tr>
               <tr>
-                <td>
-                  <FaTag className="text-primary" /> <strong>Category</strong>
+                <td className="text-muted">
+                  <strong>Category</strong>
                 </td>
                 <td>{tender.category}</td>
               </tr>
               <tr>
-                <td>
-                  <FaDollarSign className="text-primary" />{" "}
+                <td className="text-muted">
                   <strong>Price</strong>
                 </td>
                 <td>{tender.price}</td>
               </tr>
               <tr>
-                <td>
-                  <FaMapMarkerAlt className="text-primary" />{" "}
+                <td className="text-muted">
                   <strong>Address</strong>
                 </td>
                 <td>{tender.address}</td>
               </tr>
               <tr>
-                <td>
-                  <FaCalendarAlt className="text-primary" />{" "}
+                <td className="text-muted">
                   <strong>Closing Date</strong>
                 </td>
-                <td>{tender.closing_date}</td>
+                <td>
+                  {new Date(tender.closing_date).toLocaleDateString("en-IN")}
+                </td>
               </tr>
               <tr>
-                <td>
-                  <FaFileDownload className="text-primary" />{" "}
+                <td className="text-muted">
                   <strong>BOQ</strong>
                 </td>
                 <td>
@@ -103,15 +90,13 @@ const TenderDetail = () => {
                 </td>
               </tr>
               <tr>
-                <td>
-                  <FaMapMarkerAlt className="text-primary" />{" "}
+                <td className="text-muted">
                   <strong>State</strong>
                 </td>
                 <td>{tender.state}</td>
               </tr>
               <tr>
-                <td>
-                  <FaMapMarkerAlt className="text-primary" />{" "}
+                <td className="text-muted">
                   <strong>District</strong>
                 </td>
                 <td>{tender.district}</td>

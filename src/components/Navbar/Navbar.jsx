@@ -90,9 +90,9 @@ const Navbar = ({ auth, handleLogout }) => {
           data-bs-keyboard="true"
         >
           <div className="offcanvas-header">
-            <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
+            {/* <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
               Links
-            </h5>
+            </h5> */}
             <button
               type="button"
               className="btn-close"
