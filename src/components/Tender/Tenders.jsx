@@ -90,7 +90,7 @@ const Tenders = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center min-vh-100">
+    <div className="d-flex justify-content-center align-items-center min-vh-100 w-75">
       <div className="form-container container p-4 shadow-lg rounded">
         <h1 className="mb-4 text-center">Tender Search</h1>
         {loading && (

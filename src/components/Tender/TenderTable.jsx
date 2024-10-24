@@ -139,7 +139,7 @@ const TenderTable = ({
   }
 
   return (
-    <div className="bg-white shadow-lg rounded-lg border border-gray-200">
+    <div className="bg-white shadow-lg rounded-lg border border-gray-200 text-center">
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left p-1 table-bordered border-primary">
           <thead className="bg-primary text-white text-center">
@@ -205,9 +205,9 @@ const TenderTable = ({
                           onClick={() =>
                             navigate("/tender-detail", { state: { tender } })
                           }
-                          className="text-blue-400 hover:text-blue-600 text-sm mt-1 transition-colors duration-200 border border-blue-500 rounded-md px-2 py-1"
+                          className="text-blue-400 hover:text-blue-600 text-sm mt-1 transition-colors duration-200 border border-primary rounded-3 px-2 py-1"
                         >
-                          <Eye className="inline w-4 h-4 mr-1 text-blue-500" />
+                          <Eye className="inline w-4 h-4 m-1 text-blue-500" />
                           View Details
                         </button>
                       </div>
@@ -215,7 +215,7 @@ const TenderTable = ({
                   </td>
                   <td className="px-6 py-4">
                     <div className="text-base font-medium">
-                      {formatCurrency(inrPrice)}
+                      <strong>{formatCurrency(inrPrice)}</strong>
                     </div>
                   </td>
                   <td className="px-6 py-4 text-base text-gray-700">
