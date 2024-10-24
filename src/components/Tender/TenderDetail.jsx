@@ -29,56 +29,40 @@ const TenderDetail = () => {
           </button>
         </div>
         <div className="card-body">
-          <table className="table table-bordered">
+          <table className="table table-bordered table-striped">
             <tbody>
               <tr>
-                <td className="text-muted">
-                  <strong>Tender ID</strong>
-                </td>
+                <th className="text-muted">Tender ID</th>
                 <td>{tender.tender_id}</td>
               </tr>
               <tr>
-                <td className="text-muted">
-                  <strong>Organization</strong>
-                </td>
+                <th className="text-muted">Organization</th>
                 <td>{tender.org_name}</td>
               </tr>
               <tr>
-                <td className="text-muted">
-                  <strong>Title</strong>
-                </td>
+                <th className="text-muted">Title</th>
                 <td>{tender.title}</td>
               </tr>
               <tr>
-                <td className="text-muted">
-                  <strong>Category</strong>
-                </td>
+                <th className="text-muted">Category</th>
                 <td>{tender.category}</td>
               </tr>
               <tr>
-                <td className="text-muted">
-                  <strong>Price</strong>
-                </td>
+                <th className="text-muted">Price</th>
                 <td>{tender.price}</td>
               </tr>
               <tr>
-                <td className="text-muted">
-                  <strong>Address</strong>
-                </td>
+                <th className="text-muted">Address</th>
                 <td>{tender.address}</td>
               </tr>
               <tr>
-                <td className="text-muted">
-                  <strong>Closing Date</strong>
-                </td>
+                <th className="text-muted">Closing Date</th>
                 <td>
                   {new Date(tender.closing_date).toLocaleDateString("en-IN")}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">
-                  <strong>BOQ</strong>
-                </td>
+                <th className="text-muted">BOQ</th>
                 <td>
                   {tender.boq ? (
                     <a href={tender.boq} className="btn btn-primary" download>
@@ -90,15 +74,11 @@ const TenderDetail = () => {
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">
-                  <strong>State</strong>
-                </td>
+                <th className="text-muted">State</th>
                 <td>{tender.state}</td>
               </tr>
               <tr>
-                <td className="text-muted">
-                  <strong>District</strong>
-                </td>
+                <th className="text-muted">District</th>
                 <td>{tender.district}</td>
               </tr>
             </tbody>

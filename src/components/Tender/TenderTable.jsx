@@ -205,7 +205,7 @@ const TenderTable = ({
                           onClick={() =>
                             navigate("/tender-detail", { state: { tender } })
                           }
-                          className="text-blue-400 hover:text-blue-600 text-sm mt-1 transition-colors duration-200 border border-blue-500 rounded-md px-2 py-1"
+                          className="text-blue-400 hover:text-blue-600 text-sm mt-1 transition-colors duration-200 border border-primary rounded-md px-2 py-1"
                         >
                           <Eye className="inline w-4 h-4 mr-1 text-blue-500" />
                           View Details
