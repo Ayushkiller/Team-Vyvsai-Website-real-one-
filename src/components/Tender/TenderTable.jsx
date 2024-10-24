@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
-
+import "./TenderTable.css";
 const TenderTable = ({
   tenders,
   state = "",

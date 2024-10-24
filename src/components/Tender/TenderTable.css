@@ -1,0 +1,8 @@
+.tender-table-container {
+    padding: 20px; /* Adjust the padding as needed */
+  }
+  
+  .tender-table th.centered-header {
+    text-align: center;
+    padding: 10px; /* Adjust the padding as needed */
+  }
