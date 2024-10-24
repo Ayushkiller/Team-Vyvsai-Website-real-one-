@@ -139,7 +139,7 @@ const TenderTable = ({
   }
 
   return (
-    <div className="bg-white shadow-lg rounded-lg border border-gray-200">
+    <div className="bg-white shadow-lg rounded-lg border border-gray-200 text-center">
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left p-1 table-bordered border-primary">
           <thead className="bg-primary text-white text-center">
@@ -207,7 +207,7 @@ const TenderTable = ({
                           }
                           className="text-blue-400 hover:text-blue-600 text-sm mt-1 transition-colors duration-200 border border-primary rounded-3 px-2 py-1"
                         >
-                          <Eye className="inline w-4 h-4 mr-1 text-blue-500" />
+                          <Eye className="inline w-4 h-4 m-1 text-blue-500" />
                           View Details
                         </button>
                       </div>
