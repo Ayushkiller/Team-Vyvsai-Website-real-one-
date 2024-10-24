@@ -64,10 +64,15 @@ const TenderDetail = () => {
               <tr>
                 <th className="text-muted">BOQ</th>
                 <td>
-                  {tender.boq ? (
-                    <a href={tender.boq} className="btn btn-primary" download target="_self">
-                    Download BOQ
-                  </a>
+                  {tender.boq && tender.boq.trim().toLowerCase() !== "none" ? (
+                    <a
+                      href={tender.boq}
+                      className="btn btn-primary"
+                      download
+                      target="_self"
+                    >
+                      Download BOQ
+                    </a>
                   ) : (
                     <span>No BOQ available</span>
                   )}
