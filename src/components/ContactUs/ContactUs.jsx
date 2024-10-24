@@ -180,6 +180,8 @@ const ContactUs = () => {
           href="https://www.linkedin.com/company/monoxosvyvsai-pvt-lmt/"
           className="btn btn-outline-primary btn-lg d-inline-flex align-items-center"
           style={{ transition: "background-color 0.3s, color 0.3s" }}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <img
             src="linkdin-logo.svg"
