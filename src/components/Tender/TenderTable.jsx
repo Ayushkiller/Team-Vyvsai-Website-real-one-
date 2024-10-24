@@ -142,7 +142,7 @@ const TenderTable = ({
   return (
     <div className="bg-white shadow-lg rounded-lg border border-gray-200">
       <div className="overflow-x-auto">
-        <table className="w-full text-sm text-left">
+        <table className="w-full text-sm text-left p-1">
           <thead className="bg-black text-white">
             <tr>
               <th
@@ -217,11 +217,6 @@ const TenderTable = ({
                     <div className="text-base font-medium">
                       {formatCurrency(inrPrice)}
                     </div>
-                    {usdPrice && (
-                      <div className="text-sm text-gray-500 mt-1">
-                        {formatCurrency(usdPrice, "USD")}
-                      </div>
-                    )}
                   </td>
                   <td className="px-6 py-4 text-base text-gray-700">
                     {new Date(tender.closing_date).toLocaleDateString('en-IN', {
