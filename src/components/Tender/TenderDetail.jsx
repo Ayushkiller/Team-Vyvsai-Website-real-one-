@@ -20,7 +20,7 @@ const TenderDetail = () => {
   }
 
   return (
-    <div className="container mt-5">
+    <div className="mt-5">
       <div className="card">
         <div className="card-header bg-primary text-white d-flex justify-content-between align-items-center">
           <h3 className="mb-0">Tender Details</h3>
