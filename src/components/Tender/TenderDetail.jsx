@@ -81,9 +81,9 @@ const TenderDetail = () => {
                 </td>
                 <td>
                   {tender.boq ? (
-                    <a href={tender.boq} className="btn btn-primary" download>
-                      Download BOQ
-                    </a>
+                    <a href={tender.boq} className="btn btn-primary" download target="_self">
+                    Download BOQ
+                  </a>
                   ) : (
                     <span>No BOQ available</span>
                   )}
