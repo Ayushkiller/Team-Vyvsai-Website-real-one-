@@ -102,7 +102,7 @@ const Tenders = () => {
         )}
         {error && <div className="alert alert-danger">{error}</div>}
         <form onSubmit={handleSubmit}>
-          <div className="mb-3 col-12">
+          <div className="mb-3 col-12 justify-content-center">
             <div className="form-group">
               <label htmlFor="state" className="form-label">
                 <i className="bi bi-map text-primary fs-5 me-2"></i>

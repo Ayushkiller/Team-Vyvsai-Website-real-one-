@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
+import { Eye } from "lucide-react"; // Import Eye icon for "View Details"
 import "./TenderTable.css";
+
 const TenderTable = ({
   tenders,
   state = "",
@@ -76,10 +78,9 @@ const TenderTable = ({
 
   const sortTenders = (tenders) => {
     const sortedTenders = [...tenders].sort((a, b) => {
-      // Helper function to handle null/N/A values
       const compareWithNA = (valA, valB, asc = true) => {
         if (valA === null && valB === null) return 0;
-        if (valA === null) return 1; // Always put null/N/A at the bottom
+        if (valA === null) return 1;
         if (valB === null) return -1;
         return asc ? valA - valB : valB - valA;
       };
@@ -204,8 +205,9 @@ const TenderTable = ({
                           onClick={() =>
                             navigate("/tender-detail", { state: { tender } })
                           }
-                          className="text-blue-400 hover:text-blue-600 text-sm mt-1 transition-colors duration-200"
+                          className="text-blue-400 hover:text-blue-600 text-sm mt-1 transition-colors duration-200 border border-blue-500 rounded-md px-2 py-1"
                         >
+                          <Eye className="inline w-4 h-4 mr-1 text-blue-500" />
                           View Details
                         </button>
                       </div>
