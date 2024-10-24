@@ -142,7 +142,7 @@ const TenderTable = ({
   return (
     <div className="bg-white shadow-lg rounded-lg border border-gray-200">
       <div className="overflow-x-auto">
-        <table className="w-full text-sm text-left p-1">
+        <table className="w-full text-sm text-left p-1 table-bordered">
           <thead className="bg-black text-white text-center">
             <tr>
               <th
@@ -208,7 +208,7 @@ const TenderTable = ({
                           }
                           className="text-blue-400 hover:text-blue-600 text-sm mt-1 transition-colors duration-200"
                         >
-                          Click for details
+                          View Details
                         </button>
                       </div>
                     </div>
