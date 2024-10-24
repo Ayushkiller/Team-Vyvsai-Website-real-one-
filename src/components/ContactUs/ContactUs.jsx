@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from "emailjs-com";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -18,16 +19,35 @@ const ContactUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here, you would typically handle form submission (e.g., send a request to your API)
-    // For demonstration, we'll simulate a successful submission
-    setSuccess("Your message has been sent successfully!");
 
-    // Reset the form after submission
-    setFormData({
-      name: "",
-      email: "",
-      message: "",
-    });
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      message: formData.message,
+      to_email: ["manishnegi2032@gmail.com", "malikayush999@gmail.com"],
+    };
+
+    emailjs
+      .send(
+        "service_bje6iy9", 
+        "template_npfwf0p", 
+        templateParams,
+        "EJArc5G9wDvXkCXXz" 
+      )
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          setSuccess("Your message has been sent successfully!");
+          setFormData({
+            name: "",
+            email: "",
+            message: "",
+          });
+        },
+        (error) => {
+          console.log("FAILED...", error);
+        }
+      );
   };
 
   return (
