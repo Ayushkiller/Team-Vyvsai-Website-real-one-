@@ -32,7 +32,7 @@ const ContactUs = () => {
         "service_bje6iy9", 
         "template_npfwf0p", 
         templateParams,
-        "EJArc5G9wDvXkCXXz" 
+        "EJArc5G9wDvXkCXXz"
       )
       .then(
         (response) => {
