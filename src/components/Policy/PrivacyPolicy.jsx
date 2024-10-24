@@ -1,7 +1,8 @@
 import React from "react";
+import "./PrivacyPolicy.css"; // Import the CSS file for styles
 
 const PrivacyPolicy = () => (
-  <div className="container pt-4">
+  <div className=" pt-4 rounded-3">
     <div className="row">
       <div className="col-lg-10 mx-auto">
         <h1 className="mb-4 text-center">Privacy Policy</h1>
@@ -15,11 +16,13 @@ const PrivacyPolicy = () => (
             including those who subscribe to our services.
           </p>
         </div>
+
+        {/* Each section is wrapped in a card with hover effect */}
         <div className="mb-4">
           <h3 className="fw-bold">1. Information We Collect</h3>
-          <p>We collect the following types of information:</p>
-          <div className="card border-light shadow-sm rounded-3 mb-3">
+          <div className="card hover-card border-light shadow-sm rounded-3 mb-3">
             <div className="card-body">
+              <p>We collect the following types of information:</p>
               <ul className="list-unstyled">
                 <li className="d-flex align-items-start mb-3">
                   <i className="bi bi-person-fill fs-4 me-2 text-primary"></i>
@@ -49,11 +52,12 @@ const PrivacyPolicy = () => (
             </div>
           </div>
         </div>
+
         <div className="mb-4">
           <h3 className="fw-bold">2. How We Use Your Information</h3>
-          <p>We use the information we collect to:</p>
-          <div className="card border-light shadow-sm rounded-3 mb-3">
+          <div className="card hover-card border-light shadow-sm rounded-3 mb-3">
             <div className="card-body">
+              <p>We use the information we collect to:</p>
               <ul className="list-unstyled">
                 <li className="d-flex align-items-start mb-3">
                   <i className="bi bi-person-lines-fill fs-4 me-2 text-primary"></i>
@@ -91,14 +95,15 @@ const PrivacyPolicy = () => (
             </div>
           </div>
         </div>
+
         <div className="mb-4">
           <h3 className="fw-bold">3. Sharing Your Information</h3>
-          <p>
-            We do not sell, trade, or otherwise transfer your personal
-            information to outside parties, except:
-          </p>
-          <div className="card border-light shadow-sm rounded-3 mb-3">
+          <div className="card hover-card border-light shadow-sm rounded-3 mb-3">
             <div className="card-body">
+              <p>
+                We do not sell, trade, or otherwise transfer your personal
+                information to outside parties, except:
+              </p>
               <ul className="list-unstyled">
                 <li className="d-flex align-items-start mb-3">
                   <i className="bi bi-people-fill fs-4 me-2 text-primary"></i>
@@ -122,14 +127,15 @@ const PrivacyPolicy = () => (
             </div>
           </div>
         </div>
+
         <div className="mb-4">
           <h3 className="fw-bold">4. Protecting Your Information</h3>
-          <p>
-            We implement a variety of security measures to maintain the safety
-            of your personal information:
-          </p>
-          <div className="card border-light shadow-sm rounded-3 mb-3">
+          <div className="card hover-card border-light shadow-sm rounded-3 mb-3">
             <div className="card-body">
+              <p>
+                We implement a variety of security measures to maintain the
+                safety of your personal information:
+              </p>
               <ul className="list-unstyled">
                 <li className="d-flex align-items-start mb-3">
                   <i className="bi bi-lock-fill fs-4 me-2 text-primary"></i>
@@ -158,11 +164,12 @@ const PrivacyPolicy = () => (
             </div>
           </div>
         </div>
+
         <div className="mb-4">
           <h3 className="fw-bold">5. Your Rights</h3>
-          <p>You have the right to:</p>
-          <div className="card border-light shadow-sm rounded-3 mb-3">
+          <div className="card hover-card border-light shadow-sm rounded-3 mb-3">
             <div className="card-body">
+              <p>You have the right to:</p>
               <ul className="list-unstyled">
                 <li className="d-flex align-items-start mb-3">
                   <i className="bi bi-file-earmark-text-fill fs-4 me-2 text-primary"></i>
@@ -197,18 +204,23 @@ const PrivacyPolicy = () => (
             </div>
           </div>
         </div>
+
         <div className="mb-4">
           <h3 className="fw-bold">6. Changes to This Privacy Policy</h3>
-          <p>
-            We may update this Privacy Policy from time to time. Any changes
-            will be posted on this page, and we encourage you to review this
-            Policy periodically to stay informed about how we are protecting
-            your information.
-          </p>
-          <p>
-            By using our website, you consent to our Privacy Policy and agree to
-            its terms.
-          </p>
+          <div className="card hover-card border-light shadow-sm rounded-3 mb-3">
+            <div className="card-body">
+              <p>
+                We may update this Privacy Policy from time to time. Any changes
+                will be posted on this page, and we encourage you to review this
+                Policy periodically to stay informed about how we are protecting
+                your information.
+              </p>
+              <p>
+                By using our website, you consent to our Privacy Policy and
+                agree to its terms.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

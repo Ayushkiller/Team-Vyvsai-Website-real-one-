@@ -71,7 +71,7 @@ const Navbar = ({ auth, handleLogout }) => {
 
         {/* Offcanvas for mobile screens */}
         <div
-          className="offcanvas offcanvas-end custom-offcanvas" // Add a custom class here
+          className="offcanvas offcanvas-end custom-offcanvas"
           tabIndex="-1"
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
@@ -98,6 +98,7 @@ const Navbar = ({ auth, handleLogout }) => {
                   to="/"
                   onClick={handleLinkClick}
                 >
+                  <i className="bi bi-house-door-fill text-primary me-2"></i>
                   Home
                 </Link>
               </li>
@@ -107,6 +108,7 @@ const Navbar = ({ auth, handleLogout }) => {
                   to="/tenders"
                   onClick={handleLinkClick}
                 >
+                  <i className="bi bi-file-earmark-text-fill text-primary me-2"></i>
                   Tenders
                 </Link>
               </li>
@@ -117,6 +119,7 @@ const Navbar = ({ auth, handleLogout }) => {
                     to="/login"
                     onClick={handleLinkClick}
                   >
+                    <i className="bi bi-box-arrow-in-right text-primary me-2"></i>
                     Login
                   </Link>
                 </li>
@@ -127,16 +130,17 @@ const Navbar = ({ auth, handleLogout }) => {
                   to="/subscriptions"
                   onClick={handleLinkClick}
                 >
+                  <i className="bi bi-credit-card-fill text-primary me-2"></i>
                   Subscriptions
                 </Link>
               </li>
-              {/* Optional Logout Button */}
               {auth && (
                 <li className="nav-item">
                   <button
                     className="nav-link btn btn-link"
                     onClick={handleLogout}
                   >
+                    <i className="bi bi-box-arrow-right text-primary me-2"></i>
                     Logout
                   </button>
                 </li>

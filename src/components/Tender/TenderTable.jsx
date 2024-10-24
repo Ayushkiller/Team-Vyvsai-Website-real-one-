@@ -94,9 +94,7 @@ const TenderTable = ({
         case "closing_date": {
           const dateA = new Date(a.closing_date).getTime();
           const dateB = new Date(b.closing_date).getTime();
-          return sortConfig.direction === "asc"
-            ? dateA - dateB
-            : dateB - dateA;
+          return sortConfig.direction === "asc" ? dateA - dateB : dateB - dateA;
         }
 
         case "tender_id":
@@ -189,8 +187,8 @@ const TenderTable = ({
               const usdPrice = convertToUSD(inrPrice);
 
               return (
-                <tr 
-                  key={index} 
+                <tr
+                  key={index}
                   className="hover:bg-gray-50 transition-colors duration-150"
                 >
                   <td className="px-6 py-4 text-base font-medium text-gray-900">
@@ -219,10 +217,10 @@ const TenderTable = ({
                     </div>
                   </td>
                   <td className="px-6 py-4 text-base text-gray-700">
-                    {new Date(tender.closing_date).toLocaleDateString('en-IN', {
-                      day: 'numeric',
-                      month: 'short',
-                      year: 'numeric'
+                    {new Date(tender.closing_date).toLocaleDateString("en-IN", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
                     })}
                   </td>
                 </tr>

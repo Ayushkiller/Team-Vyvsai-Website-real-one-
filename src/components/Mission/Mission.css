@@ -1,0 +1,20 @@
+.mission-section {
+  border: 1px solid #ddd; /* Optional: Add a subtle border */
+  background-color: #f9f9f9; /* Light background color */
+  border-radius: 8px; /* Rounded corners */
+}
+
+.mission-section h2 {
+  font-size: 2.5em; /* Adjust font size */
+  margin-bottom: 20px; /* Space below the heading */
+}
+
+.mission-section i {
+  font-size: 2rem; /* Adjust icon size */
+  color: #007bff; /* Change icon color to match your theme */
+}
+
+.mission-section p {
+  font-size: 1.1em; /* Increase font size for better readability */
+  line-height: 1.6; /* Improve line spacing */
+}

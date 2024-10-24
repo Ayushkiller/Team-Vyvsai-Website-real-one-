@@ -51,27 +51,27 @@ const ContactUs = () => {
       <div className="row g-4">
         {/* Contact Information */}
         <div className="col-lg-6">
-          <div className="card border-dark shadow-sm rounded-3 ">
+          <div className="card shadow-sm rounded-3">
             <div className="card-body">
               <h3 className="card-title text-center mb-4">
                 Contact Information
               </h3>
               <div className="d-flex align-items-center mb-3">
-                <i className="bi bi-envelope-fill fs-4 me-3"></i>
+                <i className="bi bi-envelope-fill fs-4 me-3 text-primary"></i>
                 <div>
-                  <strong>Email:</strong>
+                  <strong> Email: </strong>
                   <a href="mailto:support@vyvsai.com">support@vyvsai.com</a>
                 </div>
               </div>
               <div className="d-flex align-items-center mb-3">
-                <i className="bi bi-phone-fill fs-4 me-3"></i>
+                <i className="bi bi-phone-fill fs-4 me-3 text-primary"></i>
                 <div>
-                  <strong>Phone:</strong>
+                  <strong>Phone: </strong>
                   <a href="tel:+919773988392">+91 9773988392</a>
                 </div>
               </div>
               <div className="d-flex align-items-center">
-                <i className="bi bi-geo-alt-fill fs-4 me-3"></i>
+                <i className="bi bi-geo-alt-fill fs-4 me-3 text-primary"></i>
                 <div>
                   <strong>Address:</strong>
                   <p className="mb-0">
@@ -85,15 +85,15 @@ const ContactUs = () => {
 
         {/* Office Hours */}
         <div className="col-lg-6">
-          <div className="card border-dark shadow-sm rounded-3 ">
+          <div className="card shadow-sm rounded-3">
             <div className="card-body">
               <h3 className="card-title text-center mb-4">Office Hours</h3>
               <p className="mb-3 d-flex align-items-center">
-                <i className="bi bi-clock-fill fs-4 me-3"></i>
-                <strong>Monday to Friday:</strong> 9:00 AM - 6:00 PM IST
+                <i className="bi bi-clock-fill fs-4 me-3 text-primary"></i>
+                <strong>Monday to Friday: </strong> 9:00 AM - 6:00 PM IST
               </p>
               <p className="mb-0 d-flex align-items-center">
-                <i className="bi bi-clock-history fs-4 me-3"></i>
+                <i className="bi bi-clock-history fs-4 me-3 text-primary"></i>
                 We aim to respond to all inquiries within 24 hours during
                 business days.
               </p>
@@ -103,13 +103,17 @@ const ContactUs = () => {
       </div>
 
       {/* Contact Form Section */}
-      <div className="container mt-5 border border-dark rounded-3 p-3 w-75">
+      <div className="mt-5 w-75 mx-auto">
         <h3 className="text-center fw-bold mb-4">Get in Touch</h3>
         <div className="row justify-content-center">
           <div className="col-md-8">
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
-                <label htmlFor="name" className="form-label">
+                <label
+                  htmlFor="name"
+                  className="form-label d-flex align-items-center"
+                >
+                  <i className="bi bi-person-fill me-2 text-primary"></i>
                   Name
                 </label>
                 <input
@@ -123,7 +127,11 @@ const ContactUs = () => {
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="email" className="form-label">
+                <label
+                  htmlFor="email"
+                  className="form-label d-flex align-items-center"
+                >
+                  <i className="bi bi-envelope-fill me-2 text-primary"></i>
                   Email address
                 </label>
                 <input
@@ -137,7 +145,11 @@ const ContactUs = () => {
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="message" className="form-label">
+                <label
+                  htmlFor="message"
+                  className="form-label d-flex align-items-center"
+                >
+                  <i className="bi bi-chat-fill me-2 text-primary"></i>
                   Message
                 </label>
                 <textarea

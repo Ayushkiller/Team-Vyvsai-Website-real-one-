@@ -1,22 +1,76 @@
 .hero-section {
-    background-image: url('../../../public/home-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-align: center;
+  background-image: url("../../../public/home-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.hero-section h1,
+.hero-section p {
+  opacity: 0; /* Initially hidden */
+  transform: translateY(20px); /* Start slightly lower */
+  animation-fill-mode: forwards; /* Keep final state after animation */
+}
+
+/* Animation for heading */
+.hero-section h1 {
+  font-size: 5vw; /* Use viewport width for responsive size */
+  margin-bottom: 1rem;
+  animation: fadeInUp 1s ease-in-out 0.5s forwards; /* Ensure it stays visible */
+}
+
+/* Animation for paragraph */
+.hero-section p {
+  font-size: 2.5vw; /* Use viewport width for responsive size */
+  max-width: 600px;
+  margin: 0 auto;
+  animation: fadeInUp 1s ease-in-out 0.75s forwards; /* Ensure it stays visible */
+}
+
+/* Define the animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0; /* Start hidden */
+    transform: translateY(20px); /* Start lower */
   }
-  
+  100% {
+    opacity: 1; /* Fully visible */
+    transform: translateY(0); /* End at original position */
+  }
+}
+
+/* Media queries for additional adjustments */
+@media (min-width: 1200px) {
   .hero-section h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 4rem; /* Fixed font size for larger screens */
   }
-  
+
   .hero-section p {
-    font-size: 1.25rem;
-    max-width: 600px;
-    margin: 0 auto;
+    font-size: 2rem; /* Fixed font size for larger screens */
   }
+}
+
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 6vw; /* Adjust font size for smaller screens */
+  }
+
+  .hero-section p {
+    font-size: 4vw; /* Adjust font size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section h1 {
+    font-size: 7vw; /* Further adjust font size for very small screens */
+  }
+
+  .hero-section p {
+    font-size: 5vw; /* Further adjust font size for very small screens */
+  }
+}
