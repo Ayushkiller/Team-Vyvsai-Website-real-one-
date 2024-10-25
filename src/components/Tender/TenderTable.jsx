@@ -139,7 +139,7 @@ const TenderTable = ({
   }
 
   return (
-    <div className="bg-white shadow-lg rounded-lg border border-gray-200 text-center">
+    <div className="bg-white shadow-lg rounded-3 border border-gray-200 text-center">
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left p-1 table-bordered border-primary">
           <thead className="bg-primary text-white text-center">
