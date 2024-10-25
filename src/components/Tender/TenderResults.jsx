@@ -13,7 +13,7 @@ const TenderResults = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="mt-5">
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2>Search Results</h2>
         <button
@@ -32,7 +32,7 @@ const TenderResults = () => {
         />
       ) : (
         <div className="alert alert-info">
-          No tenders found matching your criteria.
+          No Active tenders found matching your criteria.
           <button className="btn btn-link" onClick={() => navigate("/tenders")}>
             Try a different search
           </button>
