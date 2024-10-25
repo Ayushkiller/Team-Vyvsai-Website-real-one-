@@ -95,9 +95,7 @@ const Tenders = () => {
         <h1 className="mb-4 text-center">Tender Search</h1>
         {loading && (
           <div className="loading-animation">
-            <div className="bar"></div>
-            <div className="bar"></div>
-            <div className="bar"></div>
+            <div className="loading-circle"></div>
           </div>
         )}
         {error && <div className="alert alert-danger">{error}</div>}

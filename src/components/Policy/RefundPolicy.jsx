@@ -6,7 +6,7 @@ const RefundPolicy = () => {
       <div className="text-center mb-4">
         <h2>Refund Policy</h2>
         <p className="text-muted">
-          Understanding our refund policy and eligibility
+          Our policy regarding refunds and cancellations
         </p>
       </div>
 
@@ -14,13 +14,13 @@ const RefundPolicy = () => {
         <div className="card-body">
           <h5 className="card-title text-primary">
             <i className="bi bi-info-circle me-2"></i>
-            General Refund Policy
+            Policy Overview
           </h5>
           <p className="card-text">
-            We prioritize customer satisfaction and ensure our SaaS product
-            meets your needs. Refunds are available if you are not fully
-            satisfied, under{" "}
-            <a href="/refund-terms-and-conditions">specific terms</a>.
+            As a subscription-based SaaS provider, our service incurs ongoing
+            resources and costs to deliver accurate and timely notifications for
+            government tenders. Due to the nature of our service, we currently
+            do not offer refunds.
           </p>
         </div>
       </div>
@@ -28,13 +28,13 @@ const RefundPolicy = () => {
       <div className="card mb-3 shadow-sm">
         <div className="card-body">
           <h5 className="card-title text-primary">
-            <i className="bi bi-check2-circle me-2"></i>
-            Eligibility for Refund
+            <i className="bi bi-exclamation-triangle me-2"></i>
+            Non-Refundable Subscriptions
           </h5>
           <p className="card-text">
-            Refunds are applicable within the first 7 days of your subscription
-            start date. Refund requests apply only to initial subscriptions, not
-            renewals or ongoing services.
+            Our policy applies to all subscriptions, including initial, renewal,
+            and ongoing services. We encourage you to review the product details
+            and ensure it meets your needs prior to purchase.
           </p>
         </div>
       </div>
@@ -42,13 +42,13 @@ const RefundPolicy = () => {
       <div className="card mb-3 shadow-sm">
         <div className="card-body">
           <h5 className="card-title text-primary">
-            <i className="bi bi-arrow-clockwise me-2"></i>
-            Refund Process
+            <i className="bi bi-headset me-2"></i>
+            Support for Any Issues
           </h5>
           <p className="card-text">
-            To initiate a refund, please contact our support team with your
-            subscription details. Approved refunds will be processed within 7-10
-            business days.
+            Your satisfaction is our priority. If you have any questions or need
+            assistance, our support team is here to help. Please don’t hesitate
+            to reach out for guidance on making the most of our service.
           </p>
         </div>
       </div>

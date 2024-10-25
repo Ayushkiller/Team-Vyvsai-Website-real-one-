@@ -27,8 +27,8 @@ const Tenders = lazy(() => import("../components/Tender/Tenders"));
 const TenderDetail = lazy(() => import("../components/Tender/TenderDetail"));
 const TenderResults = lazy(() => import("../components/Tender/TenderResults"));
 const RefundPolicy = lazy(() => import("../components/Policy/RefundPolicy"));
-const RefundTermsAndConditions = lazy(() =>
-  import("../components/Policy/RefundTermsAndConditions")
+const TermsAndConditions = lazy(() =>
+  import("../components/Policy/TermsAndConditions")
 );
 
 function App() {
@@ -74,8 +74,8 @@ function App() {
               <Route path="/contact" element={<ContactUs />} />
               <Route path="/refund-policy" element={<RefundPolicy />} />
               <Route
-                path="/refund-terms-and-conditions"
-                element={<RefundTermsAndConditions />}
+                path="/terms-and-conditions"
+                element={<TermsAndConditions />}
               />
               <Route
                 path="/protected"
