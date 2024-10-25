@@ -1,9 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Cookies from "js-cookie";
 import Layout from "../components/Layout/Layout";
 import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
@@ -30,6 +26,10 @@ const ProtectedComponent = lazy(() => import("./ProtectedComponent"));
 const Tenders = lazy(() => import("../components/Tender/Tenders"));
 const TenderDetail = lazy(() => import("../components/Tender/TenderDetail"));
 const TenderResults = lazy(() => import("../components/Tender/TenderResults"));
+const RefundPolicy = lazy(() => import("../components/Policy/RefundPolicy"));
+const RefundTermsAndConditions = lazy(() =>
+  import("../components/Policy/RefundTermsAndConditions")
+);
 
 function App() {
   const [auth, setAuth] = useState(Cookies.get("auth") === "true");
@@ -72,6 +72,11 @@ function App() {
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/upload-documents" element={<UploadDocuments />} />
               <Route path="/contact" element={<ContactUs />} />
+              <Route path="/refund-policy" element={<RefundPolicy />} />
+              <Route
+                path="/refund-terms-and-conditions"
+                element={<RefundTermsAndConditions />}
+              />
               <Route
                 path="/protected"
                 element={

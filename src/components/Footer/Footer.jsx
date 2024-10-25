@@ -49,6 +49,9 @@ const Footer = () => {
               <a href="/contact" className="text-white mx-2 mb-2 mb-md-0">
                 Contact Us
               </a>
+              <a href="/refund-policy" className="text-white mx-2 mb-2 mb-md-0">
+                Refund Policy
+              </a>
             </div>
           </div>
         </div>
