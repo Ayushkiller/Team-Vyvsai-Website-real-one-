@@ -57,9 +57,7 @@ const TenderDetail = () => {
               </tr>
               <tr>
                 <th className="text-muted">Closing Date</th>
-                <td>
-                  {new Date(tender.closing_date).toLocaleDateString("en-IN")}
-                </td>
+                <td>{tender.closing_date}</td>
               </tr>
               <tr>
                 <th className="text-muted">BOQ</th>
