@@ -19,8 +19,8 @@ const RefundPolicy = () => {
           <p className="card-text">
             As a subscription-based SaaS provider, our service incurs ongoing
             resources and costs to deliver accurate and timely notifications for
-            government tenders. Due to the nature of our service, we currently
-            do not offer refunds.
+            government tenders. Due to the nature of our service,{" "}
+            <strong>we currently do not offer refunds</strong>.
           </p>
         </div>
       </div>
