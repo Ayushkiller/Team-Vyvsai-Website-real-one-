@@ -42,7 +42,7 @@ const Subscriptions = () => {
                 {/* Bootstrap icon */}
                 Basic Plan
               </h5>
-              <p className="fs-4 fw-semibold">₹2799/year</p>
+              <p className="fs-4 fw-semibold">₹5899/year</p>
               <ul className="list-unstyled">
                 <li className="text-primary fw-bold">
                   <i className="bi bi-check-circle-fill"></i> {/* Check icon */}
@@ -56,14 +56,14 @@ const Subscriptions = () => {
                   <i className="bi bi-x-circle-fill"></i> {/* Cross icon */}
                   Priority Support
                 </li>
-                <li className="text-muted">
+                {/* <li className="text-muted">
                   <i className="bi bi-x-circle-fill"></i>
                   Unlimited Tender Filing
                 </li>
                 <li className="text-muted">
                   <i className="bi bi-x-circle-fill"></i>
                   No-cost Consultancy
-                </li>
+                </li> */}
               </ul>
               <button className="btn btn-outline-primary w-100 mt-3">
                 Get Started
@@ -85,7 +85,7 @@ const Subscriptions = () => {
                 {/* Star icon */}
                 Pro Plan
               </h5>
-              <p className="fs-4 fw-semibold">₹5899/year</p>
+              <p className="fs-4 fw-semibold">₹10899/year</p>
               <ul className="list-unstyled">
                 <li className="text-primary fw-bold">
                   <i className="bi bi-check-circle-fill"></i>
@@ -93,15 +93,15 @@ const Subscriptions = () => {
                 </li>
                 <li className="text-primary fw-bold">
                   <i className="bi bi-check-circle-fill"></i>
-                  Email & SMS Alerts
+                  Email & WhatsApp Alerts
                 </li>
                 <li className="text-primary fw-bold">
                   <i className="bi bi-check-circle-fill"></i>
                   Priority Support
                 </li>
-                <li className="text-primary fw-bold">
+                {/* <li className="text-primary fw-bold">
                   <i className="bi bi-check-circle-fill"></i>1 Tender Filing
-                </li>
+                </li> */}
                 <li className="text-muted">
                   <i className="bi bi-x-circle-fill"></i>
                   No-cost Consultancy
@@ -141,12 +141,12 @@ const Subscriptions = () => {
                   <i className="bi bi-check-circle-fill"></i>
                   AI Based Bid Support
                 </li>
-                <li className="text-primary fw-bold">
+                {/* <li className="text-primary fw-bold">
                   <i className="bi bi-check-circle-fill"></i>3 Tender Filing
-                </li>
+                </li> */}
                 <li className="text-primary fw-bold">
                   <i className="bi bi-check-circle-fill"></i>
-                  No-Cost Consultation
+                  No-Cost Consultancy
                 </li>
               </ul>
               <button className="btn btn-outline-primary w-100 mt-3">
