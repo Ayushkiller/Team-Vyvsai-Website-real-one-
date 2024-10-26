@@ -38,10 +38,10 @@ const TenderDetail = () => {
   } = tender;
 
   return (
-    <div className="tender-detail__container mt-5">
-      <div className="tender-detail__card card">
-        <div className="tender-detail__header card-header">
-          <h3 className="tender-detail__title mb-0">Tender Details</h3>
+    <div className="mt-5">
+      <div className="card">
+        <div className="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+          <h3 className="mb-0">Tender Details</h3>
           <button
             className="tender-detail__back-btn btn btn-light"
             onClick={() => navigate(-1)}
