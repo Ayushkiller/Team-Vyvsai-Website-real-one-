@@ -17,22 +17,45 @@ const Footer = () => {
   return (
     <footer className="footer mt-auto bg-dark text-white">
       <div className="container-fluid py-4">
-        <div className="row justify-content-center">
-          {/* Business Name */}
-          <div className="col-12 text-center mb-1">
-            <p className="mb-0">
-              <strong>Business Name: vyvsai.com</strong>
-            </p>
+        <div className="row align-items-center">
+          {/* Logo and Business Name on the Left */}
+          <div className="col-md-6 d-flex align-items-center justify-content-md-start justify-content-center mb-2 mb-md-0">
+            <img
+              src="logo-2.png"
+              alt="Vyvsai Logo"
+              className="footer-logo me-3"
+              style={{ maxHeight: "40px" }}
+            />
+            <div>
+              <p
+                className="mb-0"
+                style={{ fontSize: "1.1rem", fontWeight: "bold" }}
+              >
+                MONOXOS VYVSAI OPC PVT LTD
+              </p>
+              <p
+                className="mb-0"
+                style={{
+                  fontSize: "0.9rem",
+                  fontStyle: "italic",
+                  color: "#bbb",
+                }}
+              >
+                Empowering tender notifications
+              </p>
+            </div>
           </div>
 
-          {/* Centered Copyright Text */}
-          <div className="col-12 text-center mb-2">
-            <p className="mb-0 border-bottom p-2">
+          {/* Copyright on the Right */}
+          <div className="col-md-6 text-md-end text-center mb-2 mb-md-0">
+            <p className="mb-0">
               &copy; {new Date().getFullYear()} vyvsai.com. All rights reserved.
             </p>
           </div>
+        </div>
 
-          {/* Links Section */}
+        {/* Links Section Centered Below */}
+        <div className="row justify-content-center mt-3">
           <div className="col-12 text-center">
             <div className="d-flex flex-column flex-md-row justify-content-center">
               <a href="/terms-and-conditions" className="text-white mx-2 mb-2">

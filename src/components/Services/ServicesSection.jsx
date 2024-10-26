@@ -58,7 +58,7 @@ const ServicesSection = () => {
                 opacity: scrollPos > 100 ? 1 : 0,
               }}
             >
-              <div className="card h-100 border border-primary border-opacity-75">
+              <div className="card h-100 border border-primary border-opacity-50">
                 <div className="card-body">
                   <h5 className="card-title fs-5">
                     <i className="bi bi-bell-fill text-info me-2"></i>{" "}

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./CoreValues.css"; // Ensure you import your CSS file
 
 const CoreValues = () => {
   const [visible, setVisible] = useState(false);
@@ -9,41 +8,40 @@ const CoreValues = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // Check if at least 25% of the section is in view
           if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-            setVisible(true); // Set to visible when 25% of the section comes into view
+            setVisible(true);
           } else {
-            setVisible(false); // Reset visibility when section goes out of view
+            setVisible(false);
           }
         });
       },
       {
-        threshold: 0.5, // Trigger when 25% of the target is visible
+        threshold: 0.5,
       }
     );
 
     const section = sectionRef.current;
     if (section) {
-      observer.observe(section); // Observe the section
+      observer.observe(section);
     }
 
     return () => {
       if (section) {
-        observer.unobserve(section); // Clean up observer on unmount
+        observer.unobserve(section);
       }
     };
   }, []);
 
   return (
-    <section ref={sectionRef} className="values-section p-1 mb-3 rounded-3">
+    <section ref={sectionRef} className="values-section p-1 mb-3">
       <div className="container text-primary-emphasis rounded-3">
         <h2 className="text-center mb-4">Our Core Values</h2>
         <div className="row text-center">
           {["Efficiency", "Transparency", "Innovation", "Client-Centric"].map(
             (value, index) => (
-              <div className="col-md-6 mb-4" key={value}>
+              <div className="col-lg-6 col-md-6 col-12 mb-4" key={value}>
                 <div
-                  className={`value-item border border-primary border-opacity-75 ${
+                  className={`card h-100 border border-primary border-opacity-75 ${
                     visible ? "fade-in" : ""
                   }`}
                   style={{ transitionDelay: `${index * 100}ms` }} // Staggered effect
@@ -52,10 +50,11 @@ const CoreValues = () => {
                     <i
                       className={`bi bi-${getIcon(value)} text-primary me-2`}
                     ></i>{" "}
-                    {/* Add icon */}
                     {value}
                   </div>
-                  <div className="card-body">{getDescription(value)}</div>
+                  <div className="card-body">
+                    <p>{getDescription(value)}</p>
+                  </div>
                 </div>
               </div>
             )
@@ -86,15 +85,15 @@ const getDescription = (value) => {
 const getIcon = (value) => {
   switch (value) {
     case "Efficiency":
-      return "check-circle-fill"; // Example icon
+      return "check-circle-fill";
     case "Transparency":
-      return "eye-fill"; // Example icon
+      return "eye-fill";
     case "Innovation":
-      return "lightbulb-fill"; // Example icon
+      return "lightbulb-fill";
     case "Client-Centric":
-      return "people-fill"; // Example icon
+      return "people-fill";
     default:
-      return "question-circle-fill"; // Default icon
+      return "question-circle-fill";
   }
 };
 
