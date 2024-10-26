@@ -47,7 +47,7 @@ function App() {
     <Router>
       <ErrorBoundary>
         <Layout auth={auth} handleLogout={handleLogout}>
-          <Suspense fallback={<AnimatedLoading />}>
+          <Suspense fallback={null}>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<Login setAuth={setAuth} />} />

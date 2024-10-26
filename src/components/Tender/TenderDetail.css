@@ -1,17 +1,19 @@
-/* TenderDetail.css */
-.tender-detail-container {
-  max-width: 900px; /* Set a maximum width to control component width */
+/* Tender Detail Container */
+.tender-detail__container {
+  max-width: 900px;
   margin: 0 auto;
   padding: 20px;
 }
 
-.tender-detail-card {
+/* Card styling */
+.tender-detail__card {
   width: 100%;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15); /* Slightly softer shadow */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
 }
 
-.tender-detail-header {
+/* Header Styling */
+.tender-detail__header {
   background-color: #007bff;
   color: #fff;
   padding: 15px 20px;
@@ -20,29 +22,55 @@
   align-items: center;
 }
 
-.tender-detail-header h3 {
+.tender-detail__title {
   font-size: 1.5rem;
   margin: 0;
 }
 
-.tender-detail-body .row {
+.tender-detail__back-btn {
+  font-size: 0.875rem;
+}
+
+/* Body and Info Styling */
+.tender-detail__body {
+  padding: 20px;
+}
+
+.tender-detail__row {
   display: flex;
   flex-wrap: wrap;
 }
 
-.tender-detail-body .col-md-6 {
-  flex: 1 1 50%; /* Each item takes up half width */
+.tender-detail__info {
+  flex: 1 1 50%;
   padding: 10px;
   font-size: 0.95em;
 }
 
-/* Responsive styling */
+/* Alert Styling */
+.tender-detail__alert {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  text-align: center;
+}
+
+.tender-detail__return-btn {
+  font-size: 0.875rem;
+}
+
+/* BOQ Button */
+.tender-detail__boq-btn {
+  font-size: 0.875rem;
+}
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
-  .tender-detail-container {
+  .tender-detail__container {
     padding: 15px;
   }
 
-  .tender-detail-body .col-md-6 {
-    flex: 1 1 100%; /* Full width on smaller screens */
+  .tender-detail__info {
+    flex: 1 1 100%;
   }
 }
