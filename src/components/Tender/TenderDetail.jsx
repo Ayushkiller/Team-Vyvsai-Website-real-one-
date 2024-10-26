@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import "./TenderDetail.css"; // Import CSS here
 
 const TenderDetail = () => {
   const location = useLocation();
@@ -37,9 +38,9 @@ const TenderDetail = () => {
   } = tender;
 
   return (
-    <div className="container mt-5">
-      <div className="card">
-        <div className="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+    <div className="tender-detail-container mt-5">
+      <div className="tender-detail-card card">
+        <div className="tender-detail-header card-header">
           <h3 className="mb-0">Tender Details</h3>
           <button
             className="btn btn-light"
@@ -49,7 +50,7 @@ const TenderDetail = () => {
             Back to Results
           </button>
         </div>
-        <div className="card-body">
+        <div className="tender-detail-body card-body">
           <div className="row">
             <div className="col-md-6 mb-3">
               <strong className="text-muted">Tender ID:</strong> {tender_id}

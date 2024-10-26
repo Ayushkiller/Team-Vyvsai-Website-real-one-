@@ -1,0 +1,48 @@
+/* TenderDetail.css */
+.tender-detail-container {
+  max-width: 900px; /* Set a maximum width to control component width */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.tender-detail-card {
+  width: 100%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15); /* Slightly softer shadow */
+  border-radius: 8px;
+}
+
+.tender-detail-header {
+  background-color: #007bff;
+  color: #fff;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tender-detail-header h3 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.tender-detail-body .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tender-detail-body .col-md-6 {
+  flex: 1 1 50%; /* Each item takes up half width */
+  padding: 10px;
+  font-size: 0.95em;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .tender-detail-container {
+    padding: 15px;
+  }
+
+  .tender-detail-body .col-md-6 {
+    flex: 1 1 100%; /* Full width on smaller screens */
+  }
+}
