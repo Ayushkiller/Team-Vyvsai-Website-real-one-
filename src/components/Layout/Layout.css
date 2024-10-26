@@ -5,10 +5,9 @@ body {
   overscroll-behavior: none;
 }
 
-/* Page container styling */
-.page-container {
-  width: 95%;
-  max-width: 1200px; /* Optional max width for large screens */
+/* Container styling */
+.container {
+  width: 100%;
   margin: 0 auto;
   padding: 20px;
   background-color: #fff;
@@ -23,7 +22,6 @@ body {
 a {
   text-decoration: none;
 }
-
 /* Navbar customization */
 .navbar {
   background-color: rgb(208, 226, 255);
@@ -36,32 +34,30 @@ a {
   padding: 10px;
 }
 
-/* Offcanvas styling */
+/* Offcanvas should be full width on small screens */
 .offcanvas {
-  width: 100%;
+  width: 100%; /* Fullscreen on mobile */
 }
 
 .offcanvas-body {
-  overflow-y: hidden;
+  overflow-y: hidden; /* Disable scrolling inside the off-canvas */
 }
 
-/* Adjust for content that needs to fill the viewport */
+/* Ensure the content fills the page */
 .flex-grow-1 {
   padding: 20px;
 }
 
 @media (max-width: 768px) {
   body {
-    font-size: 0.85em;
+    font-size: 0.8em;
   }
-
   h1 {
     font-size: 1.75rem;
   }
 
-  /* Apply smaller font sizes to page container */
-  .page-container {
-    padding: 15px;
+  table {
+    font-size: 0.85em;
   }
 
   .table-responsive {
