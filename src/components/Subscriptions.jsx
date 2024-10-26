@@ -11,7 +11,7 @@ const Subscriptions = () => {
   }, []);
 
   return (
-    <div className="mt-2 rounded-3 mb-2">
+    <div className="mt-2 rounded-3 mb-5">
       <div className="text-center mb-4">
         <h3 className="display-6">
           <i className="bi bi-card-checklist text-primary me-2"></i> Choose Your
