@@ -152,7 +152,7 @@ const Tenders = () => {
             <div className="form-group">
               <label htmlFor="department" className="form-label">
                 <i className="bi bi-building text-primary fs-5 me-2"></i>
-                Department:
+                Department: <span className="text-danger">*</span>
               </label>
               <select
                 id="department"
