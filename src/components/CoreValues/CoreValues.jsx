@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import "./CoreValues.css"; // Ensure your CSS file is imported
 
 const CoreValues = () => {
   const [visible, setVisible] = useState(false);
@@ -8,15 +9,16 @@ const CoreValues = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-            setVisible(true);
+          // Check if the section is intersecting and within the defined threshold
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
+            setVisible(true); // Fade in when 25% is visible
           } else {
-            setVisible(false);
+            setVisible(false); // Fade out when less than 25% is visible
           }
         });
       },
       {
-        threshold: 0.5,
+        threshold: 0.25, // Set threshold for 25%
       }
     );
 
@@ -34,17 +36,17 @@ const CoreValues = () => {
 
   return (
     <section ref={sectionRef} className="values-section p-1 mb-3">
-      <div className="container text-primary-emphasis rounded-3">
+      <div className="container text-primary-emphasis rounded-5">
         <h2 className="text-center mb-4">Our Core Values</h2>
         <div className="row text-center">
           {["Efficiency", "Transparency", "Innovation", "Client-Centric"].map(
             (value, index) => (
               <div className="col-lg-6 col-md-6 col-12 mb-4" key={value}>
                 <div
-                  className={`card h-100 border border-primary border-opacity-75 ${
-                    visible ? "fade-in" : ""
+                  className={`card h-100 border border-primary border-opacity-75 value-item ${
+                    visible ? "fade-in" : "fade-out"
                   }`}
-                  style={{ transitionDelay: `${index * 100}ms` }} // Staggered effect
+                  style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   <div className="card-header">
                     <i

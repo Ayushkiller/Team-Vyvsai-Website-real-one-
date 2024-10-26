@@ -21,7 +21,7 @@
   max-width: 600px;
   opacity: 0; /* Initially hidden */
   transform: translateY(20px); /* Start slightly lower */
-  transition: opacity 0.5s ease, transform 0.5s ease; /* Animation transition */
+  transition: opacity 0.5s linear, transform 0.3s linear; /* Animation transition */
 }
 
 .values-section .value-item h3 {
@@ -35,8 +35,24 @@
   color: #555;
 }
 
-/* Animation class for visible state */
+/* Animation classes for visible state */
 .values-section .value-item.fade-in {
   opacity: 1; /* Fade in */
   transform: translateY(0); /* Slide up */
+}
+
+.values-section .value-item.fade-out {
+  opacity: 0; /* Fade out */
+  transform: translateY(20px); /* Slide down */
+}
+
+/* Translate effect on hover */
+.values-section .value-item:hover {
+  transform: translateY(-10px); /* Move hovered card up */
+  z-index: 1; /* Bring hovered card to the front */
+}
+
+/* Slightly translate non-hovered items down */
+.values-section .value-item:not(:hover) {
+  transform: translateY(5px); /* Move non-hovered items down slightly */
 }
