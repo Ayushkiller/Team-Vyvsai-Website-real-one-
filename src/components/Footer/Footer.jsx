@@ -18,9 +18,16 @@ const Footer = () => {
     <footer className="footer mt-auto bg-dark text-white">
       <div className="container-fluid py-4">
         <div className="row justify-content-center">
+          {/* Business Name */}
+          <div className="col-12 text-center mb-1">
+            <p className="mb-0">
+              <strong>Business Name: vyvsai.com</strong>
+            </p>
+          </div>
+
           {/* Centered Copyright Text */}
-          <div className="col-12 text-center mb-3">
-            <p className="mb-0 border-bottom">
+          <div className="col-12 text-center mb-2">
+            <p className="mb-0 border-bottom p-2">
               &copy; {new Date().getFullYear()} vyvsai.com. All rights reserved.
             </p>
           </div>

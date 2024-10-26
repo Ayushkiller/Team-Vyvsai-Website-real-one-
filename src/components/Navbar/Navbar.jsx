@@ -59,16 +59,7 @@ const Navbar = ({ auth, handleLogout }) => {
           <img src="logo-2.png" alt="" className="logo" />
         </Link>
         {/* New External Link next to the logo */}
-        <a
-          className="nav-link d-inline-flex align-items-center"
-          href="https://vyvsaibidpredict.streamlit.app/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <i className="bi bi-graph-up text-primary me-2"></i>{" "}
-          {/* Chart icon */}
-          Bid Predict
-        </a>
+
         <button
           className="navbar-toggler"
           type="button"
