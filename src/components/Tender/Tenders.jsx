@@ -90,104 +90,106 @@ const Tenders = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center meraPyaratenderForm mb-5 mt-3">
-      <div
-        className="form-container container p-3 shadow-lg rounded"
-        style={{ marginTop: "20px" }}
-      >
-        <h1 className="mb-4 text-center">Tender Search</h1>
-        {loading && (
-          <div className="loading-animation">
-            <div className="loading-circle"></div>
-          </div>
-        )}
-        {error && <div className="alert alert-danger">{error}</div>}
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3 col-12 justify-content-center">
-            <div className="form-group">
-              <label htmlFor="state" className="form-label">
-                <i className="bi bi-map text-primary fs-5 me-2"></i>
-                State <span className="text-danger">*</span>
-              </label>
-              <select
-                id="state"
-                name="state"
-                className="form-select form-control-lg cursor-pointer"
-                required
-                value={state}
-                onChange={handleStateChange}
-              >
-                <option value="">Select a State</option>
-                {dropdownOptions.states.map((s) => (
-                  <option key={s} value={s}>
-                    {s}
-                  </option>
-                ))}
-              </select>
+    <div className="vh-100">
+      <div className="d-flex justify-content-center meraPyaratenderForm mt-2">
+        <div
+          className="form-container container p-3 shadow-lg rounded"
+          style={{ marginTop: "20px" }}
+        >
+          <h1 className="mb-4 text-center">Tender Search</h1>
+          {loading && (
+            <div className="loading-animation">
+              <div className="loading-circle"></div>
             </div>
-          </div>
-          <div className="mb-3 col-12">
-            <div className="form-group">
-              <label htmlFor="district" className="form-label">
-                <i className="bi bi-geo-alt text-primary fs-5 me-2"></i>
-                District
-              </label>
-              <select
-                id="district"
-                name="district"
-                className={`form-select form-control-lg ${
-                  state ? "cursor-pointer" : "disabled cursor-disabled"
-                }`}
-                value={district}
-                onChange={(e) => setDistrict(e.target.value)}
-                disabled={!state}
-              >
-                <option value="">Select a District</option>
-                {dropdownOptions.districts.map((d) => (
-                  <option key={d} value={d}>
-                    {d}
-                  </option>
-                ))}
-              </select>
+          )}
+          {error && <div className="alert alert-danger">{error}</div>}
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3 col-12 justify-content-center">
+              <div className="form-group">
+                <label htmlFor="state" className="form-label">
+                  <i className="bi bi-map text-primary fs-5 me-2"></i>
+                  State <span className="text-danger">*</span>
+                </label>
+                <select
+                  id="state"
+                  name="state"
+                  className="form-select form-control-lg cursor-pointer"
+                  required
+                  value={state}
+                  onChange={handleStateChange}
+                >
+                  <option value="">Select a State</option>
+                  {dropdownOptions.states.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
-          </div>
-          <div className="mb-3 col-12">
-            <div className="form-group">
-              <label htmlFor="department" className="form-label">
-                <i className="bi bi-building text-primary fs-5 me-2"></i>
-                Department
-              </label>
-              <select
-                id="department"
-                name="department"
-                className={`form-select form-control-lg ${
-                  state ? "cursor-pointer" : "disabled cursor-disabled"
-                }`}
-                value={department}
-                onChange={(e) => setDepartment(e.target.value)}
-                disabled={!state}
-              >
-                <option value="">Select a Department</option>
-                {dropdownOptions.departments.map((d) => (
-                  <option key={d} value={d}>
-                    {d}
-                  </option>
-                ))}
-              </select>
+            <div className="mb-3 col-12">
+              <div className="form-group">
+                <label htmlFor="district" className="form-label">
+                  <i className="bi bi-geo-alt text-primary fs-5 me-2"></i>
+                  District
+                </label>
+                <select
+                  id="district"
+                  name="district"
+                  className={`form-select form-control-lg ${
+                    state ? "cursor-pointer" : "disabled cursor-disabled"
+                  }`}
+                  value={district}
+                  onChange={(e) => setDistrict(e.target.value)}
+                  disabled={!state}
+                >
+                  <option value="">Select a District</option>
+                  {dropdownOptions.districts.map((d) => (
+                    <option key={d} value={d}>
+                      {d}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
-          </div>
-          <div className="d-flex justify-content-center mt-3">
-            <button
-              type="submit"
-              className="btn btn-primary w-50"
-              disabled={loading}
-            >
-              {loading ? "Searching..." : "Search Tenders"}
-            </button>
-          </div>
-        </form>
-        <div className="mt-2" style={{ minHeight: "20px" }}></div>{" "}
-        {/* Optional space if needed */}
+            <div className="mb-3 col-12">
+              <div className="form-group">
+                <label htmlFor="department" className="form-label">
+                  <i className="bi bi-building text-primary fs-5 me-2"></i>
+                  Department
+                </label>
+                <select
+                  id="department"
+                  name="department"
+                  className={`form-select form-control-lg ${
+                    state ? "cursor-pointer" : "disabled cursor-disabled"
+                  }`}
+                  value={department}
+                  onChange={(e) => setDepartment(e.target.value)}
+                  disabled={!state}
+                >
+                  <option value="">Select a Department</option>
+                  {dropdownOptions.departments.map((d) => (
+                    <option key={d} value={d}>
+                      {d}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className="d-flex justify-content-center mt-3">
+              <button
+                type="submit"
+                className="btn btn-primary w-50"
+                disabled={loading}
+              >
+                {loading ? "Searching..." : "Search Tenders"}
+              </button>
+            </div>
+          </form>
+          <div className="mt-2" style={{ minHeight: "20px" }}></div>{" "}
+          {/* Optional space if needed */}
+        </div>
       </div>
     </div>
   );
