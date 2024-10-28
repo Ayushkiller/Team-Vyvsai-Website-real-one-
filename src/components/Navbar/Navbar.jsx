@@ -54,7 +54,7 @@ const Navbar = ({ auth, handleLogout }) => {
   }, []);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-light fixed-top">
+    <nav className="navbar navbar-expand-lg bg-light sticky-top">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           <img src="logo-2.png" alt="" className="logo" />

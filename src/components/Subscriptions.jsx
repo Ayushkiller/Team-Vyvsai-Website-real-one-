@@ -15,7 +15,7 @@ const Subscriptions = () => {
       className="mt-5 pt-2"
       // style={{ marginTop: "60px" }}
     >
-      <div className="rounded-3 mb-5 pb-5 pt-5">
+      <div className="rounded-3 mb-5 pb-5">
         <div className="text-center mb-4">
           <h3 className="display-6">
             <i className="bi bi-card-checklist text-primary me-2"></i> Choose
