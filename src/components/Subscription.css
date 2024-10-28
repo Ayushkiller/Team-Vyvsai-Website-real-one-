@@ -52,6 +52,16 @@
   }
 }
 
+/* Additional responsive styling */
+@media (max-width: 576px) {
+  .vh-100 {
+    margin-top: 60px; /* Ensures space from navbar */
+  }
+  .card-body {
+    padding: 15px; /* Adjust card body padding for smaller screens */
+  }
+}
+
 @media (min-width: 576px) {
   .card-price {
     font-size: 1.25rem;

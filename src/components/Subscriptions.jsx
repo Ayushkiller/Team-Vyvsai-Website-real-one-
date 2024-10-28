@@ -11,8 +11,11 @@ const Subscriptions = () => {
   }, []);
 
   return (
-    <div className="vh-100 d-flex justify-content-center align-items-center mt-5">
-      <div className="rounded-3 mb-5 pb-5">
+    <div
+      className="mt-5 pt-2"
+      // style={{ marginTop: "60px" }}
+    >
+      <div className="rounded-3 mb-5 pb-5 pt-5">
         <div className="text-center mb-4">
           <h3 className="display-6">
             <i className="bi bi-card-checklist text-primary me-2"></i> Choose
@@ -125,14 +128,6 @@ const Subscriptions = () => {
             </div>
           </div>
         </div>
-        <style jsx>{`
-          .card-body {
-            padding: 20px; /* Increased padding for better spacing */
-          }
-          s .list-unstyled li {
-            margin-bottom: 10px; /* Spacing between list items */
-          }
-        `}</style>
       </div>
     </div>
   );
