@@ -11,7 +11,7 @@ const Subscriptions = () => {
   }, []);
 
   return (
-    <div className="vh-100 d-flex justify-content-center align-items-center">
+    <div className="vh-100 d-flex justify-content-center align-items-center mt-5">
       <div className="rounded-3 mb-5 pb-5">
         <div className="text-center mb-4">
           <h3 className="display-6">
