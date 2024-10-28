@@ -4,7 +4,7 @@ const { MongoClient } = require("mongodb");
 const crypto = require("crypto");
 const app = express();
 const port = 5000;
-
+const helmet = require('helmet');
 const mongoUrl =
   "mongodb+srv://m84719666:d6Rjb4DyVuasNDrn@tendertesting.zygfo.mongodb.net/?retryWrites=true&w=majority&appName=tenderTesting";
 const dbNameRegistration = "Registered";
@@ -15,6 +15,8 @@ const corsOptions = {
   optionsSuccessStatus: 200 // Some legacy browsers choke on 204
 };
 
+app.use(helmet());
+app.disable('x-powered-by');
 app.use(cors(corsOptions));
 app.use(express.json());
 //time to check if sht worked for automation
@@ -46,18 +48,6 @@ app.post('/api/check-password', async (req, res) => {
   const { password } = req.body;
   try {
     const db = client.db(dbName);
-    const secretPasswordsCollection = db.collection('secret_passwords');
-    const predefinedPassword = 'adskyjfghbkiufghdsjcbakueygfvsijcbawkiuecgbsajceegfarsdgzsldfgvbhszdk6853654';
-    const existingPassword = await secretPasswordsCollection.findOne({ password: predefinedPassword });
-    if (!existingPassword) {
-      await secretPasswordsCollection.insertOne({ password: predefinedPassword });
-      console.log('Inserted predefined password into secret_passwords collection');
-    }
-    await db.createCollection('secret_passwords').catch((err) => {
-      if (err.codeName !== 'NamespaceExists') {
-        console.error('Error creating secret_passwords collection:', err);
-      }
-    });
     const collection = db.collection('secret_passwords');
     const result = await collection.findOne({ password });
     if (result) {
