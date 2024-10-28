@@ -90,8 +90,11 @@ const Tenders = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center min-vh-100 meraPyaratenderForm mt-3">
-      <div className="form-container container p-3 shadow-lg rounded">
+    <div className="d-flex justify-content-center min-vh-100 meraPyaratenderForm">
+      <div
+        className="form-container container p-3 shadow-lg rounded"
+        style={{ marginTop: "20px" }}
+      >
         <h1 className="mb-4 text-center">Tender Search</h1>
         {loading && (
           <div className="loading-animation">
