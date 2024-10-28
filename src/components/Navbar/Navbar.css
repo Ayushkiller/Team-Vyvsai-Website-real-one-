@@ -1,0 +1,22 @@
+/* Increase link size for small viewports */
+@media (max-width: 768px) {
+  .navbar-nav .nav-link {
+    font-size: 1.25rem; /* Increase font size */
+    padding: 15px; /* Add padding for bigger clickable area */
+  }
+
+  /* Align navbar links to the left in offcanvas menu */
+  .offcanvas-body {
+    text-align: left; /* Align text to the left */
+  }
+
+  /* Ensure that the offcanvas menu is flush with the left */
+  .offcanvas {
+    padding-left: 0; /* Remove default padding */
+  }
+
+  /* Optional: Add a bit of margin to the links */
+  .navbar-nav .nav-item {
+    margin-bottom: 10px; /* Spacing between links */
+  }
+}
