@@ -12,7 +12,7 @@ const dbNameTenders = "test";
 
 const corsOptions = {
   origin: /^(https?:\/\/)?(\w+\.)?vyvsai\.com$/,
-  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
+  optionsSuccessStatus: 200, // Some legacy browsers choke on 204
 };
 
 app.use(cors(corsOptions));
@@ -157,7 +157,7 @@ app.get("/api/tenders", async (req, res) => {
     if (state) query.state = state;
     if (district) query.district = district;
     if (department) query.org_name = department;
-    if (showExpired === "false") query.expired = false;
+    query.expired = false;
 
     const tenders = await tendersCollection.find(query).toArray();
     res.json({ tenders });
@@ -170,7 +170,7 @@ app.get("/api/tenders", async (req, res) => {
 async function startServer() {
   try {
     await connectToMongo(); // Attempt to connect to MongoDB
-    app.listen(port, '0.0.0.0', () => {
+    app.listen(port, "0.0.0.0", () => {
       console.log(`Server is running on port ${port}`);
     });
   } catch (error) {
