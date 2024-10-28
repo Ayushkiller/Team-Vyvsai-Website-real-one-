@@ -1,15 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 const { MongoClient } = require("mongodb");
-
+const crypto = require("crypto");
 const app = express();
-const port = 6000;
+const port = 5000;
 
 const mongoUrl =
   "mongodb+srv://m84719666:d6Rjb4DyVuasNDrn@tendertesting.zygfo.mongodb.net/?retryWrites=true&w=majority&appName=tenderTesting";
 const dbNameRegistration = "Registered";
 const dbNameTenders = "test";
-
+const dbName = "Tokens";
 const corsOptions = {
   origin: /^(https?:\/\/)?(\w+\.)?vyvsai\.com$/,
   optionsSuccessStatus: 200 // Some legacy browsers choke on 204
@@ -30,6 +30,67 @@ async function connectToMongo() {
     process.exit(1);
   }
 }
+app.post("/api/generate-link", async (req, res) => {
+  const { duration } = req.body; // duration in minutes
+  const token = crypto.randomBytes(20).toString('hex');
+  const expiration = new Date(Date.now() + duration * 60000);
+
+  const db = client.db(dbName);
+  const tokensCollection = db.collection("tokenmini");
+
+  await tokensCollection.insertOne({ token, expiration });
+
+  res.json({ link: `https://www.vyvsai.com/protected?token=${token}` });
+});
+app.post('/api/check-password', async (req, res) => {
+  const { password } = req.body;
+  try {
+    const db = client.db(dbName);
+    const secretPasswordsCollection = db.collection('secret_passwords');
+    const predefinedPassword = 'adskyjfghbkiufghdsjcbakueygfvsijcbawkiuecgbsajceegfarsdgzsldfgvbhszdk6853654';
+    const existingPassword = await secretPasswordsCollection.findOne({ password: predefinedPassword });
+    if (!existingPassword) {
+      await secretPasswordsCollection.insertOne({ password: predefinedPassword });
+      console.log('Inserted predefined password into secret_passwords collection');
+    }
+    await db.createCollection('secret_passwords').catch((err) => {
+      if (err.codeName !== 'NamespaceExists') {
+        console.error('Error creating secret_passwords collection:', err);
+      }
+    });
+    const collection = db.collection('secret_passwords');
+    const result = await collection.findOne({ password });
+    if (result) {
+      res.json({ success: true });
+    } else {
+      res.json({ success: false });
+    }
+  } catch (error) {
+    console.error('Error checking password:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
+const authMiddleware = async (req, res, next) => {
+  const token = req.query.token;
+  const isAuthenticated = req.isAuthenticated && req.isAuthenticated();
+
+  if (!token && !isAuthenticated) {
+    return res.status(401).json({ message: "Unauthorized access" });
+  }
+
+  if (token) {
+    const db = client.db(dbName);
+    const tokensCollection = db.collection("tokenmini");
+
+    const tokenDoc = await tokensCollection.findOne({ token });
+    if (!tokenDoc || new Date() > tokenDoc.expiration) {
+      return res.status(401).json({ message: "Invalid or expired token" });
+    }
+  }
+
+  next();
+};
 
 app.post("/api/register", async (req, res) => {
   try {
@@ -104,60 +165,33 @@ app.post("/api/login", async (req, res) => {
     res.status(500).json({ message: "Error logging in", error: error.message });
   }
 });
-
-// Endpoint to fetch states
-app.get("/api/states", async (req, res) => {
-  try {
-    const db = client.db(dbNameTenders);
-    const tendersCollection = db.collection("tenders");
-    const states = await tendersCollection.distinct("state");
-    res.json({ states });
-  } catch (error) {
-    console.error("Error fetching states:", error);
-    res.status(500).json({ message: "Error fetching states" });
+app.get("/api/validate-token", async (req, res) => {
+  const token = req.query.token;
+  if (!token) {
+    return res.json({ valid: false });
   }
-});
 
-// Endpoint to fetch districts for a selected state
-app.get("/api/districts/:state", async (req, res) => {
-  try {
-    const { state } = req.params;
-    const db = client.db(dbNameTenders);
-    const tendersCollection = db.collection("tenders");
-    const districts = await tendersCollection.distinct("district", { state });
-    res.json({ districts });
-  } catch (error) {
-    console.error("Error fetching districts:", error);
-    res.status(500).json({ message: "Error fetching districts" });
+  const db = client.db(dbName);
+  const tokensCollection = db.collection("tokenmini");
+
+  const tokenDoc = await tokensCollection.findOne({ token });
+  if (!tokenDoc || new Date() > tokenDoc.expiration) {
+    return res.json({ valid: false });
   }
-});
 
-// Endpoint to fetch departments for a selected state
-app.get("/api/departments/:state", async (req, res) => {
-  try {
-    const { state } = req.params;
-    const db = client.db(dbNameTenders);
-    const tendersCollection = db.collection("tenders");
-    const departments = await tendersCollection.distinct("org_name", { state });
-    res.json({ departments });
-  } catch (error) {
-    console.error("Error fetching departments:", error);
-    res.status(500).json({ message: "Error fetching departments" });
-  }
+  res.json({ valid: true });
 });
-
-// Endpoint to fetch tenders
-app.get("/api/tenders", async (req, res) => {
+app.get("/api/tenders", authMiddleware, async (req, res) => {
   try {
-    const { state, district, department, showExpired } = req.query;
+    const { state, district, department } = req.query;
     const db = client.db(dbNameTenders);
     const tendersCollection = db.collection("tenders");
 
-    let query = {};
+    let query = { expired: false }; // Always show non-expired tenders
+
     if (state) query.state = state;
     if (district) query.district = district;
     if (department) query.org_name = department;
-    if (showExpired === "false") query.expired = false;
 
     const tenders = await tendersCollection.find(query).toArray();
     res.json({ tenders });

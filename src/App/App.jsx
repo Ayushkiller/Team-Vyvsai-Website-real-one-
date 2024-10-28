@@ -1,12 +1,12 @@
 import React, { useState, useEffect, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Cookies from "js-cookie";
 import Layout from "../components/Layout/Layout";
 import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
-import PrivateRoute from "./PrivateRoute";
+import ProtectedRoute from "../components/ProtectedRoute";
 import "../styles.css";
+import Cookies from "js-cookie";
 import AnimatedLoading from "./AnimatedLoading";
-
+import ProtectedComponent from "../App/ProtectedComponent";
 // Lazy-loaded components
 const HomePage = lazy(() => import("../components/Home/Home"));
 const Login = lazy(() => import("../components/Login/Login"));
@@ -22,15 +22,12 @@ const Reviews = lazy(() => import("../components/Reviews"));
 const PrivacyPolicy = lazy(() => import("../components/Policy/PrivacyPolicy"));
 const UploadDocuments = lazy(() => import("../components/UploadDocuments"));
 const ContactUs = lazy(() => import("../components/ContactUs/ContactUs"));
-const ProtectedComponent = lazy(() => import("./ProtectedComponent"));
 const Tenders = lazy(() => import("../components/Tender/Tenders"));
 const TenderDetail = lazy(() => import("../components/Tender/TenderDetail"));
 const TenderResults = lazy(() => import("../components/Tender/TenderResults"));
 const RefundPolicy = lazy(() => import("../components/Policy/RefundPolicy"));
-const TermsAndConditions = lazy(() =>
-  import("../components/Policy/TermsAndConditions")
-);
-
+const TermsAndConditions = lazy(() => import("../components/Policy/TermsAndConditions"));
+const Portal = lazy(() => import("../components/Portal"));
 function App() {
   const [auth, setAuth] = useState(Cookies.get("auth") === "true");
 
@@ -42,7 +39,6 @@ function App() {
     setAuth(false);
     Cookies.remove("auth");
   };
-
   return (
     <Router>
       <ErrorBoundary>
@@ -53,25 +49,28 @@ function App() {
               <Route path="/login" element={<Login setAuth={setAuth} />} />
               <Route path="/register" element={<Register />} />
               <Route path="/password-reset" element={<PasswordReset />} />
-              <Route
-                path="/password-reset/request-otp"
-                element={<RequestOtp />}
-              />
-              <Route
-                path="/password-reset/verify-otp"
-                element={<VerifyOtp />}
-              />
+              <Route path="/request-otp" element={<RequestOtp />} />
+              <Route path="/verify-otp" element={<VerifyOtp />} />
               <Route path="/subscriptions" element={<Subscriptions />} />
               <Route path="/mission" element={<Mission />} />
               <Route path="/services" element={<Services />} />
-              <Route path="/tender-results" element={<TenderResults />} />
-              <Route path="/tender-detail" element={<TenderDetail />} />
               <Route path="/core-values" element={<CoreValues />} />
-              <Route path="/tenders" element={<Tenders />} />
               <Route path="/reviews" element={<Reviews />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/upload-documents" element={<UploadDocuments />} />
-              <Route path="/contact" element={<ContactUs />} />
+              <Route path="/contact-us" element={<ContactUs />} />
+              <Route
+                path="/tenders"
+                element={<ProtectedRoute element={<Tenders />} />}
+              />
+              <Route
+                path="/tender-detail"
+                element={<ProtectedRoute element={<TenderDetail />} />}
+              />
+              <Route
+                path="/tender-results"
+                element={<ProtectedRoute element={<TenderResults />} />}
+              />
               <Route path="/refund-policy" element={<RefundPolicy />} />
               <Route
                 path="/terms-and-conditions"
@@ -79,11 +78,11 @@ function App() {
               />
               <Route
                 path="/protected"
-                element={
-                  <PrivateRoute auth={auth}>
-                    <ProtectedComponent />
-                  </PrivateRoute>
-                }
+                element={<ProtectedRoute element={<ProtectedComponent />} />}
+              />
+              <Route
+                path="/portal"
+                element={<ProtectedRoute element={<Portal />} />}
               />
             </Routes>
           </Suspense>

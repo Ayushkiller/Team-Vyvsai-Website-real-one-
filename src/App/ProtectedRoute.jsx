@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Route, Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const ProtectedRoute = ({ element: Component }) => {
+const ProtectedRoute = ({ element: Component, ...rest }) => {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -40,7 +40,12 @@ const ProtectedRoute = ({ element: Component }) => {
     return <div>Loading...</div>;
   }
 
-  return isAuthorized ? Component : <Navigate to="/login" />;
+  return (
+    <Route
+      {...rest}
+      element={isAuthorized ? <Component /> : <Navigate to="/login" />}
+    />
+  );
 };
 
 export default ProtectedRoute;

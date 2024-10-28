@@ -11,7 +11,6 @@ const TenderTable = ({
   organization = "",
 }) => {
   const navigate = useNavigate();
-  const [exchangeRate, setExchangeRate] = useState(null);
   const [sortConfig, setSortConfig] = useState({
     key: "price",
     direction: "desc",
@@ -21,7 +20,6 @@ const TenderTable = ({
   useEffect(() => {
     const fetchExchangeRate = async () => {
       try {
-        setExchangeRate(0.012);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching exchange rate:", error);
@@ -47,11 +45,6 @@ const TenderTable = ({
     });
 
     return formatter.format(amount);
-  };
-
-  const convertToUSD = (inrAmount) => {
-    if (!exchangeRate || !inrAmount) return null;
-    return inrAmount * exchangeRate;
   };
 
   const handleSort = (key) => {
@@ -185,8 +178,6 @@ const TenderTable = ({
           <tbody className="divide-y divide-gray-200">
             {sortedAndFilteredTenders.map((tender, index) => {
               const inrPrice = parseCurrency(tender.price);
-              const usdPrice = convertToUSD(inrPrice);
-
               return (
                 <tr
                   key={index}
