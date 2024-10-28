@@ -90,7 +90,7 @@ const Tenders = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center min-vh-100 meraPyaratenderForm">
+    <div className="d-flex justify-content-center meraPyaratenderForm mb-5 mt-3">
       <div
         className="form-container container p-3 shadow-lg rounded"
         style={{ marginTop: "20px" }}
@@ -176,7 +176,7 @@ const Tenders = () => {
               </select>
             </div>
           </div>
-          <div className="d-flex justify-content-center mt-4">
+          <div className="d-flex justify-content-center mt-3">
             <button
               type="submit"
               className="btn btn-primary w-50"
@@ -186,6 +186,8 @@ const Tenders = () => {
             </button>
           </div>
         </form>
+        <div className="mt-2" style={{ minHeight: "20px" }}></div>{" "}
+        {/* Optional space if needed */}
       </div>
     </div>
   );
