@@ -31,10 +31,6 @@
   display: flex;
 }
 
-.min-vh-100 {
-  min-height: 100vh;
-}
-
 /* Form control hover effect */
 .form-select:hover[data-bs-tooltip] .tooltip {
   display: block;
