@@ -37,10 +37,10 @@ app.post("/api/generate-link", async (req, res) => {
   const token = crypto.randomBytes(20).toString('hex');
   const expiration = new Date(Date.now() + duration * 60000);
 
-  const db = client.db(dbName);
+  const db = client.db(dbNameTenders);
   const tokensCollection = db.collection("tokenmini");
 
-  await tokensCollection.insertOne({ token, expiration });
+  await tokensCollection.insertOne({ token, expiration, status: "unused" });
 
   res.json({ link: `https://www.vyvsai.com/protected?token=${token}` });
 });
@@ -161,7 +161,7 @@ app.get("/api/validate-token", async (req, res) => {
     return res.json({ valid: false });
   }
 
-  const db = client.db(dbName);
+  const db = client.db(dbNameTenders);
   const tokensCollection = db.collection("tokenmini");
 
   const tokenDoc = await tokensCollection.findOne({ token });
