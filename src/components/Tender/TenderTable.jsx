@@ -144,7 +144,7 @@ const TenderTable = ({
         <table className="w-full text-sm text-left p-1 table-bordered border-primary rounded-3">
           <thead className="bg-primary text-white text-center">
             <tr>
-              {/* <th
+              <th
                 className="px-6 py-4 cursor-pointer hover:bg-gray-800 transition-colors duration-200"
                 onClick={() => handleSort("tender_id")}
               >
@@ -152,7 +152,7 @@ const TenderTable = ({
                   Tender ID
                   {getSortIcon("tender_id")}
                 </div>
-              </th> */}
+              </th>
               <th
                 className="px-6 py-4 cursor-pointer hover:bg-gray-800 transition-colors duration-200"
                 onClick={() => handleSort("title")}
@@ -192,9 +192,9 @@ const TenderTable = ({
                   key={index}
                   className="hover:bg-gray-50 transition-colors duration-150"
                 >
-                  {/* <td className="px-6 py-4 text-base font-medium text-gray-900">
+                  <td className="px-6 py-4 text-base font-medium text-gray-900">
                     {tender.tender_id}
-                  </td> */}
+                  </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center">
                       <div className="flex flex-col">
