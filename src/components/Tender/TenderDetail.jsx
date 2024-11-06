@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { FaFileAlt } from "react-icons/fa";
+import {
+  format,
+  differenceInDays,
+  differenceInHours,
+  differenceInMinutes,
+} from "date-fns";
 
 const TenderDetail = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { tender } = location.state || {};
+
+  const [timeRemaining, setTimeRemaining] = useState("");
+
+  useEffect(() => {
+    if (tender?.closing_date) {
+      const closingDate = new Date(tender.closing_date);
+      const now = new Date();
+      const days = differenceInDays(closingDate, now);
+      const hours = differenceInHours(closingDate, now) % 24;
+      const minutes = differenceInMinutes(closingDate, now) % 60;
+
+      setTimeRemaining(`${days} days left`);
+    }
+  }, [tender]);
 
   if (!tender) {
     return (
@@ -20,77 +41,52 @@ const TenderDetail = () => {
   }
 
   return (
-    <div className="container vh-100 mt-5">
-      <header className="text-center mb-5">
-        <h1 className="display-5">Tender Details</h1>
-        <button
-          className="btn btn-outline-secondary mt-3"
-          onClick={() => navigate(-1)}
-        >
-          Back to Results
-        </button>
-      </header>
+    <div className="container mt-5">
+      <div className="mb-4 d-flex align-items-center">
+        <FaFileAlt className="text-primary me-2" size={28} />
+        <h2 className="mb-0">Tender Details</h2>
+        <span className="badge bg-success ms-auto">{timeRemaining}</span>
+      </div>
 
-      <section className="mb-5">
-        <h2 className="h5 text-muted">Tender ID</h2>
-        <p className="lead">{tender.tender_id}</p>
-      </section>
-
-      <section className="mb-5">
-        <h2 className="h5 text-muted">Organization</h2>
-        <p className="lead">{tender.org_name}</p>
-      </section>
-
-      <section className="mb-5">
-        <h2 className="h5 text-muted">Title</h2>
-        <p className="lead">{tender.title}</p>
-      </section>
-
-      <section className="mb-5">
-        <h2 className="h5 text-muted">Category</h2>
-        <p className="lead">{tender.category}</p>
-      </section>
-
-      <section className="mb-5">
-        <h2 className="h5 text-muted">Price</h2>
-        <p className="lead">{tender.price}</p>
-      </section>
-
-      <section className="mb-5">
-        <h2 className="h5 text-muted">Address</h2>
-        <p className="lead">{tender.address}</p>
-      </section>
-
-      <section className="mb-5">
-        <h2 className="h5 text-muted">Closing Date</h2>
-        <p className="lead">{tender.closing_date}</p>
-      </section>
-
-      <section className="mb-5">
-        <h2 className="h5 text-muted">State</h2>
-        <p className="lead">{tender.state}</p>
-      </section>
-
-      <section className="mb-5">
-        <h2 className="h5 text-muted">District</h2>
-        <p className="lead">{tender.district}</p>
-      </section>
-
-      <section className="mb-5">
-        <h2 className="h5 text-muted">BOQ</h2>
+      <p>
+        <strong>Title:</strong> {tender.title}
+      </p>
+      <p>
+        <strong>Organization:</strong> {tender.org_name}
+      </p>
+      <p>
+        <strong>Category:</strong> {tender.category}
+      </p>
+      <p>
+        <strong>Price:</strong> {tender.price}
+      </p>
+      <p>
+        <strong>Address:</strong> {tender.address}
+      </p>
+      <p>
+        <strong>State:</strong> {tender.state}
+      </p>
+      <p>
+        <strong>District:</strong> {tender.district}
+      </p>
+      <p>
+        <strong>Closing Date:</strong>{" "}
+        {format(new Date(tender.closing_date), "dd-MMM-yyyy hh:mm a")}
+      </p>
+      <p>
+        <strong>BOQ:</strong>
         {tender.boq && tender.boq.trim().toLowerCase() !== "none" ? (
-          <a
-            href={tender.boq}
-            className="btn btn-primary"
-            download
-            target="_self"
-          >
+          <a href={tender.boq} className="btn btn-primary ms-2" download>
             Download BOQ
           </a>
         ) : (
-          <p className="text-secondary">No BOQ available</p>
+          <span className="ms-2">No BOQ available</span>
         )}
-      </section>
+      </p>
+
+      <button className="btn btn-secondary mt-3" onClick={() => navigate(-1)}>
+        Back to Results
+      </button>
     </div>
   );
 };
