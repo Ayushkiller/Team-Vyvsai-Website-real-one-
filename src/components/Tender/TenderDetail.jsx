@@ -19,7 +19,6 @@ const TenderDetail = () => {
     );
   }
 
-  // Format for date and time calculations
   const formatDate = (dateString) => {
     const [date, time] = dateString.split(" ");
     return new Date(`${date.split("-").reverse().join("-")} ${time}`);
@@ -41,6 +40,7 @@ const TenderDetail = () => {
 
   return (
     <div className="container mt-5">
+      {/* Header */}
       <div className="mb-4 d-flex justify-content-between align-items-center">
         <h2 className="text-primary d-flex align-items-center">
           <i className="bi bi-clipboard-check me-2"></i> Tender Details
@@ -48,30 +48,54 @@ const TenderDetail = () => {
         <span className="text-muted">Closing in: {timeRemaining}</span>
       </div>
 
-      <div className="border-bottom pb-3 mb-4">
-        <h3 className="text-dark">{tender.title}</h3>
-        <p className="text-secondary mb-1">
-          <strong>Organization:</strong> {tender.org_name}
-        </p>
-        <p className="text-secondary mb-1">
-          <strong>Category:</strong> {tender.category}
-        </p>
-        <p className="text-secondary mb-1">
-          <strong>Price:</strong> {tender.price}
-        </p>
-        <p className="text-secondary mb-1">
-          <strong>State:</strong> {tender.state}
-        </p>
-        <p className="text-secondary mb-1">
-          <strong>District:</strong> {tender.district}
-        </p>
-        <p className="text-secondary mb-1">
-          <strong>Address:</strong> {tender.address}
-        </p>
-        <p className="text-secondary">
-          <strong>Closing Date:</strong> {tender.closing_date}
-        </p>
+      {/* Title Section */}
+      <section className="border-bottom pb-4 mb-4">
+        <h3 className="display-6 text-dark">{tender.title}</h3>
+        <p className="text-muted mb-0">Organized by: {tender.org_name}</p>
+      </section>
 
+      {/* Details Section */}
+      <section className="mb-4">
+        <h5 className="text-secondary">Tender Information</h5>
+        <p className="mt-3">
+          <span className="fw-bold text-muted">Category: </span>
+          <span>{tender.category}</span>
+        </p>
+        <p>
+          <span className="fw-bold text-muted">Price: </span>
+          <span>{tender.price}</span>
+        </p>
+      </section>
+
+      {/* Location Section */}
+      <section className="mb-4">
+        <h5 className="text-secondary">Location</h5>
+        <p className="mt-3">
+          <span className="fw-bold text-muted">State: </span>
+          <span>{tender.state}</span>
+        </p>
+        <p>
+          <span className="fw-bold text-muted">District: </span>
+          <span>{tender.district}</span>
+        </p>
+        <p>
+          <span className="fw-bold text-muted">Address: </span>
+          <span>{tender.address}</span>
+        </p>
+      </section>
+
+      {/* Closing Information */}
+      <section className="mb-4">
+        <h5 className="text-secondary">Important Dates</h5>
+        <p className="mt-3">
+          <span className="fw-bold text-muted">Closing Date: </span>
+          <span>{tender.closing_date}</span>
+        </p>
+      </section>
+
+      {/* BOQ Download Button */}
+      <section className="mb-4">
+        <h5 className="text-secondary">BOQ Document</h5>
         {tender.boq && tender.boq.trim().toLowerCase() !== "none" ? (
           <a
             href={tender.boq}
@@ -83,8 +107,9 @@ const TenderDetail = () => {
         ) : (
           <p className="text-muted mt-3">No BOQ available</p>
         )}
-      </div>
+      </section>
 
+      {/* Back Button */}
       <button className="btn btn-secondary" onClick={() => navigate(-1)}>
         Back to Results
       </button>
