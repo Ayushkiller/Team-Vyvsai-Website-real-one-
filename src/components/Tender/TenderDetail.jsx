@@ -21,84 +21,76 @@ const TenderDetail = () => {
 
   return (
     <div className="container vh-100 mt-5">
-      <div className="card shadow-lg border-0">
-        <div className="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-          <h2 className="mb-0">Tender Details</h2>
-          <button className="btn btn-light" onClick={() => navigate(-1)}>
-            Back to Results
-          </button>
-        </div>
-        <div className="card-body">
-          <div className="row mb-4">
-            <div className="col-md-6 mb-3">
-              <h5 className="text-muted">Tender ID</h5>
-              <p className="fs-5">{tender.tender_id}</p>
-            </div>
-            <div className="col-md-6 mb-3">
-              <h5 className="text-muted">Organization</h5>
-              <p className="fs-5">{tender.org_name}</p>
-            </div>
-          </div>
+      <header className="text-center mb-5">
+        <h1 className="display-5">Tender Details</h1>
+        <button
+          className="btn btn-outline-secondary mt-3"
+          onClick={() => navigate(-1)}
+        >
+          Back to Results
+        </button>
+      </header>
 
-          <div className="row mb-4">
-            <div className="col-md-6 mb-3">
-              <h5 className="text-muted">Title</h5>
-              <p className="fs-5">{tender.title}</p>
-            </div>
-            <div className="col-md-6 mb-3">
-              <h5 className="text-muted">Category</h5>
-              <p className="fs-5">{tender.category}</p>
-            </div>
-          </div>
+      <section className="mb-5">
+        <h2 className="h5 text-muted">Tender ID</h2>
+        <p className="lead">{tender.tender_id}</p>
+      </section>
 
-          <div className="row mb-4">
-            <div className="col-md-6 mb-3">
-              <h5 className="text-muted">Price</h5>
-              <p className="fs-5">{tender.price}</p>
-            </div>
-            <div className="col-md-6 mb-3">
-              <h5 className="text-muted">State</h5>
-              <p className="fs-5">{tender.state}</p>
-            </div>
-          </div>
+      <section className="mb-5">
+        <h2 className="h5 text-muted">Organization</h2>
+        <p className="lead">{tender.org_name}</p>
+      </section>
 
-          <div className="row mb-4">
-            <div className="col-md-6 mb-3">
-              <h5 className="text-muted">District</h5>
-              <p className="fs-5">{tender.district}</p>
-            </div>
-            <div className="col-md-6 mb-3">
-              <h5 className="text-muted">Closing Date</h5>
-              <p className="fs-5">{tender.closing_date}</p>
-            </div>
-          </div>
+      <section className="mb-5">
+        <h2 className="h5 text-muted">Title</h2>
+        <p className="lead">{tender.title}</p>
+      </section>
 
-          <div className="row mb-4">
-            <div className="col-md-12">
-              <h5 className="text-muted">Address</h5>
-              <p className="fs-5">{tender.address}</p>
-            </div>
-          </div>
+      <section className="mb-5">
+        <h2 className="h5 text-muted">Category</h2>
+        <p className="lead">{tender.category}</p>
+      </section>
 
-          <div className="row mb-4">
-            <div className="col-md-12">
-              <h5 className="text-muted">BOQ</h5>
-              {tender.boq && tender.boq.trim().toLowerCase() !== "none" ? (
-                <a
-                  href={tender.boq}
-                  className="btn btn-outline-primary"
-                  download
-                  target="_self"
-                >
-                  Download BOQ
-                </a>
-              ) : (
-                <span className="text-secondary">No BOQ available</span>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
+      <section className="mb-5">
+        <h2 className="h5 text-muted">Price</h2>
+        <p className="lead">{tender.price}</p>
+      </section>
+
+      <section className="mb-5">
+        <h2 className="h5 text-muted">Address</h2>
+        <p className="lead">{tender.address}</p>
+      </section>
+
+      <section className="mb-5">
+        <h2 className="h5 text-muted">Closing Date</h2>
+        <p className="lead">{tender.closing_date}</p>
+      </section>
+
+      <section className="mb-5">
+        <h2 className="h5 text-muted">State</h2>
+        <p className="lead">{tender.state}</p>
+      </section>
+
+      <section className="mb-5">
+        <h2 className="h5 text-muted">District</h2>
+        <p className="lead">{tender.district}</p>
+      </section>
+
+      <section className="mb-5">
+        <h2 className="h5 text-muted">BOQ</h2>
+        {tender.boq && tender.boq.trim().toLowerCase() !== "none" ? (
+          <a
+            href={tender.boq}
+            className="btn btn-primary"
+            download
+            target="_self"
+          >
+            Download BOQ
+          </a>
+        ) : (
+          <p className="text-secondary">No BOQ available</p>
+        )}
+      </section>
     </div>
   );
 };
