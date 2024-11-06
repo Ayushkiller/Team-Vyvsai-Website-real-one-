@@ -1,10 +1,5 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import {
-  differenceInMinutes,
-  differenceInHours,
-  differenceInDays,
-} from "date-fns";
 
 const TenderDetail = () => {
   const location = useLocation();
