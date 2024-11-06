@@ -15,7 +15,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="footer d-block mt-auto bg-dark text-white sticky-bottom">
+    <footer className="footer d-block mt-auto bg-dark text-white">
       <div className="container-fluid py-4">
         <div className="row align-items-center">
           {/* Logo and Business Name on the Left */}
