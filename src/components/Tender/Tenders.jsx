@@ -93,7 +93,7 @@ const Tenders = () => {
     <div className="vh-100 mt-5">
       <div className="d-flex justify-content-center align-items-center meraPyaratenderForm pb-2 mt-4">
         <div
-          className="form-container container p-3 shadow-lg rounded"
+          className="form-container container p-3 shadow-lg rounded border border-primary"
           style={{ marginTop: "20px" }}
         >
           <h1 className="mb-4 text-center">Tender Search</h1>

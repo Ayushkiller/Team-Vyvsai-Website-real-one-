@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
-  background-color: rgb(208, 226, 255);
+  /* background-color: rgb(208, 226, 255); */
   overscroll-behavior: none;
 }
 
@@ -25,7 +25,7 @@ a {
 /* Navbar customization */
 .navbar {
   background-color: rgb(208, 226, 255);
-  border-bottom: 1px solid paleturquoise;
+  border-bottom: 1px solid black;
   max-height: 60px;
 }
 

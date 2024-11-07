@@ -4,85 +4,104 @@ function TenderFile() {
   return (
     <div className="container py-5">
       <div className="row justify-content-center">
-        <div className="col-md-10">
-          <div className="card shadow-lg border-0">
-            <div className="card-body p-4">
-              <h1 className="card-title text-center mb-4">
-                Coming Soon: Tender Filing Services by vyvsai.com
-              </h1>
+        <div className="col-lg-10 col-md-12">
+          {/* Title Section */}
+          <section className="text-center mb-5">
+            <h1 className="text-primary fw-bold mb-3">
+              <i className="bi bi-pencil-fill me-2"></i>
+              Coming Soon: Tender Filing Services by vyvsai
+            </h1>
+            <p className="lead">
+              At <strong>vyvsai.com</strong>, we’re thrilled to soon offer a
+              fully managed Tender Filing Service! Our service will support
+              organizations in preparing, managing, and filing tenders with
+              unmatched ease and accuracy.
+            </p>
+          </section>
 
-              <p className="card-text lead mb-4">
-                At vyvsai.com, we are excited to announce the upcoming launch of
-                our Tender Filing Services — a comprehensive, streamlined
-                solution to help organizations efficiently prepare, manage, and
-                submit tenders with confidence and ease.
-              </p>
+          {/* Why Choose Us Section */}
+          <section className="mb-5">
+            <h2 className="text-primary mb-3">
+              <i className="bi bi-award-fill me-2"></i>
+              Why Choose vyvsai.com for Tender Filing?
+            </h2>
+            <p>
+              Tender filing requires attention to detail, accuracy, and
+              compliance with strict requirements. Our service will streamline
+              the process, making it accessible and manageable for businesses of
+              all sizes.
+            </p>
+          </section>
 
-              <h2 className="mb-3">Why Choose vyvsai.com for Tender Filing?</h2>
-              <p>
-                Filing tenders is a critical process that requires attention to
-                detail, accuracy, and strict compliance with tender
-                requirements. Our team at vyvsai.com understands the complexity
-                involved in tender filing and is committed to providing an
-                all-in-one service that will simplify this task for businesses
-                of all sizes.
-              </p>
+          {/* What to Expect Section */}
+          <section className="mb-5">
+            <h3 className="text-primary mb-3">
+              <i className="bi bi-gear-fill me-2"></i>
+              What to Expect from Our Services
+            </h3>
+            <ul className="ps-4">
+              <li className="mb-2">
+                <strong>Personalized Support:</strong> Each client receives a
+                dedicated expert to guide them through the entire filing
+                process.
+              </li>
+              <li className="mb-2">
+                <strong>Documentation Assistance:</strong> We assist with
+                essential documents, ensuring every submission is accurate and
+                complete.
+              </li>
+              <li className="mb-2">
+                <strong>Deadline Management:</strong> We track deadlines,
+                sending reminders to help you stay on schedule.
+              </li>
+              <li className="mb-2">
+                <strong>Risk Assessment:</strong> Our experts review tender
+                requirements, identifying potential risks to strengthen your
+                bid.
+              </li>
+            </ul>
+          </section>
 
-              <h3 className="mt-4">What to Expect from Our Services</h3>
-              <ul className="list-unstyled ps-3">
-                <li>
-                  <strong>Personalized Support:</strong> Every client will
-                  receive a dedicated tender expert to guide them through the
-                  filing process, ensuring each step is handled professionally.
-                </li>
-                <li>
-                  <strong>Documentation Assistance:</strong> We help prepare all
-                  essential documents, from financial statements to project
-                  references, making sure your tender submission is complete and
-                  compliant.
-                </li>
-                <li>
-                  <strong>Deadline Management:</strong> Our service includes
-                  deadline tracking and reminders, helping you stay on top of
-                  every tender’s submission timeline.
-                </li>
-                <li>
-                  <strong>Risk Assessment:</strong> vyvsai.com’s experts will
-                  analyze tender requirements to identify potential risks,
-                  allowing you to adjust your proposal for a stronger bid.
-                </li>
-              </ul>
+          {/* Success Assurance Section */}
+          <section className="mb-5">
+            <h3 className="text-primary mb-3">
+              <i className="bi bi-check2-circle me-2"></i>
+              How We Ensure Your Success
+            </h3>
+            <p>
+              Our service prioritizes transparency, accuracy, and quality. We
+              meticulously review every detail of your tender submission to
+              ensure full compliance. Partner with vyvsai.com for a seamless
+              tender filing experience.
+            </p>
+          </section>
 
-              <h3 className="mt-4">How We Ensure Your Success</h3>
-              <p>
-                Our service is designed around transparency, accuracy, and
-                quality. We meticulously review every detail of your tender
-                submission, cross-checking against tender specifications to
-                reduce errors and ensure compliance. With vyvsai.com, you’ll
-                have a dependable partner in navigating the complex world of
-                tenders.
-              </p>
+          {/* Launch Timing Section */}
+          <section className="mb-5">
+            <h3 className="text-primary mb-3">
+              <i className="bi bi-calendar2-event-fill me-2"></i>
+              When Can You Start?
+            </h3>
+            <p>
+              Tender Filing Services will be launching soon! Sign up on
+              vyvsai.com for early access updates and exclusive offers. Join us
+              to simplify your tender filing process.
+            </p>
+          </section>
 
-              <h3 className="mt-4">When Can You Start?</h3>
-              <p>
-                Our Tender Filing Services will be available soon! Sign up on
-                vyvsai.com to receive early access updates and exclusive
-                information. Join the vyvsai.com family today, and be prepared
-                for a simplified tender filing experience.
-              </p>
-
-              <div className="text-center mt-5">
-                <button className="btn btn-primary btn-lg">
-                  Notify Me on Launch
-                </button>
-              </div>
-
-              <p className="mt-4 text-center text-muted">
-                Stay tuned as we transform tender filing into a hassle-free
-                experience. vyvsai.com – Simplifying Success.
-              </p>
-            </div>
+          {/* Notification Button */}
+          <div className="text-center my-5">
+            <button className="btn btn-primary btn-lg">
+              <i className="bi bi-bell-fill me-2"></i>Notify Me on Launch
+            </button>
           </div>
+
+          {/* Footer Message */}
+          <p className="text-center text-muted">
+            <i className="bi bi-info-circle-fill me-2"></i>
+            Stay tuned for an efficient, hassle-free tender filing experience
+            with vyvsai.com – Simplifying Success.
+          </p>
         </div>
       </div>
     </div>
