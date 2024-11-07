@@ -24,6 +24,15 @@
         "HP State Forest Development Corporation",
         "DG, Indo-Tibetan Border Police Force"
       ]
+      },
+      {
+        "state":"Delhi",
+        "districts":[
+            "South West Delhi"
+        ],
+        "departments": [
+        "National Highways Authority of India"
+        ]
       }
     ]
 }
