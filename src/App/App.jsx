@@ -30,6 +30,7 @@ const RefundPolicy = lazy(() => import("../components/Policy/RefundPolicy"));
 const TermsAndConditions = lazy(() =>
   import("../components/Policy/TermsAndConditions")
 );
+const TenderFile = lazy(() => import("../components/Tender/TenderFile"));
 
 function App() {
   const [auth, setAuth] = useState(Cookies.get("auth") === "true");
@@ -47,7 +48,7 @@ function App() {
     <Router>
       <ErrorBoundary>
         <Layout auth={auth} handleLogout={handleLogout}>
-          <Suspense fallback={<AnimatedLoading />}>
+          <Suspense fallback={null}>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<Login setAuth={setAuth} />} />
@@ -72,6 +73,7 @@ function App() {
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/upload-documents" element={<UploadDocuments />} />
               <Route path="/contact" element={<ContactUs />} />
+              <Route path="/tender-file" element={<TenderFile />} />
               <Route path="/refund-policy" element={<RefundPolicy />} />
               <Route
                 path="/terms-and-conditions"

@@ -59,6 +59,7 @@ const Navbar = ({ auth, handleLogout }) => {
         <Link className="navbar-brand" to="/">
           <img src="logo-2.png" alt="" className="logo" />
         </Link>
+        <a href="/tender-filing">Tender File</a>
         {/* New External Link next to the logo */}
 
         <button
