@@ -1,6 +1,7 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import currentData from "../current.json";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,9 @@ const Register = () => {
     email: "",
     password: "",
     preferences: "",
+    state: "",
+    districts: "",
+    departments: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -18,9 +22,27 @@ const Register = () => {
     success: false,
   });
 
+  const [statesData, setStatesData] = useState([]);
+  const [filteredDistricts, setFilteredDistricts] = useState([]);
+  const [filteredDepartments, setFilteredDepartments] = useState([]);
+
+  useEffect(() => {
+    // Load states data from current.json
+    setStatesData(currentData.states);
+  }, []);
+
   const validateForm = useCallback(() => {
     const newErrors = {};
-    const { username, mobileNo, email, password, preferences } = formData;
+    const {
+      username,
+      mobileNo,
+      email,
+      password,
+      preferences,
+      state,
+      districts,
+      departments,
+    } = formData;
 
     if (!username.trim()) newErrors.username = "Username is required.";
     if (!mobileNo.trim()) newErrors.mobileNo = "Contact number is required.";
@@ -34,15 +56,29 @@ const Register = () => {
       newErrors.password = "Password must be at least 8 characters.";
     if (!preferences)
       newErrors.preferences = "Select a notification preference.";
+    if (!state) newErrors.state = "Select a state.";
+    if (!districts) newErrors.districts = "Select districts.";
+    if (!departments) newErrors.departments = "Select departments.";
 
     return newErrors;
   }, [formData]);
 
-  const handleChange = useCallback((e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: "" }));
-  }, []);
+  const handleChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setFormData((prev) => ({ ...prev, [name]: value }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+
+      // Handle dependent dropdown updates
+      if (name === "state") {
+        const selectedState = statesData.find((s) => s.state === value);
+        setFilteredDistricts(selectedState ? selectedState.districts : []);
+        setFilteredDepartments(selectedState ? selectedState.departments : []);
+        setFormData((prev) => ({ ...prev, districts: "", departments: "" })); // Reset dependent fields
+      }
+    },
+    [statesData]
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,6 +104,9 @@ const Register = () => {
         email: "",
         password: "",
         preferences: "",
+        state: "",
+        districts: "",
+        departments: "",
       });
     } catch (error) {
       console.error("Error submitting data:", error);
@@ -192,27 +231,112 @@ const Register = () => {
                   )}
                 </div>
 
-                {/* Submit Status */}
-                {submitStatus.error && (
-                  <div className="alert alert-danger">{submitStatus.error}</div>
-                )}
-                {submitStatus.success && (
-                  <div className="alert alert-success">
-                    Registration successful!
-                  </div>
-                )}
+                {/* State */}
+                <div className="mb-3">
+                  <label htmlFor="state" className="form-label">
+                    State
+                  </label>
+                  <select
+                    id="state"
+                    name="state"
+                    className={`form-select ${
+                      errors.state ? "is-invalid" : ""
+                    }`}
+                    value={formData.state}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select State</option>
+                    {statesData.map((state) => (
+                      <option key={state.state} value={state.state}>
+                        {state.state}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.state && (
+                    <div className="invalid-feedback">{errors.state}</div>
+                  )}
+                </div>
 
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="btn btn-primary w-100"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Registering..." : "Register"}
-                </button>
+                {/* Districts */}
+                <div className="mb-3">
+                  <label htmlFor="districts" className="form-label">
+                    Districts
+                  </label>
+                  <select
+                    id="districts"
+                    name="districts"
+                    className={`form-select ${
+                      errors.districts ? "is-invalid" : ""
+                    }`}
+                    value={formData.districts}
+                    onChange={handleChange}
+                    disabled={!filteredDistricts.length}
+                  >
+                    <option value="">Select Districts</option>
+                    {filteredDistricts.map((district, index) => (
+                      <option key={index} value={district}>
+                        {district}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.districts && (
+                    <div className="invalid-feedback">{errors.districts}</div>
+                  )}
+                </div>
+
+                {/* Departments */}
+                <div className="mb-3">
+                  <label htmlFor="departments" className="form-label">
+                    Departments
+                  </label>
+                  <select
+                    id="departments"
+                    name="departments"
+                    className={`form-select ${
+                      errors.departments ? "is-invalid" : ""
+                    }`}
+                    value={formData.departments}
+                    onChange={handleChange}
+                    disabled={!filteredDepartments.length}
+                  >
+                    <option value="">Select Departments</option>
+                    {filteredDepartments.map((department, index) => (
+                      <option key={index} value={department}>
+                        {department}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.departments && (
+                    <div className="invalid-feedback">{errors.departments}</div>
+                  )}
+                </div>
+
+                {/* Submit */}
+                <div className="d-grid">
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Registering..." : "Register"}
+                  </button>
+                </div>
               </form>
+              {submitStatus.success && (
+                <div className="alert alert-success mt-3">
+                  Registration successful!
+                </div>
+              )}
+              {submitStatus.error && (
+                <div className="alert alert-danger mt-3">
+                  {submitStatus.error}
+                </div>
+              )}
               <p className="mt-3 text-center">
-                Already have an account? <Link to="/login">Login here</Link>
+                Already have an account?{" "}
+                <Link to="/login" className="text-primary">
+                  Log In
+                </Link>
               </p>
             </div>
           </div>

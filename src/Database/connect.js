@@ -7,7 +7,7 @@ const port = 6000;
 
 const mongoUrl =
   "mongodb+srv://m84719666:d6Rjb4DyVuasNDrn@tendertesting.zygfo.mongodb.net/?retryWrites=true&w=majority&appName=tenderTesting";
-const dbNameRegistration = "Registered";
+const dbNameRegistration = "test";
 const dbNameTenders = "test";
 
 const corsOptions = {
@@ -33,10 +33,21 @@ async function connectToMongo() {
 
 app.post("/api/register", async (req, res) => {
   try {
-    const { username, mobileNo, email, password, preferences } = req.body;
+    const {
+      username,
+      email,
+      mobileNo,
+      notificationPreferences,
+      state,
+      districts,
+      departments,
+      tenderPricePreferences,
+    } = req.body;
+
     const db = client.db(dbNameRegistration);
     const usersCollection = db.collection("users");
 
+    // Check if user already exists
     const existingUser = await usersCollection.findOne({
       $or: [{ mobileNo }, { email }],
     });
@@ -44,35 +55,56 @@ app.post("/api/register", async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    const result = await usersCollection.insertOne({
-      username,
-      mobileNo,
-      email,
-      password,
-      preferences,
-    });
+    const userData = {};
+
+    // Populate userData object based on received data
+    if (username) userData.username = username;
+    if (email) userData.email = email;
+    if (mobileNo) userData.mobileNo = mobileNo;
+    if (notificationPreferences)
+      userData.notificationPreferences = notificationPreferences;
+    if (tenderPricePreferences)
+      userData.tenderPricePreferences = tenderPricePreferences;
+
+    // Handle multiple states
+    userData.state = Array.isArray(state) ? state : [state];
+
+    // Handle districts (if provided, ensure it's an array)
+    if (districts) {
+      userData.districts = Array.isArray(districts) ? districts : [districts];
+    }
+
+    // Handle departments (if provided, ensure it's an array)
+    if (departments) {
+      userData.departments = Array.isArray(departments)
+        ? departments
+        : [departments];
+    }
+
+    // Set trial and subscription logic automatically
+    userData.onTrial = "active"; // Start on trial by default
+    userData.subscription = { isActive: false }; // Subscription inactive during trial
+
+    // Insert user data into MongoDB
+    const result = await usersCollection.insertOne(userData);
 
     if (!result.insertedId) {
       throw new Error("User registration failed");
     }
 
-    res
-      .status(201)
-      .json({ message: "User registered successfully", id: result.insertedId });
+    res.status(201).json({
+      message: "Registration successful",
+      id: result.insertedId,
+      trialStatus: userData.onTrial,
+    });
   } catch (error) {
     console.error("Registration error:", error);
     res.status(500).json({
-      message: "Error registering user",
+      message: "Error occurred during registration",
       error: error.message,
-      request: {
-        body: req.body,
-        url: req.originalUrl,
-        method: req.method,
-      },
     });
   }
 });
-
 // Login endpoint
 app.post("/api/login", async (req, res) => {
   try {

@@ -10,7 +10,7 @@ const Subscriptions = () => {
   }, []);
 
   return (
-    <div className="mt-5 px-3">
+    <div className="mt-2">
       <div className="container">
         <div className="text-center mb-5">
           <h3 className="display-5 fw-bold text-primary">
@@ -59,7 +59,7 @@ const Subscriptions = () => {
           <div className={`col-lg-4 col-md-6 ${showCards ? "" : "d-none"}`}>
             <div className="card h-100 shadow-sm border-0 rounded-4">
               <div className="card-body text-center d-flex flex-column">
-                <h5 className="card-title text-warning fw-bold mb-3">
+                <h5 className="card-title text-primary fw-bold mb-3">
                   <i className="bi bi-star-fill me-2"></i> Pro Plan
                 </h5>
                 <p className="fs-4 fw-bold text-dark">₹10,899/year</p>
@@ -81,7 +81,7 @@ const Subscriptions = () => {
                     Consultancy
                   </li>
                 </ul>
-                <button className="btn btn-warning text-white mt-auto">
+                <button className="btn btn-primary text-white mt-auto">
                   Get Started
                 </button>
               </div>
@@ -92,7 +92,7 @@ const Subscriptions = () => {
           <div className={`col-lg-4 col-md-6 ${showCards ? "" : "d-none"}`}>
             <div className="card h-100 shadow-sm border-0 rounded-4">
               <div className="card-body text-center d-flex flex-column">
-                <h5 className="card-title text-success fw-bold mb-3">
+                <h5 className="card-title text-primary fw-bold mb-3">
                   <i className="bi bi-building me-2"></i> Enterprise Plan
                 </h5>
                 <p className="fs-4 fw-bold text-dark">₹14,999/year</p>
@@ -114,7 +114,7 @@ const Subscriptions = () => {
                     No-cost Consultancy
                   </li>
                 </ul>
-                <button className="btn btn-outline-success mt-auto">
+                <button className="btn btn-outline-primary mt-auto">
                   Get Started
                 </button>
               </div>
