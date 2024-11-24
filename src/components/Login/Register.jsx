@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const Register = () => {
   const [formData, setFormData] = useState({
