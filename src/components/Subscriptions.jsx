@@ -1,58 +1,54 @@
 import React, { useEffect, useState } from "react";
 
 const Subscriptions = () => {
-  const [showCards, setShowCards] = useState(false); // New state for visibility
+  const [showCards, setShowCards] = useState(false);
 
   useEffect(() => {
-    // Delay showing cards to allow for animation
     setTimeout(() => {
       setShowCards(true);
-    }, 100); // Delay for better effect
+    }, 100);
   }, []);
 
   return (
-    <div
-      className="mt-5 pt-2"
-      // style={{ marginTop: "60px" }}
-    >
-      <div className="rounded-3 mb-5 pb-5">
-        <div className="text-center mb-4">
-          <h3 className="display-6">
-            <i className="bi bi-card-checklist text-primary me-2"></i> Choose
-            Your Plan
+    <div className="mt-5 px-3">
+      <div className="container">
+        <div className="text-center mb-5">
+          <h3 className="display-5 fw-bold text-primary">
+            <i className="bi bi-card-checklist me-2"></i> Choose Your Plan
           </h3>
-          <p className="lead">
-            Select the membership plan that suits your needs.
+          <p className="text-muted fs-5">
+            Select the best plan to unlock premium benefits and achieve your
+            goals.
           </p>
         </div>
-        <div className="row row-cols-1 row-cols-md-3 g-4">
+        <div className="row g-4">
           {/* Basic Plan */}
-          <div className={`col ${showCards ? "" : "d-none"}`}>
-            <div className={`card h-100 shadow border-primary rounded-4`}>
-              <div className="card-body d-flex flex-column align-items-center">
-                <div className="w-100 border-bottom border-primary text-center mb-2">
-                  <h5 className="card-title">
-                    <i className="bi bi-person-circle text-primary"></i> Basic
-                    Plan
-                  </h5>
-                </div>
-                <p className="fs-4 fw-semibold text-center">₹5899/year</p>
-                <ul className="list-unstyled flex-grow-1">
-                  <li className="text-primary fw-bold">
-                    <i className="bi bi-check-circle-fill"></i> Unlimited
-                    Notifications
+          <div className={`col-lg-4 col-md-6 ${showCards ? "" : "d-none"}`}>
+            <div className="card h-100 shadow-sm border-0 rounded-4">
+              <div className="card-body text-center d-flex flex-column">
+                <h5 className="card-title text-primary fw-bold mb-3">
+                  <i className="bi bi-person-circle me-2"></i> Basic Plan
+                </h5>
+                <p className="fs-4 fw-bold text-dark">₹5,899/year</p>
+                <ul className="list-unstyled my-3 text-start">
+                  <li className="mb-2">
+                    <i className="bi bi-check-circle-fill text-success me-2"></i>{" "}
+                    Unlimited Notifications
                   </li>
-                  <li className="text-primary fw-bold">
-                    <i className="bi bi-check-circle-fill"></i> Email Alerts
+                  <li className="mb-2">
+                    <i className="bi bi-check-circle-fill text-success me-2"></i>{" "}
+                    Email Alerts
                   </li>
-                  <li className="text-muted">
-                    <i className="bi bi-x-circle-fill"></i> Priority Support
+                  <li className="mb-2 text-muted">
+                    <i className="bi bi-x-circle-fill me-2"></i> Priority
+                    Support
                   </li>
-                  <li className="text-muted">
-                    <i className="bi bi-x-circle-fill"></i> No-cost Consultancy
+                  <li className="mb-2 text-muted">
+                    <i className="bi bi-x-circle-fill me-2"></i> No-cost
+                    Consultancy
                   </li>
                 </ul>
-                <button className="btn btn-outline-primary w-100 mt-3">
+                <button className="btn btn-outline-primary mt-auto">
                   Get Started
                 </button>
               </div>
@@ -60,32 +56,32 @@ const Subscriptions = () => {
           </div>
 
           {/* Pro Plan */}
-          <div className={`col ${showCards ? "" : "d-none"}`}>
-            <div className={`card h-100 shadow border-primary rounded-4`}>
-              <div className="card-body d-flex flex-column align-items-center">
-                <div className="w-100 border-bottom border-warning text-center mb-2">
-                  <h5 className="card-title">
-                    <i className="bi bi-star-fill text-warning"></i> Pro Plan
-                  </h5>
-                </div>
-                <p className="fs-4 fw-semibold text-center">₹10899/year</p>
-                <ul className="list-unstyled flex-grow-1">
-                  <li className="text-primary fw-bold">
-                    <i className="bi bi-check-circle-fill"></i> Unlimited
-                    Notifications
+          <div className={`col-lg-4 col-md-6 ${showCards ? "" : "d-none"}`}>
+            <div className="card h-100 shadow-sm border-0 rounded-4">
+              <div className="card-body text-center d-flex flex-column">
+                <h5 className="card-title text-warning fw-bold mb-3">
+                  <i className="bi bi-star-fill me-2"></i> Pro Plan
+                </h5>
+                <p className="fs-4 fw-bold text-dark">₹10,899/year</p>
+                <ul className="list-unstyled my-3 text-start">
+                  <li className="mb-2">
+                    <i className="bi bi-check-circle-fill text-success me-2"></i>{" "}
+                    Unlimited Notifications
                   </li>
-                  <li className="text-primary fw-bold">
-                    <i className="bi bi-check-circle-fill"></i> Email & WhatsApp
-                    Alerts
+                  <li className="mb-2">
+                    <i className="bi bi-check-circle-fill text-success me-2"></i>{" "}
+                    Email & WhatsApp Alerts
                   </li>
-                  <li className="text-primary fw-bold">
-                    <i className="bi bi-check-circle-fill"></i> Priority Support
+                  <li className="mb-2">
+                    <i className="bi bi-check-circle-fill text-success me-2"></i>{" "}
+                    Priority Support
                   </li>
-                  <li className="text-muted">
-                    <i className="bi bi-x-circle-fill"></i> No-cost Consultancy
+                  <li className="mb-2 text-muted">
+                    <i className="bi bi-x-circle-fill me-2"></i> No-cost
+                    Consultancy
                   </li>
                 </ul>
-                <button className="btn btn-primary text-white w-100 mt-3">
+                <button className="btn btn-warning text-white mt-auto">
                   Get Started
                 </button>
               </div>
@@ -93,35 +89,32 @@ const Subscriptions = () => {
           </div>
 
           {/* Enterprise Plan */}
-          <div className={`col ${showCards ? "" : "d-none"}`}>
-            <div className={`card h-100 shadow border-primary rounded-4`}>
-              <div className="card-body d-flex flex-column align-items-center">
-                <div className="w-100 border-bottom border-success text-center mb-2">
-                  <h5 className="card-title">
-                    <i className="bi bi-building text-success"></i> Enterprise
-                    Plan
-                  </h5>
-                </div>
-                <p className="fs-4 fw-semibold text-center">₹14999/year</p>
-                <ul className="list-unstyled flex-grow-1">
-                  <li className="text-primary fw-bold">
-                    <i className="bi bi-check-circle-fill"></i> Unlimited
-                    Notifications
+          <div className={`col-lg-4 col-md-6 ${showCards ? "" : "d-none"}`}>
+            <div className="card h-100 shadow-sm border-0 rounded-4">
+              <div className="card-body text-center d-flex flex-column">
+                <h5 className="card-title text-success fw-bold mb-3">
+                  <i className="bi bi-building me-2"></i> Enterprise Plan
+                </h5>
+                <p className="fs-4 fw-bold text-dark">₹14,999/year</p>
+                <ul className="list-unstyled my-3 text-start">
+                  <li className="mb-2">
+                    <i className="bi bi-check-circle-fill text-success me-2"></i>{" "}
+                    Unlimited Notifications
                   </li>
-                  <li className="text-primary fw-bold">
-                    <i className="bi bi-check-circle-fill"></i> Email & Phone
-                    Alerts
+                  <li className="mb-2">
+                    <i className="bi bi-check-circle-fill text-success me-2"></i>{" "}
+                    Email & Phone Alerts
                   </li>
-                  <li className="text-primary fw-bold">
-                    <i className="bi bi-check-circle-fill"></i> AI Based Bid
-                    Support
+                  <li className="mb-2">
+                    <i className="bi bi-check-circle-fill text-success me-2"></i>{" "}
+                    AI-Based Bid Support
                   </li>
-                  <li className="text-primary fw-bold">
-                    <i className="bi bi-check-circle-fill"></i> No-Cost
-                    Consultancy
+                  <li className="mb-2">
+                    <i className="bi bi-check-circle-fill text-success me-2"></i>{" "}
+                    No-cost Consultancy
                   </li>
                 </ul>
-                <button className="btn btn-outline-primary w-100 mt-3">
+                <button className="btn btn-outline-success mt-auto">
                   Get Started
                 </button>
               </div>
