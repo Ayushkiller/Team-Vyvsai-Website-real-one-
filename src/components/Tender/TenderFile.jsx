@@ -5,7 +5,7 @@ function TenderFile() {
   const [showModal, setShowModal] = useState(false);
   const [userDetails, setUserDetails] = useState({
     username: "",
-    mobile: "",
+    mobileNo: "",
     email: "",
   });
   const [error, setError] = useState("");
@@ -196,7 +196,7 @@ function TenderFile() {
                           className="form-control"
                           id="mobileNo"
                           name="mobileNo"
-                          value={userDetails.mobile}
+                          value={userDetails.mobileNo}
                           onChange={handleChange}
                           placeholder="Enter your WhatsApp number"
                         />
