@@ -36,7 +36,7 @@ app.post("/api/notify-tender-file", async (req, res) => {
   const { username, mobileNo, email } = req.body;
 
   // Validate the input data
-  if (!username || !mobile || !email) {
+  if (!username || !mobileNo || !email) {
     return res.status(400).json({ message: "Please fill in all the fields." });
   }
   const db = client.db(dbNameRegistered);
