@@ -33,7 +33,7 @@ async function connectToMongo() {
 }
 
 app.post("/api/notify-tender-file", async (req, res) => {
-  const { username, mobile, email } = req.body;
+  const { username, mobileNo, email } = req.body;
 
   // Validate the input data
   if (!username || !mobile || !email) {
@@ -59,7 +59,7 @@ app.post("/api/notify-tender-file", async (req, res) => {
     // If the user does not exist, insert a new user
     const newUser = {
       username,
-      mobile,
+      mobileNo,
       email,
     };
 

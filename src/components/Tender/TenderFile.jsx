@@ -39,7 +39,7 @@ function TenderFile() {
       if (response.status === 200) {
         alert("Thank you! You will be notified on launch.");
         setShowModal(false);
-        setUserDetails({ username: "", mobile: "", email: "" });
+        setUserDetails({ username: "", mobileNo: "", email: "" });
       } else {
         // Handle unexpected status codes from the server
         setError(response.data.message || "Something went wrong.");
@@ -195,7 +195,7 @@ function TenderFile() {
                           type="text"
                           className="form-control"
                           id="mobile"
-                          name="mobile"
+                          name="mobileNo"
                           value={userDetails.mobile}
                           onChange={handleChange}
                           placeholder="Enter your WhatsApp number"
