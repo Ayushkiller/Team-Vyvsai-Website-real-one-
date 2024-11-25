@@ -49,7 +49,7 @@ app.post("/api/notify-tender-file", async (req, res) => {
       // If the user exists, update the notifyForTenderFile flag to true
       await db.collection("users").updateOne(
         { email },
-        { $set: { notifyForTenderFile: true } } // Update subscription flag
+        { $set: { notifyForTenderFile: true } } // Update notification flag
       );
       return res.status(200).json({
         message: "You have been successfully updated for tender notifications.",
@@ -65,16 +65,9 @@ app.post("/api/notify-tender-file", async (req, res) => {
 
     // Insert the new user
     await db.collection("users").insertOne(newUser);
-
-    // Optionally, send an email notification
-    // await sendEmailNotification(username, email);
-
-    // Respond with success
     res
       .status(200)
       .json({ message: "Thank you! You will be notified on tender updates." });
-
-    client.close(); // Close the DB connection
   } catch (err) {
     console.error(err);
     res

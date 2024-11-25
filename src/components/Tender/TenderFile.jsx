@@ -40,16 +40,25 @@ function TenderFile() {
         }
       );
 
-      if (response.ok) {
+      // Check if the response status is success
+      if (response.status === 200) {
         alert("Thank you! You will be notified on launch.");
         setShowModal(false);
         setUserDetails({ username: "", mobile: "", email: "" });
       } else {
-        const errorData = await response.json();
-        setError(errorData.message || "Something went wrong.");
+        // Handle unexpected status codes from the server
+        setError(response.data.message || "Something went wrong.");
       }
     } catch (err) {
-      setError("Failed to submit details. Please try again.");
+      // Handle error during request
+      if (err.response) {
+        setError(
+          err.response.data.message ||
+            "Failed to submit details. Please try again."
+        );
+      } else {
+        setError("Failed to submit details. Please try again.");
+      }
     }
   };
 
