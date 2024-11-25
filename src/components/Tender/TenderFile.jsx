@@ -187,14 +187,14 @@ function TenderFile() {
                         />
                       </div>
                       <div className="mb-3">
-                        <label htmlFor="mobile" className="form-label">
+                        <label htmlFor="mobileNo" className="form-label">
                           <i className="bi bi-phone-fill text-primary me-2"></i>
                           Mobile (WhatsApp)
                         </label>
                         <input
                           type="text"
                           className="form-control"
-                          id="mobile"
+                          id="mobileNo"
                           name="mobileNo"
                           value={userDetails.mobile}
                           onChange={handleChange}
