@@ -228,7 +228,7 @@ app.get("/api/departments/:state", async (req, res) => {
 // Endpoint to fetch tenders
 app.get("/api/tenders", async (req, res) => {
   try {
-    const { state, district, department, showExpired } = req.query;
+    const { state, district, department } = req.query;
     const db = client.db(dbNameTenders);
     const tendersCollection = db.collection("tenders");
 
@@ -236,12 +236,12 @@ app.get("/api/tenders", async (req, res) => {
     if (state) query.state = state;
 
     // Check if district contains ":ALL" to allow all districts
-    if (district && !district.includes("All")) {
+    if (district && !district.includes(":ALL")) {
       query.district = district;
     }
 
     // Check if department contains ":ALL" to allow all departments
-    if (department && !department.includes("All")) {
+    if (department && !department.includes(":ALL")) {
       query.org_name = department;
     }
     query.expired = false;
