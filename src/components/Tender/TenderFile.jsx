@@ -32,11 +32,6 @@ function TenderFile() {
           username,
           mobile,
           email,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
         }
       );
 

@@ -233,21 +233,30 @@ app.get("/api/tenders", async (req, res) => {
     const tendersCollection = db.collection("tenders");
 
     let query = {};
-    if (state) query.state = state;
+    if (state) {
+      query.state = state;
+    }
 
-    // Check if district contains ":ALL" to allow all districts
+    // If district contains ":ALL", don't filter by district
     if (district && !district.includes(":ALL")) {
       query.district = district;
     }
 
-    // Check if department contains ":ALL" to allow all departments
+    // If department contains ":ALL", don't filter by department
     if (department && !department.includes(":ALL")) {
       query.org_name = department;
     }
+
     query.expired = false;
 
+    // Fetch tenders based on the query
     const tenders = await tendersCollection.find(query).toArray();
-    res.json({ tenders });
+
+    if (tenders.length > 0) {
+      res.json({ tenders });
+    } else {
+      res.status(404).json({ message: "No tenders found" });
+    }
   } catch (error) {
     console.error("Error fetching tenders:", error);
     res.status(500).json({ message: "Error fetching tenders" });
