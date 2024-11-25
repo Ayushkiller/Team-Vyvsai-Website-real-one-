@@ -90,7 +90,7 @@ const Tenders = () => {
   };
 
   return (
-    <div className="vh-100 mt-5">
+    <div className="vh-100 mt-1">
       <div className="d-flex justify-content-center align-items-center meraPyaratenderForm pb-2 mt-4">
         <div
           className="form-container container p-3 shadow-lg rounded border border-primary"

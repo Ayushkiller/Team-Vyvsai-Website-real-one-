@@ -31,11 +31,62 @@ async function connectToMongo() {
   }
 }
 
+app.post("/api/notify-tender-file", async (req, res) => {
+  const { username, mobile, email } = req.body;
+
+  // Validate the input data
+  if (!username || !mobile || !email) {
+    return res.status(400).json({ message: "Please fill in all the fields." });
+  }
+
+  try {
+    // Check if the user already exists in the database
+    const existingUser = await db.collection("users").findOne({ email });
+
+    if (existingUser) {
+      // If the user exists, update the notifyForTenderFile flag to true
+      await db.collection("users").updateOne(
+        { email },
+        { $set: { notifyForTenderFile: true } } // Update subscription flag
+      );
+      return res.status(200).json({
+        message: "You have been successfully updated for tender notifications.",
+      });
+    }
+
+    // If the user does not exist, insert a new user
+    const newUser = {
+      username,
+      mobile,
+      email,
+    };
+
+    // Insert the new user
+    await db.collection("users").insertOne(newUser);
+
+    // Optionally, send an email notification
+    await sendEmailNotification(username, email);
+
+    // Respond with success
+    res
+      .status(200)
+      .json({ message: "Thank you! You will be notified on tender updates." });
+
+    client.close(); // Close the DB connection
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ message: "Something went wrong, please try again." });
+  }
+});
+
 app.post("/api/register", async (req, res) => {
   try {
     const {
       username,
       email,
+      password,
       mobileNo,
       notificationPreferences,
       state,
@@ -60,6 +111,7 @@ app.post("/api/register", async (req, res) => {
     // Populate userData object based on received data
     if (username) userData.username = username;
     if (email) userData.email = email;
+    if (password) userData.password = password;
     if (mobileNo) userData.mobileNo = mobileNo;
     if (notificationPreferences)
       userData.notificationPreferences = notificationPreferences;
@@ -187,8 +239,16 @@ app.get("/api/tenders", async (req, res) => {
 
     let query = {};
     if (state) query.state = state;
-    if (district) query.district = district;
-    if (department) query.org_name = department;
+
+    // Check if district contains ":ALL" to allow all districts
+    if (district && !district.includes("All")) {
+      query.district = district;
+    }
+
+    // Check if department contains ":ALL" to allow all departments
+    if (department && !department.includes("All")) {
+      query.org_name = department;
+    }
     query.expired = false;
 
     const tenders = await tendersCollection.find(query).toArray();

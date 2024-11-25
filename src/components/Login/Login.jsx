@@ -49,32 +49,48 @@ const Login = ({ setAuth }) => {
   };
 
   return (
-    <div className="login-wrapper">
-      <div className="login-container">
-        <h2>Login</h2>
-        {submitStatus.error && <p className="error">{submitStatus.error}</p>}
+    <div className="login-wrapper d-flex justify-content-center align-items-center min-vh-100">
+      <div className="login-container bg-white shadow-sm p-4 rounded w-50 w-md-50 w-lg-40">
+        <h2 className="text-center text-primary mb-4">Login</h2>
+        {submitStatus.error && (
+          <p className="text-danger">{submitStatus.error}</p>
+        )}
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="mobileNo"
-            placeholder="Mobile Number"
-            value={formData.mobileNo}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-          <button type="submit" disabled={submitStatus.isLoading}>
+          <div className="mb-3">
+            <input
+              type="text"
+              name="mobileNo"
+              placeholder="Mobile Number"
+              value={formData.mobileNo}
+              onChange={handleChange}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              className="form-control"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="btn btn-primary w-100"
+            disabled={submitStatus.isLoading}
+          >
             {submitStatus.isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
-        <Link to="/register">Don't have an account? Register here</Link>
+        <div className="text-center mt-3">
+          <a href="/register" className="text-primary">
+            Don't have an account? Register here
+          </a>
+        </div>
       </div>
     </div>
   );

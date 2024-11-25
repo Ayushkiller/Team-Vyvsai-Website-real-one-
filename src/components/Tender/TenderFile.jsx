@@ -1,8 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 
 function TenderFile() {
+  const [showModal, setShowModal] = useState(false);
+  const [userDetails, setUserDetails] = useState({
+    username: "",
+    mobile: "",
+    email: "",
+  });
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    const { username, mobile, email } = userDetails;
+
+    if (!username || !mobile || !email) {
+      setError("Please fill in all the fields.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/notify-tender-file", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, mobile, email }),
+      });
+
+      if (response.ok) {
+        alert("Thank you! You will be notified on launch.");
+        setShowModal(false);
+        setUserDetails({ username: "", mobile: "", email: "" });
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || "Something went wrong.");
+      }
+    } catch (err) {
+      setError("Failed to submit details. Please try again.");
+    }
+  };
+
   return (
-    <div className="container py-5">
+    <div className="container py-1">
       <div className="row justify-content-center">
         <div className="col-lg-10 col-md-12">
           {/* Title Section */}
@@ -12,98 +55,224 @@ function TenderFile() {
               Coming Soon: Tender Filing Services by vyvsai
             </h1>
             <p className="lead">
-              At <strong>vyvsai.com</strong>, we’re thrilled to soon offer a
-              fully managed Tender Filing Service! Our service will support
-              organizations in preparing, managing, and filing tenders with
-              unmatched ease and accuracy.
+              At <strong>vyvsai.com</strong>, we’re excited to offer a
+              fully-managed Tender Filing Service that ensures your tenders are
+              filed with precision and care. Our service is designed to help
+              organizations prepare, manage, and submit tenders in a hassle-free
+              manner.
             </p>
           </section>
 
-          {/* Why Choose Us Section */}
-          <section className="mb-5">
-            <h2 className="text-primary mb-3">
-              <i className="bi bi-award-fill me-2"></i>
-              Why Choose vyvsai.com for Tender Filing?
+          {/* Service Details Section */}
+          <section className="text-center mb-2">
+            <h2 className="text-primary mb-4">
+              Why Choose Our Tender Filing Services?
             </h2>
-            <p>
-              Tender filing requires attention to detail, accuracy, and
-              compliance with strict requirements. Our service will streamline
-              the process, making it accessible and manageable for businesses of
-              all sizes.
-            </p>
-          </section>
-
-          {/* What to Expect Section */}
-          <section className="mb-5">
-            <h3 className="text-primary mb-3">
-              <i className="bi bi-gear-fill me-2"></i>
-              What to Expect from Our Services
-            </h3>
-            <ul className="ps-4">
-              <li className="mb-2">
-                <strong>Personalized Support:</strong> Each client receives a
-                dedicated expert to guide them through the entire filing
-                process.
-              </li>
-              <li className="mb-2">
-                <strong>Documentation Assistance:</strong> We assist with
-                essential documents, ensuring every submission is accurate and
-                complete.
-              </li>
-              <li className="mb-2">
-                <strong>Deadline Management:</strong> We track deadlines,
-                sending reminders to help you stay on schedule.
-              </li>
-              <li className="mb-2">
-                <strong>Risk Assessment:</strong> Our experts review tender
-                requirements, identifying potential risks to strengthen your
-                bid.
-              </li>
-            </ul>
-          </section>
-
-          {/* Success Assurance Section */}
-          <section className="mb-5">
-            <h3 className="text-primary mb-3">
-              <i className="bi bi-check2-circle me-2"></i>
-              How We Ensure Your Success
-            </h3>
-            <p>
-              Our service prioritizes transparency, accuracy, and quality. We
-              meticulously review every detail of your tender submission to
-              ensure full compliance. Partner with vyvsai.com for a seamless
-              tender filing experience.
-            </p>
-          </section>
-
-          {/* Launch Timing Section */}
-          <section className="mb-5">
-            <h3 className="text-primary mb-3">
-              <i className="bi bi-calendar2-event-fill me-2"></i>
-              When Can You Start?
-            </h3>
-            <p>
-              Tender Filing Services will be launching soon! Sign up on
-              vyvsai.com for early access updates and exclusive offers. Join us
-              to simplify your tender filing process.
-            </p>
+            <div className="row">
+              <div className="col-md-4 mb-4">
+                <div className="card shadow-sm border-0 p-4">
+                  <div className="d-flex justify-content-center mb-3">
+                    <i
+                      className="bi bi-check-circle-fill text-success"
+                      style={{ fontSize: "3rem" }}
+                    ></i>
+                  </div>
+                  <p className="lead">
+                    <strong>Accuracy</strong>: Ensure error-free tender filings
+                    with our experienced team.
+                  </p>
+                </div>
+              </div>
+              <div className="col-md-4 mb-4">
+                <div className="card shadow-sm border-0 p-4">
+                  <div className="d-flex justify-content-center mb-3">
+                    <i
+                      className="bi bi-clock-fill text-warning"
+                      style={{ fontSize: "3rem" }}
+                    ></i>
+                  </div>
+                  <p className="lead">
+                    <strong>Timeliness</strong>: We understand deadlines and
+                    guarantee timely submissions.
+                  </p>
+                </div>
+              </div>
+              <div className="col-md-4 mb-4">
+                <div className="card shadow-sm border-0 p-4">
+                  <div className="d-flex justify-content-center mb-3">
+                    <i
+                      className="bi bi-shield-lock-fill text-info"
+                      style={{ fontSize: "3rem" }}
+                    ></i>
+                  </div>
+                  <p className="lead">
+                    <strong>Security</strong>: All your tender documents are
+                    handled with the highest level of confidentiality.
+                  </p>
+                </div>
+              </div>
+            </div>
           </section>
 
           {/* Notification Button */}
-          <div className="text-center my-5">
-            <button className="btn btn-primary btn-lg">
+          <div className="text-center my-2">
+            <button
+              className="btn btn-primary btn-lg"
+              onClick={() => setShowModal(true)}
+            >
               <i className="bi bi-bell-fill me-2"></i>Notify Me on Launch
             </button>
           </div>
 
+          {/* Modal */}
+          {showModal && (
+            <div
+              className="modal-backdrop d-flex align-items-center justify-content-center"
+              onClick={() => setShowModal(false)} // Close modal on backdrop click
+            >
+              <div
+                className="modal-dialog"
+                onClick={(e) => e.stopPropagation()} // Prevent click from propagating to the backdrop
+              >
+                <div className="modal-content shadow-lg">
+                  {/* Modal Header */}
+                  <div className="modal-header d-flex justify-content-between align-items-center">
+                    <h5 className="modal-title mx-auto fw-bold">
+                      <i className="bi bi-envelope-fill text-primary me-2"></i>
+                      Notify on Launch
+                    </h5>
+                    <button
+                      type="button"
+                      className="btn-close btn-close-dark"
+                      aria-label="Close"
+                      onClick={() => setShowModal(false)}
+                      style={{ position: "absolute", right: "15px" }}
+                    ></button>
+                  </div>
+
+                  {/* Modal Body */}
+                  <div className="modal-body">
+                    <form onSubmit={handleSubmit}>
+                      {error && (
+                        <div className="alert alert-danger text-center">
+                          {error}
+                        </div>
+                      )}
+                      <div className="mb-3">
+                        <label htmlFor="username" className="form-label">
+                          <i className="bi bi-person-fill text-primary me-2"></i>
+                          Username
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="username"
+                          name="username"
+                          value={userDetails.username}
+                          onChange={handleChange}
+                          placeholder="Enter your username"
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="mobile" className="form-label">
+                          <i className="bi bi-phone-fill text-primary me-2"></i>
+                          Mobile (WhatsApp)
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="mobile"
+                          name="mobile"
+                          value={userDetails.mobile}
+                          onChange={handleChange}
+                          placeholder="Enter your WhatsApp number"
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="email" className="form-label">
+                          <i className="bi bi-envelope-fill text-primary me-2"></i>
+                          Email
+                        </label>
+                        <input
+                          type="email"
+                          className="form-control"
+                          id="email"
+                          name="email"
+                          value={userDetails.email}
+                          onChange={handleChange}
+                          placeholder="Enter your email"
+                        />
+                      </div>
+                      <button type="submit" className="btn btn-primary w-100">
+                        <i className="bi bi-check-circle me-2"></i>Submit
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Footer Message */}
-          <p className="text-center text-muted">
+          <p className="text-center text-muted mt-5">
             <i className="bi bi-info-circle-fill me-2"></i>
             Stay tuned for an efficient, hassle-free tender filing experience
             with vyvsai.com – Simplifying Success.
           </p>
         </div>
       </div>
+
+      {/* Styles */}
+      <style jsx>{`
+        .modal-backdrop {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background-color: rgba(0, 0, 0, 0.5);
+          z-index: 1050;
+        }
+
+        .modal-dialog {
+          background-color: white;
+          border-radius: 8px;
+          max-width: 500px;
+          width: 100%;
+          margin: 0 auto;
+          padding: 15px;
+          animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .modal-content {
+          border: none;
+          border-radius: 8px;
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* Custom modal icon adjustments */
+        .modal-header .bi {
+          font-size: 1.25rem;
+        }
+
+        .modal-body .bi {
+          font-size: 1.1rem;
+        }
+
+        .modal-footer .bi {
+          font-size: 1rem;
+        }
+      `}</style>
     </div>
   );
 }

@@ -4,8 +4,7 @@ import Cookies from "js-cookie";
 import Layout from "../components/Layout/Layout";
 import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 import PrivateRoute from "./PrivateRoute";
-import "../styles.css";
-import AnimatedLoading from "./AnimatedLoading";
+// import AnimatedLoading from "./AnimatedLoading";
 
 // Lazy-loaded components
 const HomePage = lazy(() => import("../components/Home/Home"));

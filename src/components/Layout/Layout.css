@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
   /* background-color: rgb(208, 226, 255); */
-  overscroll-behavior: none;
+  /* overscroll-behavior: none; */
 }
 
 /* Container styling */

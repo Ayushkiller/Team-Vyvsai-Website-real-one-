@@ -3,6 +3,7 @@
         {  
          "state":"Himachal Pradesh",
          "districts":[  
+            "Himachal Pradesh:ALL",
             "Bilaspur (HP)",
             "Chamba",
             "Hamirpur(HP)",
@@ -17,22 +18,38 @@
             "Una"
          ],
          "departments": [
+        "Himachal Pradesh:ALL",
         "PWD",
         "HPSEBL",
         "National Highways Authority of India",
         "HP Irrigation and Public Health",
-        "HP State Forest Development Corporation",
-        "DG, Indo-Tibetan Border Police Force"
+        "HP State Forest Development Corporation"
       ]
       },
       {
         "state":"Delhi",
         "districts":[
-            "South West Delhi"
+            "All Districts",
+            "Central Delhi",
+            "East Delhi",
+            "New Delhi",
+            "North Delhi",
+            "North East Delhi",
+            "North West Delhi",
+            "South Delhi",
+            "South West Delhi",
+            "West Delhi"
         ],
         "departments": [
-        "National Highways Authority of India"
-        ]
+            "Delhi:ALL",
+            "National Highways Authority of India",
+            "Delhi Jal Board",
+            "Public Works Department",
+            "New Delhi Municipal Council",
+            "Irrigation and Flood Control",
+            "Delhi Urban Shelter Improvement Board"
+          ]
       }
+      
     ]
 }
