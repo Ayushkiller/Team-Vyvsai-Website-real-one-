@@ -18,9 +18,9 @@ function TenderFile() {
     e.preventDefault();
     setError("");
 
-    const { username, mobile, email } = userDetails;
+    const { username, mobileNo, email } = userDetails;
 
-    if (!username || !mobile || !email) {
+    if (!username || !mobileNo || !email) {
       setError("Please fill in all the fields.");
       return;
     }
@@ -30,7 +30,7 @@ function TenderFile() {
         "https://dbbackend.something.vyvsai.com/api/notify-tender-file",
         {
           username,
-          mobile,
+          mobileNo,
           email,
         }
       );
