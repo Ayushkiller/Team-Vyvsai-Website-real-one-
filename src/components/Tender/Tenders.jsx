@@ -72,7 +72,7 @@ const Tenders = () => {
     setError("");
     try {
       const response = await axios.get("/tenders", {
-        params: { state, district, department, expired: false },
+        params: { state, district, department },
       });
       if (response.data.tenders.length > 0) {
         navigate("/tender-results", {

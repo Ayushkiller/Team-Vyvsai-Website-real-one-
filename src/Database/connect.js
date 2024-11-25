@@ -8,7 +8,7 @@ const port = 6000;
 const mongoUrl =
   "mongodb+srv://m84719666:d6Rjb4DyVuasNDrn@tendertesting.zygfo.mongodb.net/?retryWrites=true&w=majority&appName=tenderTesting";
 const dbNameRegistration = "test";
-const dbNameRegistered = "Registered";
+const dbNameRegistered = "test";
 const dbNameTenders = "test";
 
 const corsOptions = {
@@ -240,11 +240,15 @@ app.get("/api/tenders", async (req, res) => {
     // If district contains ":ALL", don't filter by district
     if (district && !district.includes(":ALL")) {
       query.district = district;
+    } else {
+      delete query.district;
     }
 
     // If department contains ":ALL", don't filter by department
     if (department && !department.includes(":ALL")) {
       query.org_name = department;
+    } else {
+      delete query.org_name;
     }
 
     query.expired = false;
