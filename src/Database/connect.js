@@ -65,7 +65,7 @@ app.post("/api/notify-tender-file", async (req, res) => {
     await db.collection("users").insertOne(newUser);
 
     // Optionally, send an email notification
-    await sendEmailNotification(username, email);
+    // await sendEmailNotification(username, email);
 
     // Respond with success
     res
