@@ -8,7 +8,7 @@ const port = 6000;
 const mongoUrl =
   "mongodb+srv://m84719666:d6Rjb4DyVuasNDrn@tendertesting.zygfo.mongodb.net/?retryWrites=true&w=majority&appName=tenderTesting";
 const dbNameRegistration = "test";
-const resgisteredUsers = "Registered";
+const dbNameRegistered = "Registered";
 const dbNameTenders = "test";
 
 const corsOptions = {
@@ -39,7 +39,7 @@ app.post("/api/notify-tender-file", async (req, res) => {
   if (!username || !mobile || !email) {
     return res.status(400).json({ message: "Please fill in all the fields." });
   }
-  const db = client.db(resgisteredUsers);
+  const db = client.db(dbNameRegistered);
 
   try {
     // Check if the user already exists in the database

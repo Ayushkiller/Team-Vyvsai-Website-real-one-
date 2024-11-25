@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 function TenderFile() {
   const [showModal, setShowModal] = useState(false);
@@ -25,11 +26,19 @@ function TenderFile() {
     }
 
     try {
-      const response = await fetch("/api/notify-tender-file", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, mobile, email }),
-      });
+      const response = await axios.post(
+        "https://dbbackend.something.vyvsai.com/api/notify-tender-file",
+        {
+          username,
+          mobile,
+          email,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.ok) {
         alert("Thank you! You will be notified on launch.");
