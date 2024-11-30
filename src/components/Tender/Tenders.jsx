@@ -82,7 +82,7 @@ const Tenders = () => {
         setError("No tenders found matching your criteria.");
       }
     } catch (err) {
-      setError("Error fetching tender details");
+      setError("No tenders found matching your criteria.");
       console.error("Error fetching tender details:", err);
     } finally {
       setLoading(false);
