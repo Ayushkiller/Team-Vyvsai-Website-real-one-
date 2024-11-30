@@ -3,7 +3,6 @@
         {  
          "state":"Himachal Pradesh",
          "districts":[  
-            "Himachal Pradesh:ALL",
             "Bilaspur (HP)",
             "Chamba",
             "Hamirpur(HP)",
@@ -18,7 +17,6 @@
             "Una"
          ],
          "departments": [
-        "Himachal Pradesh:ALL",
         "PWD",
         "HPSEBL",
         "National Highways Authority of India",
@@ -29,7 +27,6 @@
       {
         "state":"Delhi",
         "districts":[
-            "Delhi:ALL",
             "Central Delhi",
             "East Delhi",
             "New Delhi",
@@ -41,15 +38,71 @@
             "West Delhi"
         ],
         "departments": [
-            "Delhi:ALL",
             "National Highways Authority of India",
             "Delhi Jal Board",
+             "IPGCL-PPCL",
             "Public Works Department",
             "New Delhi Municipal Council",
             "Irrigation and Flood Control",
             "Delhi Urban Shelter Improvement Board"
           ]
-      }
+      },
+      {
+      "state":"Uttrakhand",
+       "districts":[  
+            "Almora",
+            "Bageshwar",
+            "Chamoli",
+            "Champawat",
+            "Dehradun",
+            "Haridwar",
+            "Nainital",
+            "Pauri Garhwal",
+            "Pithoragarh",
+            "Rudraprayag",
+            "Tehri Garhwal",
+            "Udham Singh Nagar",
+            "Uttarkashi"
+         ],
+      "departments":[
+        "PWD",
+        "MD - UPCL",
+        "MD - UJVN",
+        "MD (Power Transmisison Corporation of Uttarakhand Limited)",
+        "CGM (Drinking Water) Jal Sansthan"
+      ]
+    },
+    {
+      "state":"Haryana",
+      "districts":[  
+            "Ambala",
+            "Bhiwani",
+            "Charkhi Dadri",
+            "Faridabad",
+            "Fatehabad",
+            "Gurgaon",
+            "Hisar",
+            "Jhajjar",
+            "Jind",
+            "Kaithal",
+            "Karnal",
+            "Kurukshetra",
+            "Mahendragarh",
+            "Mewat",
+            "Palwal",
+            "Panchkula",
+            "Panipat",
+            "Rewari",
+            "Rohtak",
+            "Sirsa",
+            "Sonipat",
+            "Yamunanagar"
+         ],
+      "departments":[
+        "Haryana Board Corporation",
+        "Haryana Government"
+      ]
+    }
       
     ]
 }
