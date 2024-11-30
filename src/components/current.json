@@ -1,107 +1,106 @@
 {
-    "states":[
-        {  
-         "state":"Himachal Pradesh",
-         "districts":[  
-            "Bilaspur (HP)",
-            "Chamba",
-            "Hamirpur(HP)",
-            "Kangra",
-            "Kinnaur",
-            "Kullu",
-            "Lahul & Spiti",
-            "Mandi",
-            "Shimla",
-            "Sirmaur",
-            "Solan",
-            "Una"
-         ],
-         "departments": [
+  "states": [
+    {
+      "state": "Delhi",
+      "districts": [
+        "Central Delhi",
+        "East Delhi",
+        "New Delhi",
+        "North Delhi",
+        "North East Delhi",
+        "North West Delhi",
+        "South Delhi",
+        "South West Delhi",
+        "West Delhi"
+      ],
+      "departments": [
+        "National Highways Authority of India",
+        "Delhi Jal Board",
+        "IPGCL-PPCL",
+        "Public Works Department",
+        "New Delhi Municipal Council",
+        "Irrigation and Flood Control",
+        "Delhi Urban Shelter Improvement Board"
+      ]
+    },
+    {
+      "state": "Haryana",
+      "districts": [
+        "Ambala",
+        "Bhiwani",
+        "Charkhi Dadri",
+        "Faridabad",
+        "Fatehabad",
+        "Gurgaon",
+        "Hisar",
+        "Jhajjar",
+        "Jind",
+        "Kaithal",
+        "Karnal",
+        "Kurukshetra",
+        "Mahendragarh",
+        "Mewat",
+        "Palwal",
+        "Panchkula",
+        "Panipat",
+        "Rewari",
+        "Rohtak",
+        "Sirsa",
+        "Sonipat",
+        "Yamunanagar"
+      ],
+      "departments": [
+        "Haryana Government"
+      ]
+    },
+    {
+      "state": "Himachal Pradesh",
+      "districts": [
+        "Bilaspur (HP)",
+        "Chamba",
+        "Hamirpur(HP)",
+        "Kangra",
+        "Kinnaur",
+        "Kullu",
+        "Lahul & Spiti",
+        "Mandi",
+        "Shimla",
+        "Sirmaur",
+        "Solan",
+        "Una"
+      ],
+      "departments": [
         "PWD",
         "HPSEBL",
         "National Highways Authority of India",
         "HP Irrigation and Public Health",
         "HP State Forest Development Corporation"
       ]
-      },
-      {
-        "state":"Delhi",
-        "districts":[
-            "Central Delhi",
-            "East Delhi",
-            "New Delhi",
-            "North Delhi",
-            "North East Delhi",
-            "North West Delhi",
-            "South Delhi",
-            "South West Delhi",
-            "West Delhi"
-        ],
-        "departments": [
-            "National Highways Authority of India",
-            "Delhi Jal Board",
-             "IPGCL-PPCL",
-            "Public Works Department",
-            "New Delhi Municipal Council",
-            "Irrigation and Flood Control",
-            "Delhi Urban Shelter Improvement Board"
-          ]
-      },
-      {
-      "state":"Uttarakhand",
-       "districts":[  
-            "Almora",
-            "Bageshwar",
-            "Chamoli",
-            "Champawat",
-            "Dehradun",
-            "Haridwar",
-            "Nainital",
-            "Pauri Garhwal",
-            "Pithoragarh",
-            "Rudraprayag",
-            "Tehri Garhwal",
-            "Udham Singh Nagar",
-            "Uttarkashi"
-         ],
-      "departments":[
+    },
+    {
+      "state": "Uttarakhand",
+      "districts": [
+        "Almora",
+        "Bageshwar",
+        "Chamoli",
+        "Champawat",
+        "Dehradun",
+        "Haridwar",
+        "Nainital",
+        "Pauri Garhwal",
+        "Pithoragarh",
+        "Rudraprayag",
+        "Tehri Garhwal",
+        "Udham Singh Nagar",
+        "Uttarkashi"
+      ],
+      "departments": [
         "PWD",
         "MD - UPCL",
         "MD - UJVN",
         "MD (Power Transmisison Corporation of Uttarakhand Limited)",
         "CGM (Drinking Water) Jal Sansthan"
       ]
-    },
-    {
-      "state":"Haryana",
-      "districts":[  
-            "Ambala",
-            "Bhiwani",
-            "Charkhi Dadri",
-            "Faridabad",
-            "Fatehabad",
-            "Gurgaon",
-            "Hisar",
-            "Jhajjar",
-            "Jind",
-            "Kaithal",
-            "Karnal",
-            "Kurukshetra",
-            "Mahendragarh",
-            "Mewat",
-            "Palwal",
-            "Panchkula",
-            "Panipat",
-            "Rewari",
-            "Rohtak",
-            "Sirsa",
-            "Sonipat",
-            "Yamunanagar"
-         ],
-      "departments":[
-        "Haryana Government"
-      ]
     }
-      
-    ]
+  ]
 }
