@@ -4,7 +4,7 @@ import axios from "axios";
 import currentData from "../current.json";
 import "./Tenders.css"; // Ensure you have this CSS file imported
 
-axios.defaults.baseURL = "https://dbbackend.something.vyvsai.com/api";
+axios.defaults.baseURL = "https://vvysaibackend.something.vyvsai.com/api";
 
 const Tenders = () => {
   const navigate = useNavigate();

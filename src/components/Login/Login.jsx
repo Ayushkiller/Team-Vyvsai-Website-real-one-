@@ -23,7 +23,7 @@ const Login = ({ setAuth }) => {
 
     try {
       const response = await axios.post(
-        "https://dbbackend.something.vyvsai.com/api/login",
+        "https://vvysaibackend.something.vyvsai.com/api/login",
         formData
       );
 

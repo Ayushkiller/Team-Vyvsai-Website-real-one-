@@ -27,7 +27,7 @@ function TenderFile() {
 
     try {
       const response = await axios.post(
-        "https://dbbackend.something.vyvsai.com/api/notify-tender-file",
+        "https://vvysaibackend.something.vyvsai.com/api/notify-tender-file",
         {
           username,
           mobileNo,

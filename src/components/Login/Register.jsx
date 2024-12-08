@@ -119,7 +119,7 @@ const Register = () => {
 
     try {
       await axios.post(
-        "https://dbbackend.something.vyvsai.com/api/register",
+        "https://vvysaibackend.something.vyvsai.com/api/register",
         formData
       );
       setSubmitStatus({ error: "", success: true });
