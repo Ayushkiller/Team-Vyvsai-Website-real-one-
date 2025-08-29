@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate,
 } from "react-router-dom";
 import Cookies from "js-cookie";
 import Layout from "../components/Layout/Layout";

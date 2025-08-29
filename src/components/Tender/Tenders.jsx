@@ -6,7 +6,7 @@ const Tenders = () => {
   const [state, setState] = useState("");
   const [district, setDistrict] = useState("");
   const [department, setDepartment] = useState("");
-  const [showExpired, setShowExpired] = useState(false);
+  const [showExpired] = useState(false); // Currently unused but needed for API
   const [dropdownOptions, setDropdownOptions] = useState({
     states: [],
     districts: [],
