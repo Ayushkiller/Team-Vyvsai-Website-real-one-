@@ -175,4 +175,4 @@ If you encounter any issues or have questions:
 
 ---
 
-**© 2025 Team Vyvsai. Built with ❤️ for better procurement processes.**
+**© 2025 Ayush. Built with ❤️ for better procurement processes.**
