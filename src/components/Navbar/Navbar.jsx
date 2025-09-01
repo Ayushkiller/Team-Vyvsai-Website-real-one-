@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ auth, handleLogout }) => {
-  const navigate = useNavigate();
-
   // Function to handle link clicks and collapse the off-canvas menu
   const handleLinkClick = () => {
     const offcanvasToggle = document.getElementById("offcanvasNavbar");
@@ -33,7 +31,7 @@ const Navbar = ({ auth, handleLogout }) => {
   };
 
   // Close the offcanvas if clicked outside
-  const handleClickOutside = (event) => {
+  const handleClickOutside = useCallback((event) => {
     const offcanvasToggle = document.getElementById("offcanvasNavbar");
     if (
       offcanvasToggle &&
@@ -42,7 +40,7 @@ const Navbar = ({ auth, handleLogout }) => {
     ) {
       handleLinkClick();
     }
-  };
+  }, []);
 
   // Use effect to add the click event listener on mount and clean up on unmount
   useEffect(() => {
@@ -50,7 +48,7 @@ const Navbar = ({ auth, handleLogout }) => {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  }, [handleClickOutside]);
 
   return (
     <nav className="navbar navbar-expand-lg bg-light sticky-top">

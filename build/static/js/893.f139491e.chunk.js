@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkvyvsai_website=self.webpackChunkvyvsai_website||[]).push([[893],{893:(e,s,t)=>{t.r(s),t.d(s,{default:()=>c});t(43);var i=t(579);const c=()=>(0,i.jsxs)("div",{children:[(0,i.jsx)("h2",{children:"Protected Content"}),(0,i.jsx)("p",{children:"This content is only accessible to authenticated users."})]})}}]);
-//# sourceMappingURL=893.f139491e.chunk.js.map
